@@ -1,12 +1,17 @@
 import { Cartesian3, Color, Ion, HeightReference, HorizontalOrigin } from 'cesium'
 import { useState } from 'react';
 import { Entity, Viewer } from 'resium'
+import InfoBox from '../components/InfoBox'
+import CubeInfo from '../components/CubeInfo'
+
 
 Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2YWFiYmUwMy00OWJjLTQzNzgtOGRkNy1hMjNiNzJkZDhiZTgiLCJpZCI6MTM5MDYwLCJpYXQiOjE2ODQyMjk0NTJ9.vcp3vAE8acxcoCF0cVcF8t72adLDvV-daPZ_vF2vmwU';
 
 export default function Cesium() {
   const [model, setModel] = useState(false);
+  const [cubeInfo, setCubeInfo] = useState(false);
   return (
+    <>
     <Viewer full
     timeline={false}
     homeButton= {false} 
@@ -91,8 +96,12 @@ export default function Cesium() {
           heightReference: HeightReference.CLAMP_TO_GROUND,
   
         }}
+        onClick={() => setCubeInfo(f => !f)}
       />
       )}
     </Viewer>
+    <InfoBox/>
+    <CubeInfo/>
+  </>
   )
 }

@@ -1,5 +1,7 @@
 import Head from 'next/head'
+import Header from '../components/Header'
 import dynamic from 'next/dynamic'
+
 
 const Cesium = dynamic(
   () => import('../components/Cesium'),
@@ -12,6 +14,7 @@ export default function Home() {
       <Head>
         <link rel="stylesheet" href="cesium/Widgets/widgets.css" />
       </Head>
+      <Header/>
       <Cesium />
     </>
   )
