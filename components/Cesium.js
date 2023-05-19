@@ -8,6 +8,7 @@ import CubeInfo from '../components/CubeInfo'
 Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2YWFiYmUwMy00OWJjLTQzNzgtOGRkNy1hMjNiNzJkZDhiZTgiLCJpZCI6MTM5MDYwLCJpYXQiOjE2ODQyMjk0NTJ9.vcp3vAE8acxcoCF0cVcF8t72adLDvV-daPZ_vF2vmwU';
 
 export default function Cesium() {
+  const [box, setBox] = useState(false);
   const [model, setModel] = useState(false);
   const [cubeInfo, setCubeInfo] = useState(false);
   return (
@@ -23,13 +24,10 @@ export default function Cesium() {
       sceneMode={false}
       sceneModePicker={false}
       selectionIndicator={false}    
+      animation={false}
       >
-      <Entity
-        name="Tokyo"
-        position={Cartesian3.fromDegrees(139.767052, 35.681167, 100)}
-        point={{ pixelSize: 20, color: Color.WHITE }}
-        description="hoge"
-      />
+  
+  
       <Entity
         name="Costa Rica"
         position={Cartesian3.fromDegrees(-84.006971, 10.430623, 100)}
@@ -40,7 +38,8 @@ export default function Cesium() {
           horizontalOrigin: HorizontalOrigin.LEFT,
         }}
         description="La Selva"
-        onClick={() => setModel(f => !f)}
+        onDoubleClick={() => setModel(f => true)}
+        onClick={() => setBox(f => true)}
       />
 
       <Entity
@@ -77,31 +76,32 @@ export default function Cesium() {
           -84.0092992,
           10.4364417
         ]),
-        material: Color.RED,
+        material: Color.WHITE.withAlpha(0.2),
         fill:false,
         outline: true,
-        outlineColor: Color.LIME,
+        outlineColor: Color.ORANGE.withAlpha(1),
         heightReference: HeightReference.CLAMP_TO_GROUND,
 
       }}
       />
-      {model && (
+      {cubeInfo && (
       <Entity
-        name="https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/Baked_Animations.glb?v=1684333790800"
-        position={Cartesian3.fromDegrees(-84.007971, 10.430623)}
+        name="Cubez"
+        position={Cartesian3.fromDegrees(-84.011571, 10.431023)}
         model= {{
-          uri: "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/Baked_Animations.glb?v=1684333790800",
-          minimumPixelSize: 128,
-          maximumScale: 128,
-          heightReference: HeightReference.CLAMP_TO_GROUND,
+          uri: "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/Untitled.glb?v=1684514812793",
+          minimumPixelSize: 900,
+          maximumScale: 40,
+          heightReference: HeightReference.CLAMP_TO_GROUND, 
   
         }}
-        onClick={() => setCubeInfo(f => !f)}
+        onClick={() => setCubeInfo(f => true)}
       />
       )}
     </Viewer>
-    <InfoBox/>
-    <CubeInfo/>
+    {box && <InfoBox closeClick={() => setBox(f => false)} exploreClick={() => setCubeInfo(f => true)}/>}
+    {cubeInfo &&  <CubeInfo closeClick={() => setCubeInfo(f => false)}/>}
+
   </>
   )
 }

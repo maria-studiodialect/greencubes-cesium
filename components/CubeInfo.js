@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Chart from 'chart.js/auto';
 import ChartRef from "./ChartRef";
+import { RiCloseCircleFill } from 'react-icons/ri';
 
 
-export default function CubeInfo({exploreClick}) {
+export default function CubeInfo({exploreClick, closeClick}) {
     return (
         <>
-        <div className="absolute top-[12%] right-10 z-10">
+        <div className="absolute top-[14%] right-10 z-10">
+        <div  onClick={closeClick} className="absolute right-[-5px] top-[-4px] text-white z-10"><RiCloseCircleFill /></div>
         <div className="text-white bg-black/60 backdrop-blur rounded-xl px-4 py-2">
             <div className="flex justify-between mb-7">
                 <div><span className="text-3xl">5,456</span> cubes</div>  

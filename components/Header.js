@@ -10,7 +10,7 @@ export default function Header() {
             <div className="pb-2">My Forests</div>
             <div className="pb-2">Report</div>
             <div className="flex items-center">
-                <div className="w-8 h-8 bg-white rounded-full mr-4"></div>
+                <div className="relative"><img  className='w-10 h-10 bg-white rounded-full mr-4 object-cover' src="/img/avatar.jpg"/></div>
                 <div>Ulrika</div>
             </div>
         </div>
