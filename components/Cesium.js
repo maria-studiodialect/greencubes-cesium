@@ -11,6 +11,16 @@ export default function Cesium() {
   const [box, setBox] = useState(false);
   const [model, setModel] = useState(false);
   const [cubeInfo, setCubeInfo] = useState(false);
+  const [hoveredEntity, setHoveredEntity] = useState(null);
+
+
+  const handlePolygonMouseEnter = (entity) => {
+    setHoveredEntity(entity);
+  };
+
+  const handlePolygonMouseLeave = () => {
+    setHoveredEntity(null);
+  };
   return (
     <>
     <Viewer full
@@ -76,12 +86,14 @@ export default function Cesium() {
           -84.0092992,
           10.4364417
         ]),
-        material: Color.WHITE.withAlpha(0.2),
-        fill:false,
+        material: hoveredEntity === 'costaRicaArea' ? Color.YELLOW.withAlpha(0.2) : Color.WHITE.withAlpha(0.2),
+        fill: hoveredEntity === 'costaRicaArea' ? true : false,
         outline: true,
         outlineColor: Color.ORANGE.withAlpha(1),
         heightReference: HeightReference.CLAMP_TO_GROUND,
       }}
+      onMouseEnter={() => handlePolygonMouseEnter('costaRicaArea')}
+      onMouseLeave={handlePolygonMouseLeave}
       />
             <Entity
       name='Costa Rica Area 2'

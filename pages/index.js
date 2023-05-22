@@ -11,9 +11,6 @@ const Cesium = dynamic(
 export default function Home() {
   return (
     <>
-      <Head>
-        <link rel="stylesheet" href="cesium/Widgets/widgets.css" />
-      </Head>
       <Header/>
       <Cesium />
     </>
