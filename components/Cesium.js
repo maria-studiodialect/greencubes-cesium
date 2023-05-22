@@ -81,9 +81,35 @@ export default function Cesium() {
         outline: true,
         outlineColor: Color.ORANGE.withAlpha(1),
         heightReference: HeightReference.CLAMP_TO_GROUND,
-
       }}
       />
+            <Entity
+      name='Costa Rica Area 2'
+      polygon={{
+        hierarchy: Cartesian3.fromDegreesArray([
+          -84.0072607, 10.4276629, -84.0136337, 10.425447, -84.0125622, 10.4216442, -84.01621, 10.4202936, -84.0130343, 10.417128, -84.0034212, 10.4172546, -84.0004172, 10.4200825, -84.0029692, 10.4276207, -84.0062952, 10.4266077, -84.0072607, 10.4276629
+        ]),
+        material: Color.WHITE.withAlpha(0.2),
+        fill:false,
+        outline: true,
+        outlineColor: Color.ORANGE.withAlpha(1),
+        heightReference: HeightReference.CLAMP_TO_GROUND,
+      }}
+      />
+      <Entity
+      name='Costa Rica Area 3'
+      polygon={{
+        hierarchy: Cartesian3.fromDegreesArray([
+          -84.0183544, 10.4302797, -84.0248789, 10.4293681, -84.0271534, 10.4267513, -84.0270676, 10.4204202, -84.01621, 10.4202936, -84.0125622, 10.4216442, -84.0136337, 10.425447, -84.0183544, 10.4302797
+        ]),
+        material: Color.WHITE.withAlpha(0.2),
+        fill:false,
+        outline: true,
+        outlineColor: Color.ORANGE.withAlpha(1),
+        heightReference: HeightReference.CLAMP_TO_GROUND,
+      }}
+      />
+
       {cubeInfo && (
       <Entity
         name="Cubez"
