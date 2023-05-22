@@ -90,8 +90,8 @@ export default function Cesium() {
         position={Cartesian3.fromDegrees(-84.011571, 10.431023)}
         model= {{
           uri: "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/Untitled.glb?v=1684514812793",
-          minimumPixelSize: 900,
-          maximumScale: 40,
+          maximumScale: 4000,
+          scale: 40,
           heightReference: HeightReference.CLAMP_TO_GROUND, 
   
         }}
