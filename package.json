@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "scp -r node_modules/cesium/Build/Cesium public/cesium"
+    "lint": "next lint"
   },
   "dependencies": {
     "cesium": "1.101.0",
