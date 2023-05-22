@@ -11,14 +11,19 @@
   "dependencies": {
     "cesium": "1.101.0",
     "chart.js": "^4.3.0",
+    "dat.gui": "^0.7.9",
+    "gsap": "^3.11.5",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
-    "resium": "^1.16.0"
+    "resium": "^1.16.0",
+    "three": "^0.152.2"
   },
   "devDependencies": {
+    "@types/dat.gui": "^0.7.10",
+    "@types/three": "^0.152.0",
     "autoprefixer": "^10.4.14",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
