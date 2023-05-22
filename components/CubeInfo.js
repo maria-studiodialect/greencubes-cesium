@@ -35,7 +35,7 @@ export default function CubeInfo({exploreClick, closeClick}) {
                 <div>Sponsored</div>
                 </div>
             </div>
-            <div className="bg-blue text-center py-1.5 rounded-md my-5 drop-shadow-xl">Purchase</div>
+            <div className="bg-blue text-center py-1.5 rounded-md my-5 drop-shadow-xl cursor-pointer">Purchase</div>
         </div>
         </div>
         
