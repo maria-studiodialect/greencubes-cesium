@@ -1,8 +1,8 @@
 export const settings = {
-  debug: true,
   cubes: {
-    total: 12,
+    total: 80,
     size: 4,
+    roundness: 0.2,
   },
   fog: {
     color: 0x000000,

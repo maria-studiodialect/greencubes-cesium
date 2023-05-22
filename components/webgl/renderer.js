@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
 const USE_FULLSCREEN = false
 const MAX_FRAME_BUFFER_SIZE = new THREE.Vector2(1280, 720)
@@ -37,9 +38,9 @@ export class Renderer {
         fov: 45,
         near: 1,
         far: 1000,
-        x: 100,
-        y: 100,
-        z: 100,
+        x: 10,
+        y: 10,
+        z: 10,
       },
     }
 
@@ -63,11 +64,19 @@ export class Renderer {
   setup(canvas) {
     if (!canvas) return
 
-    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
+    this.renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      // alpha: true,
+    })
+    // this.renderer.setClearColor(0x003300, 1)
+    this.renderer.shadowMap.enabled = true
+    this.renderer.shadowMapSoft = true
     this.renderer.setPixelRatio(Math.min(2, global.devicePixelRatio))
     this.renderer.toneMapping = THREE.ReinhardToneMapping
 
     this.scene = new THREE.Scene()
+    // this.scene.fog = new THREE.Fog(0x003300)
 
     this.camera = new THREE.PerspectiveCamera(
       this.settings.camera.fov,
@@ -81,6 +90,35 @@ export class Renderer {
       this.settings.camera.z
     )
     this.camera.lookAt(this.scene.position)
+
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+
+    // light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
+    this.scene.add(ambientLight)
+
+    const hemiLight = new THREE.HemisphereLight()
+    hemiLight.intensity = 0.2
+    this.scene.add(hemiLight)
+
+    const light = new THREE.DirectionalLight()
+    light.position.set(50, 50, 50)
+    light.castShadow = true
+    // light.shadow.camera.zoom = 2
+
+    // Configure shadow properties
+    light.shadow.mapSize.width = 2048 // Increase shadow map size
+    light.shadow.mapSize.height = 2048
+    light.shadow.camera.near = 1 // Adjust near and far planes of the shadow camera
+    light.shadow.camera.far = 1000
+    light.shadow.camera.left = -10 // Adjust the frustum to encompass all instances
+    light.shadow.camera.right = 10
+    light.shadow.camera.top = 10
+    light.shadow.camera.bottom = -10
+    this.scene.add(light)
+
+    const lightHelper = new THREE.DirectionalLightHelper(light, 10)
+    this.scene.add(lightHelper)
   }
 
   resize = () => {
@@ -102,6 +140,7 @@ export class Renderer {
   }
 
   update = (delta) => {
+    this.controls.update()
     for (let i = 0; i < this.scenes.length; i += 1) {
       this.scenes[i].update(delta)
     }
