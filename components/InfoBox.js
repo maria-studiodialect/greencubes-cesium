@@ -35,7 +35,7 @@ export default function InfoBox({exploreClick, closeClick}) {
                     <div>580 Million</div>
                 </div>
             </div>
-            <div onClick={exploreClick} className="bg-blue text-center py-1.5 rounded-md mb-[-1em] mx-4 drop-shadow-xl">Explore</div>
+            <div onClick={exploreClick} className="bg-blue text-center py-1.5 rounded-md mb-[-1em] mx-4 drop-shadow-xl cursor-pointer">Explore</div>
         </div>
         </div>
         
