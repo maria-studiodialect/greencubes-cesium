@@ -1,6 +1,10 @@
 import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js"
+import { SSRPass } from "three/examples/jsm/postprocessing/SSRPass.js"
+import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js"
+
 const USE_FULLSCREEN = false
 const MAX_FRAME_BUFFER_SIZE = new THREE.Vector2(1280, 720)
 const BASE_SIZE = Math.sqrt(MAX_FRAME_BUFFER_SIZE.x * MAX_FRAME_BUFFER_SIZE.y)
@@ -31,19 +35,14 @@ function calculateRendererSize(windowWidth, windowHeight) {
   }
 }
 
+// README: Performance on mac's isn't great. setting to true will do:
+// - uses perspective camera
+// - forces devicePixelRatio to 1
+// - uses EffectComposer
+const POST_PROCESSING = false
+
 export class Renderer {
   constructor({ canvas }) {
-    this.settings = {
-      camera: {
-        fov: 45,
-        near: 1,
-        far: 1000,
-        x: 10,
-        y: 10,
-        z: 10,
-      },
-    }
-
     this.scenes = []
 
     if (canvas) {
@@ -64,67 +63,55 @@ export class Renderer {
   setup(canvas) {
     if (!canvas) return
 
+    const width = window.innerWidth
+    const height = window.innerHeight
+    const renderSize = calculateRendererSize(width, height)
+
     this.renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
-      // alpha: true,
     })
-    // this.renderer.setClearColor(0x003300, 1)
-    this.renderer.shadowMap.enabled = true
-    this.renderer.shadowMapSoft = true
-    this.renderer.setPixelRatio(Math.min(2, global.devicePixelRatio))
+    this.renderer.setClearColor(0xeeeeee, 1)
+    this.renderer.useLegacyLights = true
+    this.renderer.outputColorSpace = THREE.SRGBColorSpace
+
+    this.renderer.setPixelRatio(
+      Math.min(global.devicePixelRatio, POST_PROCESSING ? 1 : 2)
+    )
     this.renderer.toneMapping = THREE.ReinhardToneMapping
 
     this.scene = new THREE.Scene()
-    // this.scene.fog = new THREE.Fog(0x003300)
 
-    this.camera = new THREE.PerspectiveCamera(
-      this.settings.camera.fov,
-      1,
-      this.settings.camera.near,
-      this.settings.camera.far
-    )
-    this.camera.position.set(
-      this.settings.camera.x,
-      this.settings.camera.y,
-      this.settings.camera.z
-    )
-    this.camera.lookAt(this.scene.position)
+    if (POST_PROCESSING) {
+      this.camera = new THREE.PerspectiveCamera(
+        25,
+        renderSize.width / renderSize.height,
+        1,
+        100
+      )
+    } else {
+      this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, -1000, 1000)
+    }
+
+    this.camera.position.set(8, 12, 16)
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
 
-    // light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
-    this.scene.add(ambientLight)
+    if (POST_PROCESSING) {
+      this.composer = new EffectComposer(this.renderer)
+      this.ssrPass = new SSRPass({
+        renderer: this.renderer,
+        scene: this.scene,
+        camera: this.camera,
+      })
 
-    const hemiLight = new THREE.HemisphereLight()
-    hemiLight.intensity = 0.2
-    this.scene.add(hemiLight)
-
-    const light = new THREE.DirectionalLight()
-    light.position.set(50, 50, 50)
-    light.castShadow = true
-    // light.shadow.camera.zoom = 2
-
-    // Configure shadow properties
-    light.shadow.mapSize.width = 2048 // Increase shadow map size
-    light.shadow.mapSize.height = 2048
-    light.shadow.camera.near = 1 // Adjust near and far planes of the shadow camera
-    light.shadow.camera.far = 1000
-    light.shadow.camera.left = -10 // Adjust the frustum to encompass all instances
-    light.shadow.camera.right = 10
-    light.shadow.camera.top = 10
-    light.shadow.camera.bottom = -10
-    this.scene.add(light)
-
-    const lightHelper = new THREE.DirectionalLightHelper(light, 10)
-    this.scene.add(lightHelper)
+      this.composer.addPass(this.ssrPass)
+    }
   }
 
   resize = () => {
     const width = window.innerWidth
     const height = window.innerHeight
-
     const renderSize = calculateRendererSize(width, height)
 
     if (this.renderer && this.camera) {
@@ -134,8 +121,23 @@ export class Renderer {
       this.renderer.domElement.style.width = `${width}px`
       this.renderer.domElement.style.height = `${height}px`
 
-      this.camera.aspect = width / height
+      const aspect = renderSize.width / renderSize.height
+
+      if (POST_PROCESSING) {
+        this.camera.aspect = aspect
+      } else {
+        const frustrumSize = 10
+        this.camera.left = (frustrumSize * aspect) / -2
+        this.camera.right = (frustrumSize * aspect) / 2
+        this.camera.top = frustrumSize / 2
+        this.camera.bottom = frustrumSize / -2
+      }
+
       this.camera.updateProjectionMatrix()
+
+      if (POST_PROCESSING) {
+        this.composer.setSize(renderSize.width, renderSize.height)
+      }
     }
   }
 
@@ -145,8 +147,13 @@ export class Renderer {
       this.scenes[i].update(delta)
     }
 
-    if (this.renderer && this.scene && this.camera)
-      this.renderer.render(this.scene, this.camera)
+    if (this.renderer && this.scene && this.camera) {
+      if (POST_PROCESSING) {
+        this.composer.render()
+      } else {
+        this.renderer.render(this.scene, this.camera)
+      }
+    }
 
     this.raf = requestAnimationFrame(this.update)
   }

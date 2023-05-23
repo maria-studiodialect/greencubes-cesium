@@ -2,7 +2,8 @@ import * as THREE from "three"
 
 import { settings } from "./settings"
 import { TweenMax } from "gsap/gsap-core"
-import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js"
+import { Verde } from "./materials/verde"
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js"
 
 export class Scene {
   constructor(canvas) {
@@ -12,6 +13,25 @@ export class Scene {
     this.matrix = new THREE.Matrix4()
     this.color = new THREE.Color()
 
+    this.time = 0
+    this.init()
+  }
+
+  async init() {
+    const loader = new GLTFLoader()
+
+    // load test
+    const { scene: test } = await loader.loadAsync("/webgl/glb/ob1.glb")
+    this.testGeometry = test.children[0].geometry
+
+    // load cube
+    const { scene: cube } = await loader.loadAsync("/webgl/glb/cube1.glb")
+    this.cubeGeometry = cube.children[0].geometry
+
+    // load special shape
+    const { scene: stack } = await loader.loadAsync("/webgl/glb/cubestack.glb")
+    this.stackGeometry = stack.children[0].geometry
+
     this.addCubes()
   }
 
@@ -19,56 +39,35 @@ export class Scene {
     this.gui = gui
 
     this.gui
-      .add(settings.cubes, "total", 3, 80)
+      .add(settings.cubes, "total", 1, 80)
       .step(1)
-      .onChange(this.updateGui)
-    this.gui.add(settings.cubes, "size", 1, 50).step(1).onChange(this.updateGui)
-    this.gui
-      .add(settings.cubes, "roundness", 0, 1)
-      .step(0.01)
       .onChange(this.updateGui)
   }
 
   updateGui = () => {
-    // remove old cubes
     this.removeCubes()
-
-    // add new cubes
     this.addCubes()
-
-    // loop through scene and update material
-    this.container.traverse((node) => {
-      if (!node.isMesh) return
-
-      // node.material.fogColor.value = new THREE.Color(settings.fog.color)
-      // node.material.fogNear.value = settings.fog.near
-      // node.material.fogFar.value = settings.fog.far
-    })
   }
 
   addCubes() {
-    const total = settings.cubes.total
-    const size = settings.cubes.size
-    const half = total * size * 0.5 - size * 0.5
-
-    const geometry = new RoundedBoxGeometry(
-      size,
-      size,
-      size,
-      2,
-      settings.cubes.roundness
-    )
-
-    const material = new THREE.MeshLambertMaterial()
+    // const material = new THREE.MeshLambertMaterial()
+    const material = Verde()
 
     // add mesh
-    this.mesh = new THREE.InstancedMesh(geometry, material, Math.pow(total, 2))
-    this.mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage)
-    this.mesh.castShadow = true
-    this.mesh.receiveShadow = true
-    this.mesh.frustumCulled = false
+    this.count = settings.cubes.total * settings.cubes.total
 
-    this.container.add(this.mesh)
+    this.random = new Float32Array(this.count)
+
+    this.instanced = new THREE.InstancedMesh(
+      this.cubeGeometry,
+      material,
+      this.count
+    )
+    // this.instanced.instanceMatrix.setUsage(THREE.DynamicDrawUsage)
+    // this.instanced.castShadow = true
+    // this.instanced.receiveShadow = true
+    // this.instanced.frustumCulled = false
+    this.container.add(this.instanced)
 
     this.animate()
   }
@@ -86,6 +85,28 @@ export class Scene {
     //     delay: Math.random(),
     //   })
     // }
+
+    let index = 0
+
+    const size = 2
+    const offset = settings.cubes.total * size * 0.5 - size * 0.5
+
+    for (let i = 0; i < settings.cubes.total; i++) {
+      for (let j = 0; j < settings.cubes.total; j++) {
+        this.random[index] = Math.random()
+        const x = /* i - settings.cubes.total / 2 */ offset - i * size
+        const y = Math.random()
+        const z = /* j - settings.cubes.total / 2 */ offset - j * size
+        this.matrix.setPosition(x, y, z)
+        this.instanced.setMatrixAt(index++, this.matrix)
+      }
+    }
+
+    this.instanced.instanceMatrix.needsUpdate = true
+    this.instanced.geometry.setAttribute(
+      "aRandom",
+      new THREE.InstancedBufferAttribute(this.random, 1)
+    )
   }
 
   destroy() {
@@ -95,35 +116,9 @@ export class Scene {
   resize(/* width, height */) {}
 
   update(/* delta */) {
-    if (this.mesh) {
-      const time = Date.now() * 0.001
-
-      let i = 0
-      const offset =
-        settings.cubes.total * settings.cubes.size * 0.5 -
-        settings.cubes.size * 0.5
-
-      for (let x = 0; x < settings.cubes.total; x++) {
-        for (let z = 0; z < settings.cubes.total; z++) {
-          const nextX = offset - x * settings.cubes.size
-          const nextZ = offset - z * settings.cubes.size
-          this.matrix.setPosition(
-            nextX,
-            Math.sin(time * 0.05 * x + time * 0.05 * z),
-            nextZ
-          )
-
-          this.mesh.setColorAt(
-            i,
-            this.color.setRGB(0, 0.1 + Math.random() * 0.9, 0)
-          )
-
-          this.mesh.setMatrixAt(i++, this.matrix)
-        }
-      }
-
-      this.mesh.instanceMatrix.needsUpdate = true
-      this.mesh.computeBoundingSphere()
+    if (this.instanced) {
+      this.time += 0.01
+      this.instanced.material.uniforms.time.value = this.time
     }
   }
 }
