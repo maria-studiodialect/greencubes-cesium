@@ -4,7 +4,7 @@ import ChartRef from "./ChartRef";
 import { RiCloseCircleFill } from 'react-icons/ri';
 
 
-export default function CubeInfo({exploreClick, closeClick}) {
+export default function CubeInfo({exploreClick, closeClick, remaining, sponsored, cubes, carbon, values}) {
     return (
         <>
         <div className="absolute top-[14%] right-10 z-10">
@@ -17,7 +17,7 @@ export default function CubeInfo({exploreClick, closeClick}) {
                 <div className="text-green-400">320 <span className="text-xxs">CO2e</span></div>
                 </div>
             </div>
-            <ChartRef/>
+            <ChartRef values={values}/>
             <div className="flex justify-center text-sm items-center">
                 <div className="text-green-400  px-4 py-1">Forest profile</div>
                 <div className="text-gray-400 bg-white px-4 py-1 rounded-xl">Biodiversity</div>

@@ -9,6 +9,13 @@ import { useState, useRef } from "react"
 import { Entity, Viewer, CameraFlyTo } from "resium"
 import InfoBox from "../components/InfoBox"
 import CubeInfo from "../components/CubeInfo"
+import dynamic from "next/dynamic"
+import { motion, AnimatePresence } from "framer-motion"
+
+
+// because dat.gui has dependencies to "window" we need to load that module on the client only.
+const WebGL = dynamic(() => import("../components/webgl"), { ssr: false })
+
 
 Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2YWFiYmUwMy00OWJjLTQzNzgtOGRkNy1hMjNiNzJkZDhiZTgiLCJpZCI6MTM5MDYwLCJpYXQiOjE2ODQyMjk0NTJ9.vcp3vAE8acxcoCF0cVcF8t72adLDvV-daPZ_vF2vmwU"
@@ -20,6 +27,17 @@ export default function Cesium() {
   const [hoveredEntity, setHoveredEntity] = useState(null)
   const [selectedPolygon, setSelectedPolygon] = useState({name:null})
   const [cameraFly, setCameraFly] = useState(false);
+  const [cameraCubes, setCameraCubes] = useState(false);
+
+  const image = "/img/test.jpg"
+
+  const handleHover = (cube) => {
+    console.log("hover on cube", cube)
+  }
+
+  const handleOut = () => {
+    console.log("out")
+  }
 
   const handleDoubleClick = () => {
     setCameraFly(true);
@@ -41,6 +59,11 @@ export default function Cesium() {
     setBox(true);
   };
 
+  const handleExploreClick = () => {
+    setCubeInfo(true);
+    //setCameraCubes(true);
+  }
+
   return (
     <>
       <Viewer
@@ -60,7 +83,7 @@ export default function Cesium() {
       >
         <Entity
           name="Costa Rica"
-          position={Cartesian3.fromDegrees(-84.006971, 10.430623, 100)}
+          position={Cartesian3.fromDegrees(-84.013971, 10.425500, 100)}
           billboard={{
             image:
               "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/costa-rica.png?v=1684253508897",
@@ -74,7 +97,7 @@ export default function Cesium() {
         {cameraFly && (
           <CameraFlyTo
             duration={2} // Adjust the duration as needed
-            destination={Cartesian3.fromDegrees(-84.006971, 10.430623, 5000)}
+            destination={Cartesian3.fromDegrees(-84.013971, 10.425500, 5000)}
             offset={new Cartesian3(0, 0, 20000)} // Adjust the zoom level as needed
             onComplete={() => setCameraFly(false)} // Reset the state after the camera animation completes
           />
@@ -118,6 +141,14 @@ export default function Cesium() {
             })
           }
         />
+        {cameraCubes &&
+          <CameraFlyTo
+            duration={2} // Adjust the duration as needed
+            destination={Cartesian3.fromDegrees(-84.011648, 10.4213488, 100)}
+            offset={new Cartesian3(0, 0, 500)} // Adjust the zoom level as needed
+            onComplete={() => setCameraCubes(false)} // Reset the state after the camera animation completes
+          />
+        }
         <Entity
           name="Costa Rica Area 2"
           polygon={{
@@ -188,7 +219,7 @@ export default function Cesium() {
       {box && (
         <InfoBox
           closeClick={() => setBox((f) => false)}
-          exploreClick={() => setCubeInfo((f) => true)}
+          exploreClick={handleExploreClick}
           location={selectedPolygon.location}
           coordinates={selectedPolygon.coordinates}
           bio={selectedPolygon.bio}
@@ -198,6 +229,18 @@ export default function Cesium() {
       )}
 
       {cubeInfo && <CubeInfo closeClick={() => setCubeInfo((f) => false)} />}
+      <AnimatePresence>
+        {cubeInfo && (
+        <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ type: "spring", stiffness: 100, duration: 1 }}
+        >
+          <WebGL map={image} onHover={handleHover} onOut={handleOut} />
+        </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
