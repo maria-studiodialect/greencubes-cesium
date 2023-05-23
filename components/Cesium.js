@@ -71,12 +71,17 @@ export default function Cesium() {
     setCameraCubes(true);
   }
 
+  const closeInfoCubes = () => {
+    setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
+    setCubeInfo(false);
+    setCameraFly(true);
+  }
+
   
 
   return (
     <>
       <Viewer
-        
         full
         timeline={false}
         homeButton={false}
@@ -208,7 +213,7 @@ export default function Cesium() {
           onClick={() =>
             handlePolygonClick({
               name: 'costaRicaArea3',
-              coordinates: ' -83.2290178, 8.7211045',
+              coordinates: '-83.2290178, 8.7211045',
               location: 'La Selva 3', 
               bio: 'Very High', 
               cubes: '467 million',
@@ -229,7 +234,7 @@ export default function Cesium() {
         />
       )}
 
-      {cubeInfo && <CubeInfo closeClick={() => setCubeInfo((f) => false)} />}
+      {cubeInfo && <CubeInfo closeClick={closeInfoCubes} />}
       <AnimatePresence>
         {cubeInfo && (
         <motion.div 
