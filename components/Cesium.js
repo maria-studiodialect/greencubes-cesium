@@ -4,8 +4,9 @@ import {
   Ion,
   HeightReference,
   HorizontalOrigin,
+  Camera
 } from "cesium"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Entity, Viewer, CameraFlyTo } from "resium"
 import InfoBox from "../components/InfoBox"
 import CubeInfo from "../components/CubeInfo"
@@ -64,6 +65,11 @@ export default function Cesium() {
     //setCameraCubes(true);
   }
 
+  useEffect(() => {
+    var currentPosition = Camera.position;
+    console.log(currentPosition)
+  });
+
   return (
     <>
       <Viewer
@@ -83,7 +89,7 @@ export default function Cesium() {
       >
         <Entity
           name="Costa Rica"
-          position={Cartesian3.fromDegrees(-84.013971, 10.425500, 100)}
+          position={Cartesian3.fromDegrees(-83.219870, 8.720819, 100)}
           billboard={{
             image:
               "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/costa-rica.png?v=1684253508897",
@@ -97,7 +103,7 @@ export default function Cesium() {
         {cameraFly && (
           <CameraFlyTo
             duration={2} // Adjust the duration as needed
-            destination={Cartesian3.fromDegrees(-84.013971, 10.425500, 5000)}
+            destination={Cartesian3.fromDegrees(-83.219870, 8.720819, 5000)}
             offset={new Cartesian3(0, 0, 20000)} // Adjust the zoom level as needed
             onComplete={() => setCameraFly(false)} // Reset the state after the camera animation completes
           />
@@ -120,7 +126,7 @@ export default function Cesium() {
           name="Costa Rica Area"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
-              -84.0092992, 10.4364417, -84.0170669, 10.4346902, -84.0168523, 10.4309972, -84.0183544, 10.4302797, -84.0136337, 10.425447, -84.0072607, 10.4276629, -84.0062952, 10.4266077, -84.0029692, 10.4276207, -84.0092992, 10.4364417,
+              -83.2190299, 8.7310534, -83.2267586, 8.7293019, -83.2265452, 8.7256089, -83.2280397, 8.7248914, -83.2233427, 8.7200587, -83.2170016, 8.7222746, -83.216041, 8.7212194, -83.2127317, 8.7222324, -83.2190299, 8.7310534,
             ]),
             material: hoveredEntity === "costaRicaArea" || selectedPolygon.name === "costaRicaArea" ? Color.ORANGE.withAlpha(0.5) : Color.WHITE.withAlpha(0.4),
             fill: true,
@@ -153,7 +159,7 @@ export default function Cesium() {
           name="Costa Rica Area 2"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
-              -84.0072983, 10.4274941, -84.0136337, 10.4252993, -84.012648, 10.4213488, -84.0161348, 10.420072, -84.0130343, 10.4169803, -84.0034212, 10.4171069, -84.0004172, 10.4199348, -84.0029692, 10.427473, -84.0063542, 10.4264389, -84.0072983, 10.4274941,
+              -83.2170349, 8.7220951, -83.2233386, 8.7199003, -83.2223577, 8.7159498, -83.2258272, 8.714673, -83.2227422, 8.7115813, -83.2131772, 8.7117079, -83.2101882, 8.7145358, -83.2127275, 8.722074, -83.2160956, 8.7210399, -83.2170349, 8.7220951
             ]),
             material: hoveredEntity === "costaRicaArea2" || selectedPolygon.name === "costaRicaArea2" ? Color.ORANGE.withAlpha(0.5) : Color.WHITE.withAlpha(0.4),
             fill: true,
@@ -179,7 +185,7 @@ export default function Cesium() {
           name="Costa Rica Area 3"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
-              -84.0185153, 10.4301847, -84.0250506, 10.4292626, -84.0273465, 10.4264981, -84.0272607, 10.420167, -84.0164031, 10.4201564, -84.0128519, 10.4214543, -84.0137732, 10.4253626, -84.0185153, 10.4301847,
+              -83.2282308, 8.7247911, -83.2347334, 8.723869, -83.2370178, 8.7211045, -83.2369325, 8.7147734, -83.2261292, 8.7147628, -83.2225957, 8.7160607, -83.2235125, 8.719969, -83.2282308, 8.7247911  
             ]),
             material: hoveredEntity === "costaRicaArea3" || selectedPolygon.name === "costaRicaArea3" ? Color.ORANGE.withAlpha(0.5) : Color.WHITE.withAlpha(0.4),
             fill: true,
@@ -201,20 +207,6 @@ export default function Cesium() {
             })
           }
         />
-
-        {cubeInfo && (
-          <Entity
-            name="Cubez"
-            position={Cartesian3.fromDegrees(-84.011571, 10.431023)}
-            model={{
-              uri: "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/Untitled.glb?v=1684514812793",
-              maximumScale: 4000,
-              scale: 40,
-              heightReference: HeightReference.CLAMP_TO_GROUND,
-            }}
-            onClick={() => setCubeInfo((f) => true)}
-          />
-        )}
       </Viewer>
       {box && (
         <InfoBox
