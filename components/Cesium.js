@@ -4,15 +4,13 @@ import {
   Ion,
   HeightReference,
   HorizontalOrigin,
-  Camera
 } from "cesium"
 import { useState, useRef, useEffect } from "react"
-import { Entity, Viewer, CameraFlyTo } from "resium"
+import { Entity, Viewer, CameraFlyTo, Scene, Globe, Camera } from "resium"
 import InfoBox from "../components/InfoBox"
 import CubeInfo from "../components/CubeInfo"
 import dynamic from "next/dynamic"
 import { motion, AnimatePresence } from "framer-motion"
-
 
 // because dat.gui has dependencies to "window" we need to load that module on the client only.
 const WebGL = dynamic(() => import("../components/webgl"), { ssr: false })
@@ -29,6 +27,10 @@ export default function Cesium() {
   const [selectedPolygon, setSelectedPolygon] = useState({name:null})
   const [cameraFly, setCameraFly] = useState(false);
   const [cameraCubes, setCameraCubes] = useState(false);
+  const [position, setPosition] = useState(null);
+  const [coordinates, setCoordinates] = useState(null)
+  const cesium = useRef(null)
+
 
   const image = "/img/test.jpg"
 
@@ -41,6 +43,7 @@ export default function Cesium() {
   }
 
   const handleDoubleClick = () => {
+    setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
     setCameraFly(true);
     setModel(true);
   };
@@ -58,21 +61,22 @@ export default function Cesium() {
   const handlePolygonClick = (polygonData) => {
     setSelectedPolygon(polygonData);
     setBox(true);
+    const [longitude, latitude] = polygonData.coordinates.split(',').map(coord => parseFloat(coord.trim()));
+    setCoordinates({longitude: longitude, latitude: latitude})
   };
 
   const handleExploreClick = () => {
+    setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
     setCubeInfo(true);
-    //setCameraCubes(true);
+    setCameraCubes(true);
   }
 
-  useEffect(() => {
-    var currentPosition = Camera.position;
-    console.log(currentPosition)
-  });
+  
 
   return (
     <>
       <Viewer
+        
         full
         timeline={false}
         homeButton={false}
@@ -87,6 +91,9 @@ export default function Cesium() {
         animation={false}
         trackedEntity={undefined}
       >
+        <Scene />
+        <Globe />
+        <Camera ref={cesium}/>
         <Entity
           name="Costa Rica"
           position={Cartesian3.fromDegrees(-83.219870, 8.720819, 100)}
@@ -105,6 +112,7 @@ export default function Cesium() {
             duration={2} // Adjust the duration as needed
             destination={Cartesian3.fromDegrees(-83.219870, 8.720819, 5000)}
             offset={new Cartesian3(0, 0, 20000)} // Adjust the zoom level as needed
+            maximumHeight={position}
             onComplete={() => setCameraFly(false)} // Reset the state after the camera animation completes
           />
         )}
@@ -140,7 +148,7 @@ export default function Cesium() {
           onClick={() =>
             handlePolygonClick({
               name: 'costaRicaArea',
-              coordinates: '-84.0092992, 10.4364417',
+              coordinates: '-83.2265452, 8.7256089',
               location: 'La Selva', 
               bio: 'High', 
               cubes: '580 million'
@@ -150,8 +158,9 @@ export default function Cesium() {
         {cameraCubes &&
           <CameraFlyTo
             duration={2} // Adjust the duration as needed
-            destination={Cartesian3.fromDegrees(-84.011648, 10.4213488, 100)}
+            destination={Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude, 100)}
             offset={new Cartesian3(0, 0, 500)} // Adjust the zoom level as needed
+            maximumHeight={position}
             onComplete={() => setCameraCubes(false)} // Reset the state after the camera animation completes
           />
         }
@@ -173,7 +182,7 @@ export default function Cesium() {
           onClick={() =>
             handlePolygonClick({
               name: 'costaRicaArea2',
-              coordinates: '-84.0136337, 10.4252993',
+              coordinates: '-83.2193577, 8.7159498',
               location: 'La Selva 2', 
               bio: 'Medium', 
               cubes: '340 million',
@@ -199,7 +208,7 @@ export default function Cesium() {
           onClick={() =>
             handlePolygonClick({
               name: 'costaRicaArea3',
-              coordinates: '-84.0136337, 10.4252993',
+              coordinates: ' -83.2290178, 8.7211045',
               location: 'La Selva 3', 
               bio: 'Very High', 
               cubes: '467 million',
@@ -225,7 +234,7 @@ export default function Cesium() {
         {cubeInfo && (
         <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: 1, transition: { delay: 1.5 } }}
         exit={{ opacity: 0 }}
         transition={{ type: "spring", stiffness: 100, duration: 1 }}
         >
