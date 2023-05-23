@@ -5,8 +5,8 @@ import {
   HeightReference,
   HorizontalOrigin,
 } from "cesium"
-import { useState } from "react"
-import { Entity, Viewer } from "resium"
+import { useState, useRef } from "react"
+import { Entity, Viewer, CameraFlyTo } from "resium"
 import InfoBox from "../components/InfoBox"
 import CubeInfo from "../components/CubeInfo"
 
@@ -18,6 +18,15 @@ export default function Cesium() {
   const [model, setModel] = useState(false)
   const [cubeInfo, setCubeInfo] = useState(false)
   const [hoveredEntity, setHoveredEntity] = useState(null)
+  const [selectedPolygon, setSelectedPolygon] = useState({name:null})
+  const [cameraFly, setCameraFly] = useState(false);
+
+  const handleDoubleClick = () => {
+    setCameraFly(true);
+    setModel(true);
+  };
+
+
 
   const handlePolygonMouseEnter = (entity) => {
     setHoveredEntity(entity)
@@ -26,6 +35,11 @@ export default function Cesium() {
   const handlePolygonMouseLeave = () => {
     setHoveredEntity(null)
   }
+
+  const handlePolygonClick = (polygonData) => {
+    setSelectedPolygon(polygonData);
+    setBox(true);
+  };
 
   return (
     <>
@@ -42,6 +56,7 @@ export default function Cesium() {
         sceneModePicker={false}
         selectionIndicator={false}
         animation={false}
+        trackedEntity={undefined}
       >
         <Entity
           name="Costa Rica"
@@ -54,8 +69,17 @@ export default function Cesium() {
             horizontalOrigin: HorizontalOrigin.LEFT,
           }}
           description="La Selva"
-          onDoubleClick={() => setModel((f) => true)}
-        />
+          onDoubleClick={handleDoubleClick}
+      >
+        {cameraFly && (
+          <CameraFlyTo
+            duration={2} // Adjust the duration as needed
+            destination={Cartesian3.fromDegrees(-84.006971, 10.430623, 5000)}
+            offset={new Cartesian3(0, 0, 20000)} // Adjust the zoom level as needed
+            onComplete={() => setCameraFly(false)} // Reset the state after the camera animation completes
+          />
+        )}
+      </Entity>
 
         <Entity
           name="Colombia"
@@ -73,79 +97,78 @@ export default function Cesium() {
           name="Costa Rica Area"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
-              -84.0092992, 10.4364417, -84.0170669, 10.4346902, -84.0168523,
-              10.4309972, -84.0183544, 10.4302797, -84.0136337, 10.425447,
-              -84.0072607, 10.4276629, -84.0062952, 10.4266077, -84.0029692,
-              10.4276207, -84.0092992, 10.4364417,
+              -84.0092992, 10.4364417, -84.0170669, 10.4346902, -84.0168523, 10.4309972, -84.0183544, 10.4302797, -84.0136337, 10.425447, -84.0072607, 10.4276629, -84.0062952, 10.4266077, -84.0029692, 10.4276207, -84.0092992, 10.4364417,
             ]),
-            material:
-              hoveredEntity === "costaRicaArea"
-                ? Color.ORANGE.withAlpha(0.5)
-                : Color.WHITE.withAlpha(0.5),
+            material: hoveredEntity === "costaRicaArea" || selectedPolygon.name === "costaRicaArea" ? Color.ORANGE.withAlpha(0.5) : Color.WHITE.withAlpha(0.4),
             fill: true,
-            fillColor:
-              hoveredEntity === "costaRicaArea"
-                ? Color.YELLOW.withAlpha(0.5)
-                : Color.TRANSPARENT,
+            fillColor: hoveredEntity === "costaRicaArea" || selectedPolygon.name === "costaRicaArea" ? Color.ORANGE.withAlpha(0.5) : Color.TRANSPARENT,
             outline: true,
-            outlineColor: Color.ORANGE.withAlpha(1),
-            heightReference: HeightReference.CLAMP_TO_GROUND,
+            outlineColor: selectedPolygon.name === "costaRicaArea" ? Color.ORANGE.withAlpha(1) : Color.ORANGE.withAlpha(0.7),
+            heightReference: HeightReference.CLAMP_TO_GROUND
           }}
           onMouseEnter={() => handlePolygonMouseEnter("costaRicaArea")}
           onMouseLeave={handlePolygonMouseLeave}
-          onClick={() => setBox((f) => true)}
+          onClick={() =>
+            handlePolygonClick({
+              name: 'costaRicaArea',
+              coordinates: '-84.0092992, 10.4364417',
+              location: 'La Selva', 
+              bio: 'High', 
+              cubes: '580 million'
+            })
+          }
         />
         <Entity
           name="Costa Rica Area 2"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
-              -84.0072607, 10.4276629, -84.0136337, 10.425447, -84.0125622,
-              10.4216442, -84.01621, 10.4202936, -84.0130343, 10.417128,
-              -84.0034212, 10.4172546, -84.0004172, 10.4200825, -84.0029692,
-              10.4276207, -84.0062952, 10.4266077, -84.0072607, 10.4276629,
+              -84.0072983, 10.4274941, -84.0136337, 10.4252993, -84.012648, 10.4213488, -84.0161348, 10.420072, -84.0130343, 10.4169803, -84.0034212, 10.4171069, -84.0004172, 10.4199348, -84.0029692, 10.427473, -84.0063542, 10.4264389, -84.0072983, 10.4274941,
             ]),
-            material:
-              hoveredEntity === "costaRicaArea2"
-                ? Color.ORANGE.withAlpha(0.5)
-                : Color.WHITE.withAlpha(0.5),
+            material: hoveredEntity === "costaRicaArea2" || selectedPolygon.name === "costaRicaArea2" ? Color.ORANGE.withAlpha(0.5) : Color.WHITE.withAlpha(0.4),
             fill: true,
-            fillColor:
-              hoveredEntity === "costaRicaArea2"
-                ? Color.YELLOW.withAlpha(0.5)
-                : Color.TRANSPARENT,
+            fillColor: hoveredEntity === "costaRicaArea2" || selectedPolygon.name === "costaRicaArea2" ? Color.ORANGE.withAlpha(0.5) : Color.TRANSPARENT,
             outline: true,
-            outlineColor: Color.ORANGE.withAlpha(1),
-            heightReference: HeightReference.CLAMP_TO_GROUND,
+            outlineColor: selectedPolygon.name === "costaRicaArea2" ? Color.ORANGE.withAlpha(1) : Color.ORANGE.withAlpha(0.7),
+            heightReference: HeightReference.CLAMP_TO_GROUND
           }}
           onMouseEnter={() => handlePolygonMouseEnter("costaRicaArea2")}
           onMouseLeave={handlePolygonMouseLeave}
-          onClick={() => setBox((f) => true)}
+          onClick={() =>
+            handlePolygonClick({
+              name: 'costaRicaArea2',
+              coordinates: '-84.0136337, 10.4252993',
+              location: 'La Selva 2', 
+              bio: 'Medium', 
+              cubes: '340 million',
+              img: '/img/laselva-2.svg'
+            })
+          }
         />
         <Entity
           name="Costa Rica Area 3"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
-              -84.0183544, 10.4302797, -84.0248789, 10.4293681, -84.0271534,
-              10.4267513, -84.0270676, 10.4204202, -84.01621, 10.4202936,
-              -84.0125622, 10.4216442, -84.0136337, 10.425447, -84.0183544,
-              10.4302797,
+              -84.0185153, 10.4301847, -84.0250506, 10.4292626, -84.0273465, 10.4264981, -84.0272607, 10.420167, -84.0164031, 10.4201564, -84.0128519, 10.4214543, -84.0137732, 10.4253626, -84.0185153, 10.4301847,
             ]),
-            material:
-              hoveredEntity === "costaRicaArea3"
-                ? Color.ORANGE.withAlpha(0.5)
-                : Color.WHITE.withAlpha(0.5),
+            material: hoveredEntity === "costaRicaArea3" || selectedPolygon.name === "costaRicaArea3" ? Color.ORANGE.withAlpha(0.5) : Color.WHITE.withAlpha(0.4),
             fill: true,
-            fillColor:
-              hoveredEntity === "costaRicaArea3"
-                ? Color.YELLOW.withAlpha(0.5)
-                : Color.TRANSPARENT,
+            fillColor: hoveredEntity === "costaRicaArea3" || selectedPolygon.name === "costaRicaArea3" ? Color.ORANGE.withAlpha(0.5) : Color.TRANSPARENT,
             outline: true,
-            outlineColor: Color.ORANGE.withAlpha(1),
-            heightReference: HeightReference.CLAMP_TO_GROUND,
+            outlineColor: selectedPolygon.name === "costaRicaArea3" ? Color.ORANGE.withAlpha(1) : Color.ORANGE.withAlpha(0.7),
+            heightReference: HeightReference.CLAMP_TO_GROUND
           }}
           onMouseEnter={() => handlePolygonMouseEnter("costaRicaArea3")}
           onMouseLeave={handlePolygonMouseLeave}
-          onClick={() => setBox((f) => true)}
+          onClick={() =>
+            handlePolygonClick({
+              name: 'costaRicaArea3',
+              coordinates: '-84.0136337, 10.4252993',
+              location: 'La Selva 3', 
+              bio: 'Very High', 
+              cubes: '467 million',
+              img: '/img/laselva-3.svg'
+            })
+          }
         />
 
         {cubeInfo && (
@@ -166,6 +189,11 @@ export default function Cesium() {
         <InfoBox
           closeClick={() => setBox((f) => false)}
           exploreClick={() => setCubeInfo((f) => true)}
+          location={selectedPolygon.location}
+          coordinates={selectedPolygon.coordinates}
+          bio={selectedPolygon.bio}
+          cubes={selectedPolygon.cubes}
+          img={selectedPolygon.img}
         />
       )}
 
