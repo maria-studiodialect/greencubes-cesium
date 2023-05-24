@@ -4,6 +4,7 @@ import {
   Ion,
   HeightReference,
   HorizontalOrigin,
+  ScreenSpaceEventType
 } from "cesium"
 import { useState, useRef, useEffect } from "react"
 import { Entity, Viewer, CameraFlyTo, Scene, Globe, Camera } from "resium"
@@ -28,6 +29,7 @@ export default function Cesium() {
   const [position, setPosition] = useState(null);
   const [coordinates, setCoordinates] = useState(null)
   const cesium = useRef(null)
+  const viewerRef = useRef(null)
 
 
   const image = "/img/test.jpg"
@@ -76,10 +78,20 @@ export default function Cesium() {
     setCameraFly(true);
   }
 
+  useEffect(() => {
+    if (viewerRef.current) {
+      const viewer = viewerRef.current?.cesiumElement;
+      viewer.screenSpaceEventHandler.removeInputAction(
+        ScreenSpaceEventType.LEFT_DOUBLE_CLICK
+      );
+    }
+  }, []);
+
 
   return (
     <>
       <Viewer
+        ref={viewerRef}
         full
         timeline={false}
         homeButton={false}
