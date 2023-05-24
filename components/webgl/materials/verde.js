@@ -53,7 +53,7 @@ export const Verde = () =>
     uniforms: {
       time: { value: 0 },
       uMatcap: {
-        value: new THREE.TextureLoader().load("/webgl/matcap/matcap3.png"),
+        value: new THREE.TextureLoader().load("/webgl/matcap/matcap-green8.png"),
       },
       multiplier: { value: 1 },
       uOffset: { value: 0 },

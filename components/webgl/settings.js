@@ -7,8 +7,8 @@ export const settings = {
     total: 49,
     startX: 24,
     startZ: 22,
-    multiplier: -10,
-    matcap: "/webgl/matcap/matcap3.png",
+    multiplier: 15,
+    matcap: "/webgl/matcap/matcap-green6.png",
     noise: "/webgl/noise1.jpg",
   },
 }
