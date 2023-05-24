@@ -13,9 +13,6 @@ import dynamic from "next/dynamic"
 import { motion, AnimatePresence } from "framer-motion"
 import UnityBuild from "../components/UnityBuild"
 
-// because dat.gui has dependencies to "window" we need to load that module on the client only.
-const WebGL = dynamic(() => import("../components/webgl"), { ssr: false })
-
 
 Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2YWFiYmUwMy00OWJjLTQzNzgtOGRkNy1hMjNiNzJkZDhiZTgiLCJpZCI6MTM5MDYwLCJpYXQiOjE2ODQyMjk0NTJ9.vcp3vAE8acxcoCF0cVcF8t72adLDvV-daPZ_vF2vmwU"
@@ -52,6 +49,9 @@ export default function Cesium() {
   const handlePolygonMouseEnter = (entity) => {
     setHoveredEntity(entity)
   }
+  const doubleClickQuiet = () => {
+    //console.log('double click')
+  }
 
   const handlePolygonMouseLeave = () => {
     setHoveredEntity(null)
@@ -76,7 +76,6 @@ export default function Cesium() {
     setCameraFly(true);
   }
 
-  
 
   return (
     <>
@@ -134,6 +133,16 @@ export default function Cesium() {
           }}
           description="Serrania de La Macarena"
         />
+        
+        {cameraCubes &&
+          <CameraFlyTo
+            duration={2} // Adjust the duration as needed
+            destination={Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude, 100)}
+            offset={new Cartesian3(0, 0, 500)} // Adjust the zoom level as needed
+            maximumHeight={position}
+            onComplete={() => setCameraCubes(false)} // Reset the state after the camera animation completes
+          />
+        }
         <Entity
           name="Costa Rica Area"
           polygon={{
@@ -149,25 +158,17 @@ export default function Cesium() {
           }}
           onMouseEnter={() => handlePolygonMouseEnter("costaRicaArea")}
           onMouseLeave={handlePolygonMouseLeave}
+          onDoubleClick={doubleClickQuiet}
           onClick={() =>
             handlePolygonClick({
               name: 'costaRicaArea',
-              coordinates: '-83.2265452, 8.7256089',
+              coordinates: '-83.2195452, 8.7256089',
               location: 'La Selva', 
               bio: 'High', 
               cubes: '580 million'
             })
           }
         />
-        {cameraCubes &&
-          <CameraFlyTo
-            duration={2} // Adjust the duration as needed
-            destination={Cartesian3.fromDegrees(coordinates.longitude, coordinates.latitude, 100)}
-            offset={new Cartesian3(0, 0, 500)} // Adjust the zoom level as needed
-            maximumHeight={position}
-            onComplete={() => setCameraCubes(false)} // Reset the state after the camera animation completes
-          />
-        }
         <Entity
           name="Costa Rica Area 2"
           polygon={{
@@ -183,6 +184,7 @@ export default function Cesium() {
           }}
           onMouseEnter={() => handlePolygonMouseEnter("costaRicaArea2")}
           onMouseLeave={handlePolygonMouseLeave}
+          onDoubleClick={doubleClickQuiet}
           onClick={() =>
             handlePolygonClick({
               name: 'costaRicaArea2',
@@ -209,6 +211,7 @@ export default function Cesium() {
           }}
           onMouseEnter={() => handlePolygonMouseEnter("costaRicaArea3")}
           onMouseLeave={handlePolygonMouseLeave}
+          onDoubleClick={doubleClickQuiet}
           onClick={() =>
             handlePolygonClick({
               name: 'costaRicaArea3',
