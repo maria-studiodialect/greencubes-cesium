@@ -11,6 +11,7 @@ import InfoBox from "../components/InfoBox"
 import CubeInfo from "../components/CubeInfo"
 import dynamic from "next/dynamic"
 import { motion, AnimatePresence } from "framer-motion"
+import UnityBuild from "../components/UnityBuild"
 
 // because dat.gui has dependencies to "window" we need to load that module on the client only.
 const WebGL = dynamic(() => import("../components/webgl"), { ssr: false })
@@ -47,8 +48,6 @@ export default function Cesium() {
     setCameraFly(true);
     setModel(true);
   };
-
-
 
   const handlePolygonMouseEnter = (entity) => {
     setHoveredEntity(entity)
@@ -243,7 +242,7 @@ export default function Cesium() {
         exit={{ opacity: 0 }}
         transition={{ type: "spring", stiffness: 100, duration: 1 }}
         >
-          <WebGL map={image} onHover={handleHover} onOut={handleOut} />
+          <UnityBuild/>
         </motion.div>
         )}
       </AnimatePresence>
