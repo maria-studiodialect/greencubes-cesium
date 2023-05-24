@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
+import Loader from "./Loader";
 
 export default function UnityBuild() {
-    const { unityProvider, isLoaded, UNSAFE__detachAndUnloadImmediate: detachAndUnloadImmediate } = useUnityContext({
+    const { unityProvider, isLoaded, loadingProgression, UNSAFE__detachAndUnloadImmediate: detachAndUnloadImmediate } = useUnityContext({
         loaderUrl: "/unity/Build/GreenCubes.loader.js",
         dataUrl: "/unity/Build/GreenCubes.data",
         frameworkUrl: "/unity/Build/GreenCubes.framework.js",
@@ -17,14 +18,21 @@ export default function UnityBuild() {
         };
     }, [detachAndUnloadImmediate]);
 
-    return <Unity
-    unityProvider={unityProvider}
-    style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-    }}
-    />;
+    return ( 
+    <>
+        {isLoaded && (
+            <Loader text={'Generating cubes'} progress={false} />
+        )}
+        <Unity
+        unityProvider={unityProvider}
+        style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+        }}
+        />;
+    </>
+    )
 }
