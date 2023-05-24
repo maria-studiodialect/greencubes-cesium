@@ -163,14 +163,14 @@ export class Scene {
         this.matrix.setPosition(x, y, z)
 
         // send to the bottom if intersects with the stack
-        if (
-          i >= settings.cubes.startX &&
-          i < settings.cubes.startX + 1 &&
-          j >= settings.cubes.startZ &&
-          j < settings.cubes.startZ + 5
-        ) {
-          this.matrix.setPosition(x, -2000, z)
-        }
+        // if (
+        //   i >= settings.cubes.startX &&
+        //   i < settings.cubes.startX + 1 &&
+        //   j >= settings.cubes.startZ &&
+        //   j < settings.cubes.startZ + 5
+        // ) {
+        //   this.matrix.setPosition(x, -2000, z)
+        // }
         this.instanced.setMatrixAt(index++, this.matrix)
       }
     }
