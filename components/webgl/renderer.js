@@ -3,51 +3,21 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js"
 import { SSRPass } from "three/examples/jsm/postprocessing/SSRPass.js"
-import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js"
+import { settings } from "./settings"
 
-const USE_FULLSCREEN = false
-const MAX_FRAME_BUFFER_SIZE = new THREE.Vector2(1280, 720)
-const BASE_SIZE = Math.sqrt(MAX_FRAME_BUFFER_SIZE.x * MAX_FRAME_BUFFER_SIZE.y)
-const MAX_SIZE = BASE_SIZE * BASE_SIZE
+import { calculateRendererSize } from "./utils/gl"
 
-function calculateRendererSize(windowWidth, windowHeight) {
-  let width = windowWidth
-  let height = windowHeight
-  if (USE_FULLSCREEN) {
-    return {
-      width,
-      height,
-    }
-  }
-
-  if (windowWidth * windowHeight > MAX_SIZE) {
-    const ratio = height / width
-    width = BASE_SIZE
-    height = Math.floor(BASE_SIZE * ratio)
-    const newSize = width * height
-    const scalar = Math.sqrt(MAX_SIZE / newSize)
-    width = Math.floor(width * scalar)
-    height = Math.floor(height * scalar)
-  }
-  return {
-    width,
-    height,
-  }
-}
-
-// README: Performance on mac's isn't great. setting to true will do:
-// - uses perspective camera
-// - forces devicePixelRatio to 1
-// - uses EffectComposer
-const POST_PROCESSING = false
+const dummy = new THREE.Vector3()
 
 export class Renderer {
   constructor({ canvas }) {
     this.scenes = []
 
+    this.debug = true
+
     if (canvas) {
       this.setup(canvas)
-      this.resize()
+      this.updateGui()
       this.update(0)
       window.addEventListener("resize", this.resize, false)
     }
@@ -71,34 +41,57 @@ export class Renderer {
       canvas,
       antialias: true,
     })
-    this.renderer.setClearColor(0xeeeeee, 1)
+    this.renderer.setClearColor(0x000000, 1)
     this.renderer.useLegacyLights = true
     this.renderer.outputColorSpace = THREE.SRGBColorSpace
-
-    this.renderer.setPixelRatio(
-      Math.min(global.devicePixelRatio, POST_PROCESSING ? 1 : 2)
-    )
     this.renderer.toneMapping = THREE.ReinhardToneMapping
 
     this.scene = new THREE.Scene()
 
-    if (POST_PROCESSING) {
+    if (settings.postprocessing.enabled) {
       this.camera = new THREE.PerspectiveCamera(
         25,
         renderSize.width / renderSize.height,
         1,
-        100
+        500
       )
     } else {
       this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, -1000, 1000)
     }
 
-    this.camera.position.set(8, 12, 16)
+    this.camera.position.set(20, 20, 20)
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
 
-    if (POST_PROCESSING) {
-      this.composer = new EffectComposer(this.renderer)
+    this.composer = new EffectComposer(this.renderer)
+
+    this.axesHelper = new THREE.AxesHelper(100)
+    this.scene.add(this.axesHelper)
+  }
+
+  addGui(gui) {
+    const pp = gui.addFolder("Post Processing")
+    pp.open()
+
+    pp.add(settings.postprocessing, "enabled").onChange(this.updateGui)
+    pp.add(settings.postprocessing, "pixelDensity", [1, 2]).onChange(
+      this.updateGui
+    )
+  }
+
+  updateGui = () => {
+    const width = window.innerWidth
+    const height = window.innerHeight
+    const renderSize = calculateRendererSize(width, height)
+
+    if (settings.postprocessing.enabled) {
+      this.camera = new THREE.PerspectiveCamera(
+        25,
+        renderSize.width / renderSize.height,
+        1,
+        500
+      )
+
       this.ssrPass = new SSRPass({
         renderer: this.renderer,
         scene: this.scene,
@@ -106,7 +99,32 @@ export class Renderer {
       })
 
       this.composer.addPass(this.ssrPass)
+    } else {
+      this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, -120, 120)
+
+      if (this.ssrPass) {
+        this.composer.removePass(this.ssrPass)
+        this.ssrPass.dispose()
+        this.ssrPass = null
+      }
     }
+
+    this.camera.position.set(20, 20, 20)
+
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+
+    const pixelRatio = Math.min(
+      global.devicePixelRatio,
+      settings.postprocessing.pixelDensity
+    )
+    this.renderer.setPixelRatio(pixelRatio)
+    this.composer.setPixelRatio(pixelRatio)
+
+    this.resize()
+  }
+
+  toggleDebug(value) {
+    this.axesHelper.visible = value
   }
 
   resize = () => {
@@ -123,10 +141,10 @@ export class Renderer {
 
       const aspect = renderSize.width / renderSize.height
 
-      if (POST_PROCESSING) {
+      if (settings.postprocessing.enabled) {
         this.camera.aspect = aspect
       } else {
-        const frustrumSize = 10
+        const frustrumSize = 20
         this.camera.left = (frustrumSize * aspect) / -2
         this.camera.right = (frustrumSize * aspect) / 2
         this.camera.top = frustrumSize / 2
@@ -135,7 +153,7 @@ export class Renderer {
 
       this.camera.updateProjectionMatrix()
 
-      if (POST_PROCESSING) {
+      if (settings.postprocessing.enabled) {
         this.composer.setSize(renderSize.width, renderSize.height)
       }
     }
@@ -143,12 +161,21 @@ export class Renderer {
 
   update = (delta) => {
     this.controls.update()
+
     for (let i = 0; i < this.scenes.length; i += 1) {
       this.scenes[i].update(delta)
     }
 
+    // look at
+    if (this.scenes[0] && this.scenes[0].origin) {
+      dummy.y = this.scenes[0].origin
+    }
+
+    this.camera.lookAt(dummy)
+    this.axesHelper.position.copy(dummy)
+
     if (this.renderer && this.scene && this.camera) {
-      if (POST_PROCESSING) {
+      if (settings.postprocessing.enabled) {
         this.composer.render()
       } else {
         this.renderer.render(this.scene, this.camera)
