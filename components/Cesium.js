@@ -53,6 +53,7 @@ export default function Cesium() {
 
   const handlePolygonMouseEnter = (entity) => {
     setHoveredEntity(entity)
+    document.body.style.cursor = 'pointer';
   }
   const doubleClickQuiet = () => {
     //console.log('double click')
@@ -60,6 +61,7 @@ export default function Cesium() {
 
   const handlePolygonMouseLeave = () => {
     setHoveredEntity(null)
+    document.body.style.cursor = 'default';
   }
 
   const handlePolygonClick = (polygonData) => {
@@ -123,6 +125,8 @@ export default function Cesium() {
           }}
           description="La Selva"
           onDoubleClick={handleDoubleClick}
+          onMouseEnter={() => document.body.style.cursor = 'pointer'}
+          onMouseLeave={() => document.body.style.cursor = 'default'}
       >
         {cameraFly && (
           <CameraFlyTo
@@ -145,6 +149,8 @@ export default function Cesium() {
             horizontalOrigin: HorizontalOrigin.LEFT,
           }}
           description="Serrania de La Macarena"
+          onMouseEnter={() => document.body.style.cursor = 'pointer'}
+          onMouseLeave={() => document.body.style.cursor = 'default'}
         />
 
       <Entity
@@ -156,7 +162,9 @@ export default function Cesium() {
             heightReference: HeightReference.CLAMP_TO_GROUND,
             horizontalOrigin: HorizontalOrigin.LEFT,
           }}
-          description="Serrania de La Macarena"
+          description="Cajati"
+          onMouseEnter={() => document.body.style.cursor = 'pointer'}
+          onMouseLeave={() => document.body.style.cursor = 'default'}
         />
         
         {cameraCubes &&
