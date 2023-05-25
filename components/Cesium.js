@@ -30,6 +30,9 @@ export default function Cesium() {
   const [coordinates, setCoordinates] = useState(null)
   const cesium = useRef(null)
   const viewerRef = useRef(null)
+  const selectedGreen = Color.fromCssColorString('#4DA947').withAlpha(0.5)
+  const hoverGreen = Color.fromCssColorString('#8DB388').withAlpha(0.7)
+  const outlineGreen = Color.fromCssColorString('#224C25').withAlpha(1)
 
 
   const image = "/img/test.jpg"
@@ -116,7 +119,6 @@ export default function Cesium() {
             image:
               "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/costa-rica.png?v=1684253508897",
             heightReference: HeightReference.CLAMP_TO_GROUND,
-            disableDepthTestDistance: Number.POSITIVE_INFINITY,
             horizontalOrigin: HorizontalOrigin.LEFT,
           }}
           description="La Selva"
@@ -125,7 +127,7 @@ export default function Cesium() {
         {cameraFly && (
           <CameraFlyTo
             duration={2} // Adjust the duration as needed
-            destination={Cartesian3.fromDegrees(-83.219870, 8.720819, 5000)}
+            destination={Cartesian3.fromDegrees(-83.223870, 8.720819, 6000)}
             offset={new Cartesian3(0, 0, 20000)} // Adjust the zoom level as needed
             maximumHeight={position}
             onComplete={() => setCameraFly(false)} // Reset the state after the camera animation completes
@@ -140,7 +142,18 @@ export default function Cesium() {
             image:
               "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/Colombia.png?v=1684253505802",
             heightReference: HeightReference.CLAMP_TO_GROUND,
-            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+            horizontalOrigin: HorizontalOrigin.LEFT,
+          }}
+          description="Serrania de La Macarena"
+        />
+
+      <Entity
+          name="Brazil"
+          position={Cartesian3.fromDegrees(-48.205586, -24.683075, 100)}
+          billboard={{
+            image:
+              "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/Brasil.png?v=1685011500173",
+            heightReference: HeightReference.CLAMP_TO_GROUND,
             horizontalOrigin: HorizontalOrigin.LEFT,
           }}
           description="Serrania de La Macarena"
@@ -161,7 +174,15 @@ export default function Cesium() {
             hierarchy: Cartesian3.fromDegreesArray([
               -83.2190299, 8.7310534, -83.2267586, 8.7293019, -83.2265452, 8.7256089, -83.2280397, 8.7248914, -83.2233427, 8.7200587, -83.2170016, 8.7222746, -83.216041, 8.7212194, -83.2127317, 8.7222324, -83.2190299, 8.7310534,
             ]),
-            material: hoveredEntity === "costaRicaArea" || selectedPolygon.name === "costaRicaArea" ? Color.ORANGE.withAlpha(0.5) : Color.WHITE.withAlpha(0.4),
+            material: (() => {
+              if (hoveredEntity === 'costaRicaArea') {
+                return hoverGreen;
+              } else if (selectedPolygon.name === 'costaRicaArea') {
+                return selectedGreen;
+              } else {
+                return Color.WHITE.withAlpha(0.3);
+              }
+            })(),
             fill: true,
             fillColor: hoveredEntity === "costaRicaArea" || selectedPolygon.name === "costaRicaArea" ? Color.ORANGE.withAlpha(0.5) : Color.TRANSPARENT,
             outline: true,
@@ -187,9 +208,16 @@ export default function Cesium() {
             hierarchy: Cartesian3.fromDegreesArray([
               -83.2170349, 8.7220951, -83.2233386, 8.7199003, -83.2223577, 8.7159498, -83.2258272, 8.714673, -83.2227422, 8.7115813, -83.2131772, 8.7117079, -83.2101882, 8.7145358, -83.2127275, 8.722074, -83.2160956, 8.7210399, -83.2170349, 8.7220951
             ]),
-            material: hoveredEntity === "costaRicaArea2" || selectedPolygon.name === "costaRicaArea2" ? Color.ORANGE.withAlpha(0.5) : Color.WHITE.withAlpha(0.4),
+            material: (() => {
+              if (hoveredEntity === 'costaRicaArea2') {
+                return hoverGreen;
+              } else if (selectedPolygon.name === 'costaRicaArea2') {
+                return selectedGreen;
+              } else {
+                return Color.WHITE.withAlpha(0.3);
+              }
+            })(),
             fill: true,
-            fillColor: hoveredEntity === "costaRicaArea2" || selectedPolygon.name === "costaRicaArea2" ? Color.ORANGE.withAlpha(0.5) : Color.TRANSPARENT,
             outline: true,
             outlineColor: selectedPolygon.name === "costaRicaArea2" ? Color.ORANGE.withAlpha(1) : Color.ORANGE.withAlpha(0.7),
             heightReference: HeightReference.CLAMP_TO_GROUND
@@ -214,11 +242,18 @@ export default function Cesium() {
             hierarchy: Cartesian3.fromDegreesArray([
               -83.2282308, 8.7247911, -83.2347334, 8.723869, -83.2370178, 8.7211045, -83.2369325, 8.7147734, -83.2261292, 8.7147628, -83.2225957, 8.7160607, -83.2235125, 8.719969, -83.2282308, 8.7247911  
             ]),
-            material: hoveredEntity === "costaRicaArea3" || selectedPolygon.name === "costaRicaArea3" ? Color.ORANGE.withAlpha(0.5) : Color.WHITE.withAlpha(0.4),
+            material: (() => {
+              if (hoveredEntity === 'costaRicaArea3') {
+                return hoverGreen;
+              } else if (selectedPolygon.name === 'costaRicaArea3') {
+                return selectedGreen;
+              } else {
+                return Color.WHITE.withAlpha(0.3);
+              }
+            })(),
             fill: true,
-            fillColor: hoveredEntity === "costaRicaArea3" || selectedPolygon.name === "costaRicaArea3" ? Color.ORANGE.withAlpha(0.5) : Color.TRANSPARENT,
             outline: true,
-            outlineColor: selectedPolygon.name === "costaRicaArea3" ? Color.ORANGE.withAlpha(1) : Color.ORANGE.withAlpha(0.7),
+            zIndex: 1, 
             heightReference: HeightReference.CLAMP_TO_GROUND
           }}
           onMouseEnter={() => handlePolygonMouseEnter("costaRicaArea3")}
@@ -235,6 +270,20 @@ export default function Cesium() {
             })
           }
         />
+      {selectedPolygon.name === "costaRicaArea2" &&
+        <Entity
+          name="Inner Area"
+          polyline={{
+            positions: Cartesian3.fromDegreesArray([
+              -83.2188616, 8.7195678, -83.2172415, 8.7154318, -83.2166729, 8.7158136, -83.2164047, 8.7171392, -83.2173917, 8.7195996, -83.2188616, 8.7195678  
+            ]),
+            zIndex: 2,
+            material: outlineGreen,
+            width: 4,
+            heightReference: HeightReference.CLAMP_TO_GROUND
+          }}
+        />
+      }
       </Viewer>
       {box && (
         <InfoBox
