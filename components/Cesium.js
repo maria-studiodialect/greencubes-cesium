@@ -17,7 +17,7 @@ import UnityBuild from "../components/UnityBuild"
 
 
 Ion.defaultAccessToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2YWFiYmUwMy00OWJjLTQzNzgtOGRkNy1hMjNiNzJkZDhiZTgiLCJpZCI6MTM5MDYwLCJpYXQiOjE2ODQyMjk0NTJ9.vcp3vAE8acxcoCF0cVcF8t72adLDvV-daPZ_vF2vmwU"
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMjQ1ZDBmNi00OWVhLTQ2N2MtOWNkZS0yZTc1ZGE2Yzg4NzgiLCJpZCI6MTQxNDkxLCJpYXQiOjE2ODUwMjcwMzB9.9ItNpoWAU_9XHWjvLiRfNaF_EiO0WusZ7X7184iR-T0"
 
 export default function Cesium() {
   const [box, setBox] = useState(false)
@@ -308,7 +308,11 @@ export default function Cesium() {
       )}
       </AnimatePresence>
 
-      {cubeInfo && <CubeInfo closeClick={closeInfoCubes} />}
+      <AnimatePresence>
+        {cubeInfo && (
+          <CubeInfo closeClick={closeInfoCubes} />
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {cubeInfo && (
         <motion.div 

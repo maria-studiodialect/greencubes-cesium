@@ -7,10 +7,10 @@ export default function InfoBox({exploreClick, closeClick, country, location, co
         <>
         <div className="absolute top-[14%] left-10 z-10">
         <motion.div 
-        initial={{ x: -100,opacity: 0 }}
+        initial={{ x: -50,opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        exit={{ x: -100, opacity: 0 }}
-        transition={{}}
+        exit={{ x: -50, opacity: 0 }}
+        transition={{ ease: 'easeInOut', stiffness: 50}}
         >
         <div  onClick={closeClick} className="absolute right-[-5px] top-[-4px] text-white z-10"><RiCloseCircleFill /></div>
         <div className="grid grid-cols-2 text-white bg-black/60 backdrop-blur rounded-xl px-4 py-3 mb-2">

@@ -2,12 +2,18 @@ import Image from "next/image";
 import Chart from 'chart.js/auto';
 import ChartRef from "./ChartRef";
 import { RiCloseCircleFill } from 'react-icons/ri';
-
+import { motion } from "framer-motion";
 
 export default function CubeInfo({exploreClick, closeClick, remaining, sponsored, cubes, carbon, values}) {
     return (
         <>
         <div className="absolute top-[14%] right-10 z-10">
+        <motion.div 
+        initial={{ x: 20,opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: 20, opacity: 0 }}
+        transition={{ ease: 'easeInOut', stiffness: 50}}
+        >
         <div  onClick={closeClick} className="absolute right-[-5px] top-[-4px] text-white z-10"><RiCloseCircleFill /></div>
         <div className="text-white bg-black/60 backdrop-blur rounded-xl px-4 py-2">
             <div className="flex justify-between mb-7">
@@ -37,8 +43,8 @@ export default function CubeInfo({exploreClick, closeClick, remaining, sponsored
             </div>
             <div className="bg-blue text-center py-1.5 rounded-md my-5 drop-shadow-xl cursor-pointer">Purchase</div>
         </div>
+        </motion.div>
         </div>
-        
         </>
     )
 }
