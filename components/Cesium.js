@@ -4,7 +4,8 @@ import {
   Ion,
   HeightReference,
   HorizontalOrigin,
-  ScreenSpaceEventType
+  ScreenSpaceEventType,
+  IonImageryProvider
 } from "cesium"
 import { useState, useRef, useEffect } from "react"
 import { Entity, Viewer, CameraFlyTo, Scene, Globe, Camera } from "resium"
@@ -293,6 +294,7 @@ export default function Cesium() {
         />
       }
       </Viewer>
+      <AnimatePresence>
       {box && (
         <InfoBox
           closeClick={() => setBox((f) => false)}
@@ -304,6 +306,7 @@ export default function Cesium() {
           img={selectedPolygon.img}
         />
       )}
+      </AnimatePresence>
 
       {cubeInfo && <CubeInfo closeClick={closeInfoCubes} />}
       <AnimatePresence>
