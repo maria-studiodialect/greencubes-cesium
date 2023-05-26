@@ -34,7 +34,7 @@ export default function BuildingInfo({exploreClick, closeClick, country, locatio
             </div>
             <div className="flex mt-3">
             <div className="bg-white relative h-[18vh] w-[19vw] object-cover rounded-md mr-2">
-                <Image src={img ? img : '/img/google-datacentre.png'} fill alt='graphs' className="object-cover"/>
+                <Image src='/img/google-datacentre.webp' fill alt='graphs' className="object-cover" priority/>
             </div>
             <div className="space-y-5">
                 <div>

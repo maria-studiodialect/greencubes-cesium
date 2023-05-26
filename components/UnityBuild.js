@@ -20,7 +20,7 @@ export default function UnityBuild() {
 
     return ( 
     <>
-        {!isLoaded && (
+        {isLoaded && (
             <Loader text={'Generating cubes'} progress={false} />
         )}
         <Unity
