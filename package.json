@@ -24,6 +24,7 @@
     "react-icons": "^4.8.0",
     "react-unity-webgl": "^9.4.0",
     "resium": "^1.16.0",
+    "sharp": "^0.32.1",
     "three": "^0.152.2"
   },
   "devDependencies": {
