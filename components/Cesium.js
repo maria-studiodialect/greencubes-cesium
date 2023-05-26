@@ -100,7 +100,7 @@ export default function Cesium() {
       <Viewer
         ref={viewerRef}
         full
-        imageryProvider={false}
+        
         timeline={false}
         homeButton={false}
         baseLayerPicker={false}
