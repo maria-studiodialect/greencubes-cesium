@@ -14,7 +14,7 @@ export default function CubeInfo({exploreClick, closeClick, remaining, sponsored
         exit={{ x: 20, opacity: 0 }}
         transition={{ ease: 'easeInOut', stiffness: 50}}
         >
-        <div  onClick={closeClick} className="absolute right-1.5 top-1.5 text-stone-600 z-10">< RiCloseFill /></div>
+        <div  onClick={closeClick} className="absolute right-1.5 top-1.5 text-stone-600 z-10 cursor-pointer">< RiCloseFill /></div>
         <div className="bg-white text-black backdrop-blur rounded-xl px-6 py-4">
             <div className="flex justify-between mb-7">
                 <div><span className="text-3xl font-bold">5,456</span> cubes</div>  
