@@ -14,6 +14,7 @@ import CubeInfo from "../components/CubeInfo"
 import dynamic from "next/dynamic"
 import { motion, AnimatePresence } from "framer-motion"
 import UnityBuild from "../components/UnityBuild"
+import BuildingInfo from "../components/BuildingInfo"
 
 
 Ion.defaultAccessToken =
@@ -99,7 +100,7 @@ export default function Cesium() {
       <Viewer
         ref={viewerRef}
         full
-        imageryProvider={false}
+        
         timeline={false}
         homeButton={false}
         baseLayerPicker={false}
@@ -311,7 +312,10 @@ export default function Cesium() {
 
       <AnimatePresence>
         {cubeInfo && (
+          <>
           <CubeInfo closeClick={closeInfoCubes} />
+          
+          </>
         )}
       </AnimatePresence>
       <AnimatePresence>

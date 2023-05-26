@@ -67,6 +67,7 @@ export default function ChartRef() {
         type: "bar",
         data: data,
         options: {
+            scaleShowVerticalLines: false,
             responsive: true, 
             maintainAspectRatio: false, 
             plugins: {
@@ -74,16 +75,16 @@ export default function ChartRef() {
                     display: false,
                 }, 
             },
-        scales: {
-            xAxis: {
-                display: false, 
-            }, 
-            y: {
-                ticks: {
-                    display: false,
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    }
+                    },
+                    y: {
+                        display: false, // Hide y-axis
+                    },
                 },
-            },
-        }
         },
         
         };
