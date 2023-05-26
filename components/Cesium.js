@@ -306,6 +306,7 @@ export default function Cesium() {
           bio={selectedPolygon.bio}
           cubes={selectedPolygon.cubes}
           img={selectedPolygon.img}
+          cubeInfo={cubeInfo}
         />
       )}
       </AnimatePresence>
@@ -314,7 +315,6 @@ export default function Cesium() {
         {cubeInfo && (
           <>
           <CubeInfo closeClick={closeInfoCubes} />
-          
           </>
         )}
       </AnimatePresence>

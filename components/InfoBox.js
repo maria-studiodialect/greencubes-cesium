@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { RiCloseFill } from 'react-icons/ri';
 import { motion } from "framer-motion";
+import BuildingInfo from "./BuildingInfo";
 
-export default function InfoBox({exploreClick, closeClick, country, location, coordinates, bio, cubes, img}) {
+export default function InfoBox({exploreClick, closeClick, country, location, coordinates, bio, cubes, img, cubeInfo}) {
     return (
         <>
         <div className="absolute top-[14%] left-10 z-10">
@@ -72,6 +73,9 @@ export default function InfoBox({exploreClick, closeClick, country, location, co
             <div onClick={exploreClick} className="bg-blue text-white text-center py-1.5 rounded-md mb-[-2em] mx-4 drop-shadow-xl cursor-pointer">Explore</div>
         </div>
         </motion.div>
+        {cubeInfo && 
+        <BuildingInfo/>
+        }
         </div>
         
         </>
