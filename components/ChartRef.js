@@ -7,10 +7,10 @@ export default function ChartRef() {
 
     const colors = {
         purple: {
-        default: "rgba(158, 229, 148, 1)",
-        half: "rgba(58, 229, 148, 0.5)",
-        quarter: "rgba(58, 229, 148, 0.25)",
-        zero: "rgba(58, 229, 148, 0)"
+        default: "rgba(67, 197, 70, 1)",
+        half: "rgba(67, 197, 70, 0.5)",
+        quarter: "rgba(67, 197, 70, 0.25)",
+        zero: "rgba(67, 197, 70, 0)"
         },
         indigo: {
         default: "rgba(80, 102, 120, 1)",
