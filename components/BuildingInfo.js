@@ -43,7 +43,7 @@ export default function BuildingInfo({exploreClick, closeClick, country, locatio
                 </div>
                 <div>
                     <div className="text-xs opacity-80">Cubes</div>
-                    <div className="font-bold">{cubes ? cubes : '580 Million'}</div>
+                    <div className="font-bold">{cubes ? cubes : '460,000 m3'}</div>
                 </div>
             </div>
             </div>

@@ -17,7 +17,7 @@ export default function CubeInfo({exploreClick, closeClick, remaining, sponsored
         <div  onClick={closeClick} className="absolute right-1.5 top-1.5 text-stone-600 z-10 cursor-pointer">< RiCloseFill /></div>
         <div className="bg-white text-black backdrop-blur rounded-xl px-6 py-4">
             <div className="flex justify-between mb-7">
-                <div><span className="text-3xl font-bold">5,456</span> cubes</div>  
+                <div><span className="text-3xl font-bold">460,000</span> m3</div>  
                 <div className="text-center mr-2 flex">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M25.5202 16.1954C25.1878 14.8054 24.4318 13.543 23.3473 12.5863C22.0728 11.4619 20.434 10.8428 18.7328 10.8428C14.8849 10.8428 11.7544 13.9733 11.7544 17.8212C11.7544 17.8809 11.7551 17.9406 11.7567 18.0004C11.6976 17.9985 11.6386 17.9976 11.5797 17.9976C8.50306 17.9976 6 20.5006 6 23.5773C6 26.654 8.50306 29.1571 11.5797 29.1571H25.5192C29.0927 29.1571 32 26.2498 32 22.6763C32 19.1029 29.0934 16.1958 25.5202 16.1954ZM25.5192 27.6336H11.5797C9.34308 27.6336 7.52344 25.8139 7.52344 23.5773C7.52344 21.3407 9.34308 19.521 11.5797 19.521C11.8678 19.521 12.1584 19.5524 12.4433 19.6141L13.5442 19.8527L13.3556 18.7422C13.304 18.4385 13.2779 18.1287 13.2779 17.8212C13.2779 14.8134 15.725 12.3663 18.7328 12.3663C21.4555 12.3663 23.7798 14.3979 24.1392 17.0921L24.2375 17.829L24.9765 17.7486C25.1576 17.7289 25.3401 17.719 25.5192 17.719C28.2527 17.719 30.4766 19.9428 30.4766 22.6763C30.4766 25.4098 28.2527 27.6336 25.5192 27.6336Z" fill="black"/>
@@ -44,12 +44,12 @@ export default function CubeInfo({exploreClick, closeClick, remaining, sponsored
                     <div>Remaining</div>
                 </div>
                 <div className="text-green-500 w-3/4">
-                <div>34,563</div>
+                <div>460,000</div>
                 <div className="border-2 border-green-500"></div>
                 <div>Sponsored</div>
                 </div>
             </div>
-            <div className="bg-blue text-white text-center py-1.5 rounded-md my-5 drop-shadow-xl cursor-pointer">Purchase</div>
+            <a href="https://green-cubes-concept.webflow.io/client-purchase"><div className="bg-blue text-white text-center py-1.5 rounded-md my-5 drop-shadow-xl cursor-pointer">Purchase</div></a>
         </div>
         </motion.div>
         </div>

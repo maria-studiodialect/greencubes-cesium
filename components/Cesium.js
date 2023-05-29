@@ -241,7 +241,7 @@ export default function Cesium() {
               name: 'costaRicaArea2',
               coordinates: '-83.2193577, 8.7159498',
               location: 'La Selva 2', 
-              bio: 'Medium', 
+              bio: 'Very High', 
               cubes: '340 million',
               img: '/img/laselva-2.svg'
             })
@@ -275,7 +275,7 @@ export default function Cesium() {
               name: 'costaRicaArea3',
               coordinates: '-83.2290178, 8.7211045',
               location: 'La Selva 3', 
-              bio: 'Very High', 
+              bio: 'High', 
               cubes: '467 million',
               img: '/img/laselva-3.svg'
             })
