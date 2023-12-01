@@ -5,7 +5,8 @@ import {
   HeightReference,
   HorizontalOrigin,
   ScreenSpaceEventType,
-  IonImageryProvider
+  IonImageryProvider, 
+  createWorldTerrain
 } from "cesium"
 import { useState, useRef, useEffect } from "react"
 import { Entity, Viewer, CameraFlyTo, Scene, Globe, Camera } from "resium"
@@ -113,20 +114,21 @@ export default function Cesium() {
         selectionIndicator={false}
         animation={false}
         trackedEntity={undefined}
+        terrainProvider={createWorldTerrain()}
       >
         <Scene />
         <Globe />
         <Camera ref={cesium}/>
         <Entity
           name="Costa Rica"
-          position={Cartesian3.fromDegrees(-83.219870, 8.720819, 100)}
+          position={Cartesian3.fromDegrees(-83.18837090285736, 8.708579229757717, 100)}
           billboard={{
             image:
               "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/costa-rica.png?v=1684253508897",
             heightReference: HeightReference.CLAMP_TO_GROUND,
             horizontalOrigin: HorizontalOrigin.LEFT,
           }}
-          description="La Selva"
+          description="La Gamba"
           onDoubleClick={handleDoubleClick}
           onMouseEnter={() => document.body.style.cursor = 'pointer'}
           onMouseLeave={() => document.body.style.cursor = 'default'}
@@ -134,7 +136,7 @@ export default function Cesium() {
         {cameraFly && (
           <CameraFlyTo
             duration={2} // Adjust the duration as needed
-            destination={Cartesian3.fromDegrees(-83.223870, 8.720819, 6000)}
+            destination={Cartesian3.fromDegrees(-83.18837090285736, 8.708579229757717, 6000)}
             offset={new Cartesian3(0, 0, 20000)} // Adjust the zoom level as needed
             maximumHeight={position}
             onComplete={() => setCameraFly(false)} // Reset the state after the camera animation completes
@@ -183,7 +185,7 @@ export default function Cesium() {
           name="Costa Rica Area"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
-              -83.2190299, 8.7310534, -83.2267586, 8.7293019, -83.2265452, 8.7256089, -83.2280397, 8.7248914, -83.2233427, 8.7200587, -83.2170016, 8.7222746, -83.216041, 8.7212194, -83.2127317, 8.7222324, -83.2190299, 8.7310534,
+              -83.20242972659405,8.700082058155436,0 -83.20175800222725,8.699860569079352,0 -83.20155978832922,8.700130078432313,0 -83.20165488750533,8.700412174732799,0 -83.20159200153307,8.700732928924968,0 -83.20185595577597,8.700812275774163,0 -83.20227298918174,8.700952883488037,0 -83.20270660155461,8.700677855947868,0 -83.20242972659405,8.700082058155436
             ]),
             material: (() => {
               if (hoveredEntity === 'costaRicaArea') {
@@ -206,7 +208,7 @@ export default function Cesium() {
           onClick={() =>
             handlePolygonClick({
               name: 'costaRicaArea',
-              coordinates: '-83.2195452, 8.7256089',
+              coordinates: '-83.20242972659405,8.700082058155436',
               location: 'La Selva', 
               bio: 'High', 
               cubes: '580 million'
@@ -217,7 +219,7 @@ export default function Cesium() {
           name="Costa Rica Area 2"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
-              -83.2170349, 8.7220951, -83.2233386, 8.7199003, -83.2223577, 8.7159498, -83.2258272, 8.714673, -83.2227422, 8.7115813, -83.2131772, 8.7117079, -83.2101882, 8.7145358, -83.2127275, 8.722074, -83.2160956, 8.7210399, -83.2170349, 8.7220951
+              -83.17605240146077,8.712786755328775,0 -83.17406036546352,8.708759834175375,0 -83.17146428794715,8.710658512386951,0 -83.17078466190627,8.711269918005209,0 -83.1721993820246,8.714406002668166,0 -83.17605240146077,8.712786755328775
             ]),
             material: (() => {
               if (hoveredEntity === 'costaRicaArea2') {
@@ -239,7 +241,7 @@ export default function Cesium() {
           onClick={() =>
             handlePolygonClick({
               name: 'costaRicaArea2',
-              coordinates: '-83.2193577, 8.7159498',
+              coordinates: '-83.17605240146077,8.712786755328775',
               location: 'La Selva 2', 
               bio: 'Very High', 
               cubes: '340 million',
@@ -251,7 +253,7 @@ export default function Cesium() {
           name="Costa Rica Area 3"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
-              -83.2282308, 8.7247911, -83.2347334, 8.723869, -83.2370178, 8.7211045, -83.2369325, 8.7147734, -83.2261292, 8.7147628, -83.2225957, 8.7160607, -83.2235125, 8.719969, -83.2282308, 8.7247911  
+              -83.1746627910919,8.715954642202648,0 -83.1737570781505,8.713936806606773,0 -83.17225636996424,8.714578212993517,0 -83.17427388150296,8.719114376600476,0 -83.17459705888224,8.719035778065916,0 -83.17493506353392,8.719244663164448,0 -83.17547381808328,8.719350260654883,0 -83.17598596924216,8.719206239997447,0 -83.17648590750156,8.718956333337792,0 -83.17663486209328,8.71875732663138,0 -83.17652764759447,8.71843855349665,0 -83.17623064260972,8.718252040559312,0 -83.17589290352993,8.718265574729413,0 -83.17519012725013,8.718199728650866,0 -83.17504140398765,8.717972596981951,0 -83.17535234815065,8.717799168364181,0 -83.17655527327155,8.717277397041395,0 -83.17670398008781,8.717010225329005,0 -83.17690683882057,8.716662893778647,0 -83.17627182685756,8.715272990225751,0 -83.1746627910919,8.715954642202648  
             ]),
             material: (() => {
               if (hoveredEntity === 'costaRicaArea3') {
@@ -310,7 +312,7 @@ export default function Cesium() {
         />
       )}
       </AnimatePresence>
-
+        
       <AnimatePresence>
         {cubeInfo && (
           <>
