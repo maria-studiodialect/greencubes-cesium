@@ -8,13 +8,13 @@ export default function ChartRef() {
     const colors = {
         purple: {
         default: "rgba(67, 197, 70, 1)",
-        half: "rgba(67, 197, 70, 0.5)",
-        quarter: "rgba(67, 197, 70, 0.25)",
+        half: "rgba(67, 197, 70, 0.8)",
+        quarter: "rgba(67, 197, 70, 0.4)",
         zero: "rgba(67, 197, 70, 0)"
         },
         indigo: {
         default: "rgba(80, 102, 120, 1)",
-        quarter: "rgba(80, 102, 120, 0.25)"
+        quarter: "rgba(80, 102, 120, 0.4)"
         }
     };
 
@@ -27,7 +27,7 @@ export default function ChartRef() {
         gradient.addColorStop(0.65, colors.purple.quarter);
         gradient.addColorStop(1, colors.purple.zero);
 
-        const weight = [260.0, 260.2, 259.1, 259.1, 280, 180, 180,180, 59.8, 58.6, 59.6, 59.2,  59.8, 58.6, 59.6, 59.2];
+        const weight = [260.0, 260.2, 260, 235, 220,180,180, 180, 170, 160, 160, 140, 140, 140, 140, 50];
 
         const labels = [
         "",
@@ -95,7 +95,7 @@ export default function ChartRef() {
         };
     });
     return (
-        <div className='relative h-[20vh] w-[20vw]'>
+        <div className='relative h-[20vh] w-[15vw]'>
         <canvas id="myChart" ref={canvasEl} height="600" />
         </div>
     )

@@ -15,6 +15,7 @@
     "chart.js": "^4.3.0",
     "dat.gui": "^0.7.9",
     "dat.gui.image": "^1.0.4",
+    "embla-carousel-react": "^8.0.0-rc15",
     "framer-motion": "^10.12.12",
     "gsap": "^3.11.5",
     "next": "^13.4.4",

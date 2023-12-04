@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="16YWf9wUK9CA0A_Rc4BxRvZnwvAWlLdaM">
+	<name>laGamba AOI - 100sq km</name>
+	<gx:CascadingStyle kml:id="__managed_style_5B01096BCC2D54C2488E">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff9aa626</color>
+				<width>4.8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_447CF958972D54C2488E">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff9aa626</color>
+				<width>3.2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_298482AF022D54C2488E">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>fff5a542</color>
+				<width>4.8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_000053A4BC2D54C2488D">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1DC45DF2C42D54C2488D</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_2E91D2166E2D54C2488D</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_155EF7D5B72D54C2488E">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>fff5a542</color>
+				<width>3.2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_017DDC16E82D54C27D26">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_151F2214722D54C27D26</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_2489D970A62D54C27D26</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="__managed_style_3AC0D986362D54C2488E">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_447CF958972D54C2488E</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_5B01096BCC2D54C2488E</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_2E91D2166E2D54C2488D">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>2.4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0E9C4F5D582D54C2488E">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_155EF7D5B72D54C2488E</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_298482AF022D54C2488E</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_1DC45DF2C42D54C2488D">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>1.6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_2489D970A62D54C27D26">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff9aa626</color>
+				<width>2.4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_151F2214722D54C27D26">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff9aa626</color>
+				<width>1.6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<Placemark id="0C4B1F54FD2CC10E0E1D">
+		<name>Quebrada Chorro</name>
+		<LookAt>
+			<longitude>-83.16802415137752</longitude>
+			<latitude>8.707912223782962</latitude>
+			<altitude>162.2235644496339</altitude>
+			<heading>2.681409029304964</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>5885.838992411736</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_017DDC16E82D54C27D26</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.17616548869073,8.704925709509777,0 -83.17664851735405,8.704325694630096,0 -83.17530058441766,8.702933732275342,0 -83.17216131514597,8.701515247161396,0 -83.1696610953375,8.699066889042577,0 -83.16828929999512,8.697753285130275,0 -83.16557051043456,8.696108284033279,0 -83.16465383693058,8.697056167505565,0 -83.16324920857792,8.696938905688651,0 -83.16191449729791,8.695659949726251,0 -83.16121731707938,8.694494306849535,0 -83.16119216364322,8.693239973757732,0 -83.16049813154871,8.692883553820918,0 -83.15937416107538,8.694263223573772,0 -83.15909804448358,8.696332010537708,0 -83.15956943578485,8.698549466523163,0 -83.16055593431287,8.701493338530343,0 -83.16053789688348,8.702893944229496,0 -83.16055422274326,8.704560519649348,0 -83.16162391577451,8.705348582848769,0 -83.16336018051007,8.706550359014017,0 -83.16484648009299,8.706247707910141,0 -83.16618323153025,8.705347828767614,0 -83.16741948502869,8.704808851324604,0 -83.17215799108075,8.705382008556864,0 -83.17335610346477,8.706244436979565,0 -83.17416816820878,8.705042082715583,0 -83.17616548869073,8.704925709509777,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0913D8FF1A2CC110068A">
+		<name>Estacion Tropical La Gamba</name>
+		<LookAt>
+			<longitude>-83.19813011137829</longitude>
+			<latitude>8.703377524097341</latitude>
+			<altitude>82.91125941535184</altitude>
+			<heading>2.681409029247226</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>2148.806547312706</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_000053A4BC2D54C2488D</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.20242972659405,8.700082058155436,0 -83.20175800222725,8.699860569079352,0 -83.20155978832922,8.700130078432313,0 -83.20165488750533,8.700412174732799,0 -83.20159200153307,8.700732928924968,0 -83.20185595577597,8.700812275774163,0 -83.20227298918174,8.700952883488037,0 -83.20270660155461,8.700677855947868,0 -83.20242972659405,8.700082058155436,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="09C3D9029C2CC127686B">
+		<name>Quebrada Chorro</name>
+		<LookAt>
+			<longitude>-83.16564916292874</longitude>
+			<latitude>8.707681291346312</latitude>
+			<altitude>217.1971796209122</altitude>
+			<heading>2.681409029192158</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>3513.915417201352</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_017DDC16E82D54C27D26</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.16339655746255,8.707211599146957,0 -83.16220779671191,8.709645486811423,0 -83.16146476213287,8.711711038199727,0 -83.16384675449318,8.713568459219402,0 -83.16780193419004,8.711417432541934,0 -83.16339655746255,8.707211599146957,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0F4CD8687A2CC12A914E">
+		<name>Finca Amable</name>
+		<LookAt>
+			<longitude>-83.17541996552545</longitude>
+			<latitude>8.716358931872824</latitude>
+			<altitude>57.59437675915792</altitude>
+			<heading>0.0001548981646606869</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00086883448997</gx:fovy>
+			<range>2454.471244302986</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_000053A4BC2D54C2488D</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.1746627910919,8.715954642202648,0 -83.1737570781505,8.713936806606773,0 -83.17225636996424,8.714578212993517,0 -83.17427388150296,8.719114376600476,0 -83.17459705888224,8.719035778065916,0 -83.17493506353392,8.719244663164448,0 -83.17547381808328,8.719350260654883,0 -83.17598596924216,8.719206239997447,0 -83.17648590750156,8.718956333337792,0 -83.17663486209328,8.71875732663138,0 -83.17652764759447,8.71843855349665,0 -83.17623064260972,8.718252040559312,0 -83.17589290352993,8.718265574729413,0 -83.17519012725013,8.718199728650866,0 -83.17504140398765,8.717972596981951,0 -83.17535234815065,8.717799168364181,0 -83.17655527327155,8.717277397041395,0 -83.17670398008781,8.717010225329005,0 -83.17690683882057,8.716662893778647,0 -83.17627182685756,8.715272990225751,0 -83.1746627910919,8.715954642202648,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="08000D32662CC12B2556">
+		<name>Finca Eduardo</name>
+		<LookAt>
+			<longitude>-83.17406035063107</longitude>
+			<latitude>8.714132279893008</latitude>
+			<altitude>59.17453687558992</altitude>
+			<heading>0.0001544551801679398</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00086883448997</gx:fovy>
+			<range>2680.135397659906</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_000053A4BC2D54C2488D</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.17605240146077,8.712786755328775,0 -83.17406036546352,8.708759834175375,0 -83.17146428794715,8.710658512386951,0 -83.17078466190627,8.711269918005209,0 -83.1721993820246,8.714406002668166,0 -83.17605240146077,8.712786755328775,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="023C2CAAF82CC12C983D">
+		<name>Finca Marcos</name>
+		<LookAt>
+			<longitude>-83.20686691339279</longitude>
+			<latitude>8.711773072764192</latitude>
+			<altitude>93.80601752213525</altitude>
+			<heading>0.000153977842860929</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00086883448997</gx:fovy>
+			<range>6244.403500497574</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_017DDC16E82D54C27D26</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.20494390466358,8.715159152117959,0 -83.20563032894228,8.713089052144312,0 -83.20693578050695,8.712207436009241,0 -83.20868705430314,8.711934616021788,0 -83.20947215095227,8.711764836745294,0 -83.21061570312845,8.710855138970031,0 -83.21013873948588,8.70839583772986,0 -83.20963016862386,8.707954249131312,0 -83.20942769259685,8.707174730132529,0 -83.20863637252374,8.704835692182016,0 -83.20863069709412,8.703214953418387,0 -83.20798504190863,8.702420305696894,0 -83.20676491676757,8.701545062551981,0 -83.20563539926137,8.701146620690569,0 -83.20505116154854,8.70214699478689,0 -83.20446756236964,8.703091003294759,0 -83.20460918998234,8.704055109833618,0 -83.20540403578308,8.704904332790214,0 -83.20513020534543,8.707321422891878,0 -83.20492824740117,8.708335418980713,0 -83.20423924907472,8.709201071545134,0 -83.20301218177262,8.710213596487977,0 -83.20263899653477,8.711259126568624,0 -83.20332340556236,8.712505596598939,0 -83.2026269177701,8.71321809144505,0 -83.20210179570878,8.714373989946345,0 -83.20104384392249,8.715387542527651,0 -83.20102684658796,8.716186975485353,0 -83.20211527141002,8.716697996856762,0 -83.20319337408253,8.716346138555281,0 -83.20394207683773,8.716322561284358,0 -83.20466058291042,8.716739994154175,0 -83.20494390466358,8.715159152117959,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0199B9BF792CC12DB343">
+		<name>Finca Luis</name>
+		<LookAt>
+			<longitude>-83.19470044330551</longitude>
+			<latitude>8.713445251795568</latitude>
+			<altitude>68.32658454176777</altitude>
+			<heading>0.0001534751637658368</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00086883448997</gx:fovy>
+			<range>4153.219617346767</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_017DDC16E82D54C27D26</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.19360114073274,8.713122658162435,0 -83.19176782572129,8.715409814528256,0 -83.19250107693908,8.715953222018005,0 -83.19427666687339,8.71356419553077,0 -83.19360114073274,8.713122658162435,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0FF2B2A6AA2CC12FB4DA">
+		<name>Finca Alexis_1</name>
+		<LookAt>
+			<longitude>-83.17033965389767</longitude>
+			<latitude>8.757793175608583</latitude>
+			<altitude>279.9858388876525</altitude>
+			<heading>0.0001525825450068379</heading>
+			<tilt>0.3873844754428273</tilt>
+			<gx:fovy>30.00086883448997</gx:fovy>
+			<range>11943.92500306713</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_017DDC16E82D54C27D26</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.16919159338516,8.757222855124665,0 -83.1669931572665,8.757320868126021,0 -83.16580804245207,8.757775436717422,0 -83.16469350454304,8.757840058502509,0 -83.16253330455245,8.75783938881704,0 -83.15948594891935,8.757061328608048,0 -83.16013223964811,8.758096027577356,0 -83.16047929519782,8.759578318722573,0 -83.15972755579283,8.761050675381727,0 -83.16110263428916,8.761690197889042,0 -83.16264954775356,8.763373418897638,0 -83.16186082199486,8.76524763249199,0 -83.16206130827175,8.766853346338243,0 -83.16426667916706,8.766677336385383,0 -83.16543945557922,8.765713987133163,0 -83.1662187639904,8.766241061996976,0 -83.16798046971849,8.765610519225834,0 -83.16817712910662,8.766581672806808,0 -83.167331400202,8.767854785708085,0 -83.16851159347154,8.76951424968003,0 -83.16981723636174,8.769580839139859,0 -83.17171851094827,8.766990001717071,0 -83.17053668613843,8.765630660510647,0 -83.1707338385997,8.764333698216914,0 -83.17066893951844,8.762852523413091,0 -83.17225156639817,8.762010681629695,0 -83.17179298295066,8.760713369294891,0 -83.17298467567923,8.759866634667295,0 -83.17212556188353,8.759082760677552,0 -83.17232599084309,8.757578955160504,0 -83.17172836290439,8.756664203774196,0 -83.1708667845985,8.755821656190934,0 -83.16919159338516,8.757222855124665,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0994CE703F2CC130DBCE">
+		<name>Finca Alexis_3</name>
+		<LookAt>
+			<longitude>-83.16658449769525</longitude>
+			<latitude>8.770637500038438</latitude>
+			<altitude>411.4632761568876</altitude>
+			<heading>358.4842929807851</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00086883448997</gx:fovy>
+			<range>11810.69422848173</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_017DDC16E82D54C27D26</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.1674616078658,8.767979094712897,0 -83.16621949781506,8.76914878569999,0 -83.16545070992943,8.769562327512144,0 -83.16500713395173,8.770853547808011,0 -83.16417482208803,8.771758680424211,0 -83.16321205364211,8.772523255612262,0 -83.16320841336781,8.773931055756311,0 -83.16224195532061,8.77501405930183,0 -83.16000009179051,8.776656915918959,0 -83.16218655715981,8.777617251973661,0 -83.16302561621643,8.778443059389682,0 -83.16489222604376,8.777499161675209,0 -83.1676088141019,8.775599842920995,0 -83.16988968922661,8.773173994159809,0 -83.1706818478725,8.770731043296491,0 -83.17062564494603,8.769245344094662,0 -83.16875371491221,8.770081087097001,0 -83.1674616078658,8.767979094712897,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0218F768872CC131B8E4">
+		<name>Finca Marvin</name>
+		<LookAt>
+			<longitude>-83.16656911843862</longitude>
+			<latitude>8.770630587181772</latitude>
+			<altitude>411.1653879935259</altitude>
+			<heading>358.8423830076254</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00086883448997</gx:fovy>
+			<range>11810.9923851199</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_017DDC16E82D54C27D26</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.16302929238053,8.774583044206203,0 -83.16312204856702,8.772598177485579,0 -83.1647635761144,8.771228044732053,0 -83.16486224619906,8.769813407168209,0 -83.16756517117989,8.768205227510219,0 -83.16843729655554,8.766428822418639,0 -83.1678286691517,8.765733803708773,0 -83.16633405343298,8.766168305089479,0 -83.16547365816363,8.765743953750999,0 -83.1643829645341,8.766421424880303,0 -83.16244411962734,8.766929029981847,0 -83.16146415151913,8.766700088905512,0 -83.1598706114399,8.766825012337673,0 -83.15673401781397,8.771195702484009,0 -83.15688472151155,8.772078255002604,0 -83.15603041445556,8.773619860083503,0 -83.15415161077753,8.775188023440682,0 -83.15673577084841,8.776006753223848,0 -83.15849064025841,8.777816071601062,0 -83.15960229518492,8.776655388220055,0 -83.16302929238053,8.774583044206203,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0D4E8AF8032CC1335958">
+		<name>Finca Zaida</name>
+		<LookAt>
+			<longitude>-83.14477183083434</longitude>
+			<latitude>8.754053994502801</latitude>
+			<altitude>473.269679722042</altitude>
+			<heading>356.8484012940021</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30.00086883448997</gx:fovy>
+			<range>2504.043493813661</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_017DDC16E82D54C27D26</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.14540809896266,8.75503419546447,0 -83.14520914320229,8.754804971839745,0 -83.14500645202165,8.754410885764687,0 -83.14494792206334,8.753000495857638,0 -83.14497768823551,8.752475745944821,0 -83.14486242456678,8.752197611964947,0 -83.14459712375377,8.751895063406277,0 -83.14309709086345,8.752543256188256,0 -83.14376841185083,8.753194397235658,0 -83.14404749236527,8.753783553724466,0 -83.1441281186197,8.754325292012446,0 -83.14431709960927,8.7548553862924,0 -83.14482321002383,8.75492125075902,0 -83.1450545631794,8.755048161872837,0 -83.14540809896266,8.75503419546447,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0CEF2852982CEE2E2C0C">
+		<name>AOI 01 - 25sqkm</name>
+		<visibility>0</visibility>
+		<LookAt>
+			<longitude>-83.21026936921979</longitude>
+			<latitude>8.715107842904713</latitude>
+			<altitude>83.77802348905898</altitude>
+			<heading>4.286184746901347</heading>
+			<tilt>0</tilt>
+			<gx:fovy>34.99999999984932</gx:fovy>
+			<range>23155.91847706586</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0E9C4F5D582D54C2488E</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.1802340212587,8.665522814432741,0 -83.14736658856623,8.70699006346404,0 -83.19326170022478,8.736418406076512,0 -83.22245986584407,8.696099729838979,0 -83.1802340212587,8.665522814432741,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0B9C9564D42CEE343C76">
+		<name>Florian Research site</name>
+		<visibility>0</visibility>
+		<LookAt>
+			<longitude>-83.23907687930682</longitude>
+			<latitude>8.731652472969797</latitude>
+			<altitude>278.5826614048433</altitude>
+			<heading>4.286184746847215</heading>
+			<tilt>0</tilt>
+			<gx:fovy>34.99999999984932</gx:fovy>
+			<range>31995.6160508981</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_3AC0D986362D54C2488E</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.1944242102975,8.660179712653644,0 -83.18154570469606,8.676567938507661,0 -83.21206175801819,8.698434217660649,0 -83.2251159298763,8.680924050415884,0 -83.1944242102975,8.660179712653644,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0BA8E629182CEEA2BC6A">
+		<name>Finca 3</name>
+		<LookAt>
+			<longitude>-83.18937054041204</longitude>
+			<latitude>8.699629634767122</latitude>
+			<altitude>87.53157374235913</altitude>
+			<heading>4.286184746823809</heading>
+			<tilt>0</tilt>
+			<gx:fovy>34.99999999984932</gx:fovy>
+			<range>13903.51871482562</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_3AC0D986362D54C2488E</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.18494998722052,8.703347648866643,0 -83.18365045477728,8.701069745226,0 -83.18421140144116,8.69856586879011,0 -83.18435548583341,8.696668391225012,0 -83.18310962749524,8.694846228500799,0 -83.1851268016905,8.690945864804927,0 -83.18685784233413,8.688678508574897,0 -83.18698357123192,8.685803480512849,0 -83.18534564507952,8.685669564896552,0 -83.18281954105261,8.685249901534567,0 -83.18181098144359,8.688740657378702,0 -83.18108246382229,8.692201150646143,0 -83.17995280549873,8.695236251476159,0 -83.18150957078657,8.696221758949525,0 -83.18215027212425,8.697446305706281,0 -83.18177903557982,8.701246344447087,0 -83.18155998533733,8.702859687245397,0 -83.18355181387975,8.705642565778167,0 -83.18503448528013,8.707936212430242,0 -83.18630137505457,8.706690343922689,0 -83.18494998722052,8.703347648866643,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0C8F2B74862CEEA36DF0">
+		<name>Finca 4</name>
+		<LookAt>
+			<longitude>-83.18937054041396</longitude>
+			<latitude>8.699629634765332</latitude>
+			<altitude>87.53278146023378</altitude>
+			<heading>4.286184746823809</heading>
+			<tilt>0</tilt>
+			<gx:fovy>34.99999999984932</gx:fovy>
+			<range>13903.51723145926</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_3AC0D986362D54C2488E</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.19077340943285,8.683522889980567,0 -83.19231868761915,8.682300761859874,0 -83.19280109755765,8.679493921752906,0 -83.19192063982887,8.676779888421535,0 -83.18830529887374,8.676484523169785,0 -83.18589416592124,8.676859438025856,0 -83.18383984557525,8.678582099724554,0 -83.18346202568125,8.680011226705544,0 -83.18705750925591,8.684322710615374,0 -83.19077340943285,8.683522889980567,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0A25E7E8F42CEE2B353D">
+		<name>AOI 02 - 100sqkm</name>
+		<visibility>0</visibility>
+		<LookAt>
+			<longitude>-83.28606924278226</longitude>
+			<latitude>8.725726278548766</latitude>
+			<altitude>91.65591044807962</altitude>
+			<heading>4.286184746903984</heading>
+			<tilt>0</tilt>
+			<gx:fovy>34.99999999984932</gx:fovy>
+			<range>56019.68655651437</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0E9C4F5D582D54C2488E</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-83.18373369330958,8.651582209483163,0 -83.10365693515287,8.753730059174902,0 -83.17030658237289,8.789884629388286,0 -83.24206440227374,8.692519913355655,0 -83.18373369330958,8.651582209483163,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>
