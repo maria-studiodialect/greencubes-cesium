@@ -8,10 +8,10 @@ export default function WiderModal({exploreClick, droneSelection, cameraSelectio
         initial={{ x: -50,opacity: 0 }}
         animate={{ x: 0, opacity: 1, transition: { delay: 0.5 } }}
         exit={{ x: -50, opacity: 0}}
-        transition={{ ease: 'easeInOut', stiffness: 50}}
+        transition={{ ease: 'easeInOut', stiffness: 50, transition: 2}}
         >
-        <div className="absolute top-[18vh] left-10 bg-cover z-30">
-            <div><Image src='/img/bg-img-wider.jpg' width={870} height={240} className="rounded-lg w-[40vw]"/></div>
+        <div className="fixed top-[18vh] left-10 bg-cover z-30">
+            <div><Image src='/img/bg-img-wider.jpg' width={870} height={240} className="rounded-lg w-auto h-[21vh] aspect-auto"/></div>
             <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center p-5">
                 <Image src={'/img/finca-amable.png'} width={135} height={135} className="drop-shadow-xl ml-4"/> 
                 <div className="text-center flex-1 mt-4 ml-3">

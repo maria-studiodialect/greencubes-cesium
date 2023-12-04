@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
     <Header/>
-      <Cesium />
+      <div className='parent-container'><Cesium /></div>
     </>
   )
 }

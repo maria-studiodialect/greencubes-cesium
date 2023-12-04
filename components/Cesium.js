@@ -613,21 +613,7 @@ export default function Cesium() {
       </Viewer>
       <AnimatePresence>
       {box && (
-        <>
-        {/* 
-        <InfoBox
-          closeClick={() => setBox((f) => false)}
-          exploreClick={handleExploreClick}
-          location={selectedPolygon.location}
-          coordinates={selectedPolygon.coordinates}
-          bio={selectedPolygon.bio}
-          cubes={selectedPolygon.cubes}
-          img={selectedPolygon.img}
-          cubeInfo={cubeInfo}
-        />
-        */}
-        <WiderModal  exploreClick={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
-        </>
+          <WiderModal  exploreClick={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
       )}
       </AnimatePresence>
       <AnimatePresence>
