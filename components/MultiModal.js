@@ -1,10 +1,25 @@
 import Image from "next/image"
 import ChartRef from "./ChartRef"
 import { RiArrowDropRightFill } from "react-icons/ri";
+import SuccessMessage from "./SuccessMessage";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
-export default function MultiModal({closeClick, country, flag, coordinates, cubeNr, location, img}) {
+export default function MultiModal({closeClick, checkout, country, flag, coordinates, cubeNr, location, img}) {
+    const [success, setSuccess] = useState(false)
+    const [mainModal, setMainModal] = useState(true)
+
+
     return (
         <>
+        <AnimatePresence>
+        {mainModal &&
+        <motion.div 
+        initial={{ x: 0, opacity: 1  }}
+        exit={{ x: -50,opacity: 0 }}
+        animate={{ x: 0, opacity: 1  }}
+        transition={{ ease: 'easeInOut', stiffness: 50}}
+        >
         <div className="absolute top-[16vh] left-8 bg-cover z-30">
             <div className="flex items-center mb-3 bg-white rounded-lg pl-6 py-6 pr-1">
                 <div className="mb-5">
@@ -51,9 +66,12 @@ export default function MultiModal({closeClick, country, flag, coordinates, cube
             </div>
             <div className="bg-white rounded-lg flex justify-end px-3 py-3 space-x-3">
             <div onClick={closeClick} className="border border-black px-14 text-sm font-bold text-gray-400 border-gray-400 rounded py-1.5 hover:bg-gray-300 hover:text-white hover:border-transparent hover:drop-shadow">BACK</div>
-            <div className="border border-black px-14 text-sm font-bold rounded py-1.5 hover:bg-gradient-to-r from-lime-400 to-[#F3F424] hover:text-white hover:border-transparent hover:drop-shadow"><a href="https://green-cubes-concept.webflow.io/contact">ADD TO CHECKOUT</a></div>
+            <div onClick={checkout} className="border border-black px-14 text-sm font-bold rounded py-1.5 hover:bg-gradient-to-r from-lime-400 to-[#F3F424] hover:text-white hover:border-transparent hover:drop-shadow">ADD TO CHECKOUT</div>
             </div>
         </div>
+        </motion.div>
+        }
+        </AnimatePresence>
         </>
     )
 }

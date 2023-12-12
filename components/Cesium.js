@@ -26,6 +26,7 @@ import WiderModal from "./WiderModal"
 import MultiModal from "./MultiModal"
 import Carousel from "./Carousel"
 import { IoMdClose } from "react-icons/io";
+import SuccessMessage from "./SuccessMessage"
 
 
 Ion.defaultAccessToken =
@@ -35,6 +36,7 @@ export default function Cesium() {
   const [box, setBox] = useState(false)
   const [model, setModel] = useState(false)
   const [cubeInfo, setCubeInfo] = useState(false)
+  const [cubeBuild, setCubeBuild] = useState(false)
   const [hoveredEntity, setHoveredEntity] = useState(null)
   const [selectedPolygon, setSelectedPolygon] = useState({name:null})
   const [cameraFly, setCameraFly] = useState(false);
@@ -43,6 +45,7 @@ export default function Cesium() {
   const [position, setPosition] = useState(null);
   const [coordinates, setCoordinates] = useState(null)
   const [carousel, setCarousel] = useState(0)
+  const [success, setSuccess] = useState(false)
   const cesium = useRef(null)
   const viewerRef = useRef(null)
   const selectedGreen = Color.fromCssColorString('#4DA947').withAlpha(0.5)
@@ -105,6 +108,7 @@ export default function Cesium() {
     setCubeInfo(true);
     setCameraCubes(true);
     setBox(false)
+    setCubeBuild(true);
   }
 
   const closeInfoCubes = () => {
@@ -112,6 +116,10 @@ export default function Cesium() {
     setCubeInfo(false);
     setCameraFly(true);
     setBox(true);
+  }
+  const handleCheckout = () => {
+    setCubeInfo(false);
+    setSuccess(true);
   }
 
   const terrainProvider = useMemo(() => new CesiumTerrainProvider({
@@ -621,23 +629,12 @@ export default function Cesium() {
           <InfoModal/>
         }
       </AnimatePresence>
+      
+
+
+      {/* Unity Build */}
       <AnimatePresence>
-        {cubeInfo && (
-          <>
-          <motion.div 
-            initial={{ x: -50,opacity: 0 }}
-            animate={{ x: 0, opacity: 1, transition: { delay: 0.5}  }}
-            exit={{ x: -50, opacity: 0 }}
-            transition={{ ease: 'easeInOut', stiffness: 50}}
-          >
-          {/* <CubeInfo closeClick={closeInfoCubes} /> */}
-          <MultiModal closeClick={closeInfoCubes}/>
-          </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {cubeInfo && (
+        {cubeBuild && (
         <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 1.5 } }}
@@ -648,6 +645,36 @@ export default function Cesium() {
         </motion.div>
         )}
       </AnimatePresence>
+
+      <AnimatePresence>
+        {cubeInfo && (
+          <>
+          <motion.div 
+            initial={{ y: 100, x: 0,opacity: 0 }}
+            animate={{ y: 0, x: 0, opacity: 1, transition: { delay: 0.5}  }}
+            exit={{ y: 0, x: -50, opacity: 0 }}
+            transition={{ ease: 'easeInOut', stiffness: 50}}
+          >
+          {/* <CubeInfo closeClick={closeInfoCubes} /> */}
+          <MultiModal closeClick={closeInfoCubes} checkout={handleCheckout}/>
+          </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {success &&
+            <motion.div 
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1}}
+              transition={{ delay: 0.5 }}
+            >
+            <SuccessMessage/>
+            </motion.div>
+        }
+      </AnimatePresence>
+
+      {/* Carousels */}
       <AnimatePresence>
         {carousel === 1 && (
           <div className="fixed top-0 left-0 z-40 bg-black/30 backdrop-blur h-full w-full flex items-center justify-center px-[25%]">

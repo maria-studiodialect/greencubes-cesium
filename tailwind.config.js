@@ -10,7 +10,11 @@ module.exports = {
         xxs: '0.60em'
       }, 
       colors: {
-        blue: '#32B8DC'
+        blue: '#32B8DC', 
+        greenLime: '#77D721', 
+        greenLeaf: '#B9F46E', 
+        greenLemon: '#DCFF06'
+      
       }
     },
   },
