@@ -66,7 +66,7 @@ export default function MultiModal({closeClick, checkout, country, flag, coordin
             </div>
             <div className="bg-white rounded-lg flex justify-end px-3 py-3 space-x-3">
             <div onClick={closeClick} className="border border-black px-14 text-sm font-bold text-gray-400 border-gray-400 rounded py-1.5 hover:bg-gray-300 hover:text-white hover:border-transparent hover:drop-shadow">BACK</div>
-            <div onClick={checkout} className="border border-black px-14 text-sm font-bold rounded py-1.5 hover:bg-gradient-to-r from-lime-400 to-[#F3F424] hover:text-white hover:border-transparent hover:drop-shadow">ADD TO CHECKOUT</div>
+            <div onClick={checkout} className="border border-black px-14 text-sm font-bold rounded py-1.5 hover:bg-greenLeaf focus:bg-greenLemon active:bg-greenLime hover:border-transparent hover:drop-shadow">ADD TO CHECKOUT</div>
             </div>
         </div>
         </motion.div>

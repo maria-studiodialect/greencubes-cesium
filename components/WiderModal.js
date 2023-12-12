@@ -26,7 +26,7 @@ export default function WiderModal({exploreClick, droneSelection, cameraSelectio
                         <div className="bg-white p-2 rounded-full cursor-pointer" onClick={droneSelection}><Image src={'/img/drone-icon.svg'} width={18} height={18} className="mt-0.5"/></div>
                         <div className="bg-white p-2 rounded-full px-3 cursor-pointer" onClick={personSelection}><Image src={'/img/person-icon.svg'} width={8} height={12} className="mx-[0.05rem]"/></div>
                     </div>
-                    <div onClick={exploreClick} className="border border-black px-10 rounded py-1 hover:bg-gradient-to-r from-lime-400 to-[#F3F424] hover:text-white hover:border-transparent hover:drop-shadow">Select</div>
+                    <div onClick={exploreClick} className="border border-black px-10 rounded py-1 hover:bg-greenLeaf focus:bg-greenLemon active:bg-greenLime hover:border-transparent hover:drop-shadow">Select</div>
                 </div>
             </div>
         </div>
