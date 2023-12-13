@@ -16,7 +16,7 @@ export default function WiderModal({exploreClick, droneSelection, cameraSelectio
                 <Image src={'/img/finca-amable.png'} width={135} height={135} className="drop-shadow-xl ml-4 w-auto h-[12vh] aspect-auto"/> 
                 <div className="text-center flex-1 mt-4 ml-3">
                     <div className="text-[3vh] font-bold">Finca Amable</div>
-                    <div className="text-xs font-light mb-5">🇨🇷 La Gamba tropicstation</div>
+                    <div className="text-xs font-light mb-5 flex justify-center items-center w-full"><Image src={'/img/cr-flag.png'} width={24} height={15} className="mr-1 w-[1vw] h-fit"/> La Gamba tropicstation</div>
                     <div className="text-[1.8vh]">8°42&apos;22&quot;N, 83°10&apos;54&quot;W</div>
                     <div className="text-[1.6vh] flex items-center justify-center mt-1"><Image src={'/img/greencube-minilogo.svg'} width={18} height={21} className="mr-2"/> 3,200,000</div>
                 </div>

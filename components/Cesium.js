@@ -684,7 +684,7 @@ export default function Cesium() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             >
-                <Carousel slides={[{type: 'video', src: '/img/ocelot_2.mp4', thumbnail: '/img/leopard.jpg'}, {type: 'image', src: '/img/1.jpg', thumbnail: '/img/1.jpg' },{type: 'image', src:'/img/2.jpg', thumbnail: '/img/2.jpg'}, {type: 'image', src:'/img/3.jpg', thumbnail: '/img/3.jpg'}, {type: 'image', src:'/img/4.jpg', thumbnail: '/img/4.jpg'}]} />
+                <Carousel slides={[{type: 'video', src: '/img/ocelot_2.mp4', webm: '/img/ocelot_2.webm',thumbnail: '/img/leopard.jpg'}, {type: 'image', src: '/img/1.jpg', thumbnail: '/img/1.jpg' },{type: 'image', src:'/img/2.jpg', thumbnail: '/img/2.jpg'}, {type: 'image', src:'/img/3.jpg', thumbnail: '/img/3.jpg'}, {type: 'image', src:'/img/4.jpg', thumbnail: '/img/4.jpg'}]} />
             </motion.div>
           </div>
         )}
@@ -698,7 +698,7 @@ export default function Cesium() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             >
-                <Carousel slides={[{type: 'video', src: '/img/flyOver_720.mp4', thumbnail: '/img/video.jpg'}, {type: 'image', src: '/img/2-1.jpg', thumbnail: '/img/2-1.jpg' },{type: 'image', src:'/img/2-2.jpg', thumbnail: '/img/2-2.jpg'}, {type: 'image', src:'/img/2-3.jpg', thumbnail: '/img/2-3.jpg'}, {type: 'image', src:'/img/2-4.jpg', thumbnail: '/img/2-4.jpg'}]} />
+                <Carousel slides={[{type: 'video', src: '/img/flyOver_720.mp4',webm: '/img/flyOver_720.webm', thumbnail: '/img/video.jpg'}, {type: 'image', src: '/img/2-1.jpg', thumbnail: '/img/2-1.jpg' },{type: 'image', src:'/img/2-2.jpg', thumbnail: '/img/2-2.jpg'}, {type: 'image', src:'/img/2-3.jpg', thumbnail: '/img/2-3.jpg'}, {type: 'image', src:'/img/2-4.jpg', thumbnail: '/img/2-4.jpg'}]} />
             </motion.div>
           </div>
         )}
@@ -712,7 +712,7 @@ export default function Cesium() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             >
-                <Carousel slides={[{type: 'video', src: '/img/blendVideo_720_1.mp4', thumbnail: '/img/lidar.jpg'}, {type: 'image', src: '/img/3-1.jpg', thumbnail: '/img/3-1.jpg' },{type: 'image', src:'/img/3-2.jpg', thumbnail: '/img/3-2.jpg'}, {type: 'image', src:'/img/3-3.jpg', thumbnail: '/img/3-3.jpg'}, {type: 'image', src:'/img/3-4.jpg', thumbnail: '/img/3-4.jpg'}]} />
+                <Carousel slides={[{type: 'video', src: '/img/blendVideo_720_1.mp4', webm: '/img/blendVideo_720_1.webm', thumbnail: '/img/lidar.jpg'}, {type: 'image', src: '/img/3-1.jpg', thumbnail: '/img/3-1.jpg' },{type: 'image', src:'/img/3-2.jpg', thumbnail: '/img/3-2.jpg'}, {type: 'image', src:'/img/3-3.jpg', thumbnail: '/img/3-3.jpg'}, {type: 'image', src:'/img/3-4.jpg', thumbnail: '/img/3-4.jpg'}]} />
             </motion.div>
           </div>
         )}

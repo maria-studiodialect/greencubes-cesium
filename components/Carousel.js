@@ -75,6 +75,7 @@ export default function Carousel(props) {
                     ) : (
                     <video controls autoPlay muted className="embla__slide__video h-[60vh] object-cover">
                         <source src={slide.src} type="video/mp4"  />
+                        <source src={slide.webm} type="video/webm"  />
                         Your browser does not support the video tag.
                     </video>
                     )}

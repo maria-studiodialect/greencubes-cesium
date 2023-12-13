@@ -20,7 +20,7 @@ export default function InfoModal({country, flag, coordinates, cubeNr, location,
                 <div className="text-sm flex items-center"><Image src={'/img/hectares.svg'} width={30} height={30} className="mr-2"/> 500 Hectares</div>
                 <div className="flex justify-center items-center space-x-5 border-t w-full pt-3 mt-2">
                     <Image src={'/img/map_gamba.png'} width={105} height={99} className="mb-3 drop-shadow-xl h-[7vh] w-auto aspect-auto"/> 
-                    <div className="text-xs font-light text-center"><div className="text-3xl leading-none">🇨🇷</div> <div className="text-lg leading-none">Costa Rica</div></div>
+                    <div className="text-xs font-light flex flex-col items-center"><Image src={'/img/cr-flag.png'} width={30} height={30} className="mb-2"/><div className="text-lg leading-none">Costa Rica</div></div>
                 </div>
             </div>
         </div>

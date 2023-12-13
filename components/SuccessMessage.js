@@ -25,7 +25,7 @@ export default function SuccessMessage({}) {
                             <div className="text-[1.8vh] flex items-center justify-center mt-1">
                                 <Image src={'/img/finca_amable_outline.png'} width={48} height={55} className="mr-2"/> 
                                 <div className="text-xs">
-                                    <div className="font-bold">🇨🇷 Costa Rica</div>
+                                    <div className="font-bold flex justify-center items-center"><Image src={'/img/cr-flag.png'} width={24} height={15} className="mr-1 mb-0.5 w-[0.6vw] h-fit"/> Costa Rica</div>
                                     <div>Finca Amable</div>
                                 </div>
                             </div>
