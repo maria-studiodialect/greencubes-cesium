@@ -27,7 +27,7 @@ export default function SponsorCalculator({inputValue, handleClose, handleChange
     
         // Check if total impact exceeds the maximum allowed value
         if (totalImpact > available) {
-            console.log("Total impact exceeds the maximum allowed value. Adjusting to available.");
+            console.log("Total exceeds the maximum available value of cubes. Adjusting to available.");
             totalImpact = available; // Set to maximum value
             setMessage("The maximum amount of cubes is available"); // Set message
         } else {

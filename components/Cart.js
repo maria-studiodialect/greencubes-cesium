@@ -92,14 +92,15 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
         className="fixed h-[80vh] inset-0 z-[9999999] flex items-center justify-center"
         >
         <div className="bg-cover relative">
-                <div><Image src='/img/bg-img-wider.jpg' width={870} height={240} className="rounded-lg w-auto h-[21vh] aspect-auto relative z-0"/></div>
+                <div><Image src='/img/bg-img-wider.jpg' width={870} height={240} className="rounded-lg w-auto h-[22vh] aspect-auto relative z-0"/></div>
                 <div onClick={handleClose} className="absolute top-2 right-2 text-md bg-white rounded-full p-1 cursor-pointer shadow hover:bg-greenLemon z-10"><IoClose /></div>
+                <form name="contactForm" netlify method="POST">
                 <div className="absolute top-0 left-0 right-0 flex flex-col items-center justify-center">
                     <div className="text-center flex-1 mt-4 ml-3 pt-5">
                         <div className="text-[3vh] font-bold">{getTitle()} </div>
                     </div>
                     {step === 1 &&
-                    <div className="flex space-x-8 mt-14 bg-lightGray">
+                    <div className="flex space-x-8 pt-14 bg-lightGray">
                         {/* 
                         <div>
                             <div className="flex items-center"><Image src={'/img/greencube-minilogo.svg'} width={18} height={18} className="mr-2"/><span className="text-lg font-bold">{Intl.NumberFormat('en-US').format(userData.sponsored_cubes)}</span></div>
@@ -124,7 +125,8 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
                         }
                     </div>
                     }
-
+                    
+                    <input type="hidden" name="form-name" value="contactForm" />
                     {step === 2 &&
                         <div className="mt-14 bg-lightGrey w-full flex flex-col items-center">
                             <div className="text-xs px-28 pb-5">On check out, your cubes will now be escrowed for one month, and an agent wil be in contact to manage the purchase order and payment.</div>
@@ -162,11 +164,14 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
                     {step < 3 &&
                     <div className="flex justify-end space-x-4 pt-5 bg-lightGrey w-full p-5 pt-12 rounded-b-lg">
                         <Button text='Cancel' customStyle='bg-gray-200 text-gray-500 shadow-none hover:bg-gray-400'/>
-                        <Button onClick={btnClick} text={getCta()} customStyle='bg-transparent border border-solid border-black shadow-none'/>
+                        <Button type='submit' onClick={btnClick} text={getCta()} customStyle='bg-transparent border border-solid border-black shadow-none'/>
                     </div>
                     }
+                    
                 </div>
+                </form>
         </div>
+        
         </motion.div>
         </>
     )
