@@ -16,7 +16,6 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
         setGreenCubes(inputValue);
     }, [inputValue]);
 
-
     console.log(step)
 
     function getCta() {
@@ -75,8 +74,8 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
         }
     }
     function btnClick(e) {
+        e.preventDefault()
         if (step === 2) {
-            e.preventDefault()
             setStep(step + 1)
             onFormSubmit({sponsored_cubes: updatedCubes})
         } else {
@@ -95,7 +94,7 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
         <div className="bg-cover relative">
                 <div><Image src='/img/bg-img-wider.jpg' width={870} height={240} className="rounded-lg w-auto h-[22vh] aspect-auto relative z-0"/></div>
                 <div onClick={handleClose} className="absolute top-2 right-2 text-md bg-white rounded-full p-1 cursor-pointer shadow hover:bg-greenLemon z-10"><IoClose /></div>
-                <form name="contactForm" method="POST" data-netlify="true">
+                <form name="contactForm" action="/success" method="POST" data-netlify="true">
                 <input type="hidden" name="form-name" value="contactForm" />
                 <div className="absolute top-0 left-0 right-0 flex flex-col items-center justify-center">
                     <div className="text-center flex-1 mt-4 ml-3 pt-5">
@@ -164,7 +163,7 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
                         </div>
                         <div className="flex justify-end space-x-4 pt-5 bg-lightGrey w-full p-5 pt-12 rounded-b-lg">
                             <Button text='Cancel' customStyle='bg-gray-200 text-gray-500 shadow-none hover:bg-gray-400'/>
-                            <button type='submit' onClick={btnClick} className={`inline-block rounded-full px-10 py-1 shadow-md shadow-lime-500 cursor-pointer bg-transparent border border-solid border-black shadow-none`}>{getCta()}</button>
+                            <button type='submit' action={btnClick} className={`inline-block rounded-full px-10 py-1 shadow-md shadow-lime-500 cursor-pointer bg-transparent border border-solid border-black shadow-none`}>{getCta()}</button>
                         </div>
                     </>
                     }
