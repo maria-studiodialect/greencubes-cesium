@@ -55,6 +55,8 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const formattedDate = nextMonth.toLocaleDateString('en-GB', options); 
 
+    const updatedCubes = (Number(userData.sponsored_cubes) + Number(inputValue))
+
     const onFormSubmit = async (data) => {
         try {
             await fetch(`/api/updateUser`, {
@@ -65,6 +67,7 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
                 body: JSON.stringify({ id: userData.id, ...data }),
             }).then(() => {
                 console.log('updated')
+                console.log(data)
             })
         } catch (error) {
             console.error('Error updating the product:', error);
@@ -74,7 +77,7 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
     function btnClick() {
         if (step === 2) {
             setStep(step + 1)
-            onFormSubmit({sponsored_cubes: inputValue})
+            onFormSubmit({sponsored_cubes: updatedCubes})
         } else {
             setStep(step + 1)
         }
@@ -96,16 +99,29 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
                         <div className="text-[3vh] font-bold">{getTitle()} </div>
                     </div>
                     {step === 1 &&
-                    <div className="grid grid-cols-2 mt-14">
+                    <div className="flex space-x-8 mt-14 bg-lightGray">
+                        {/* 
+                        <div>
+                            <div className="flex items-center"><Image src={'/img/greencube-minilogo.svg'} width={18} height={18} className="mr-2"/><span className="text-lg font-bold">{Intl.NumberFormat('en-US').format(userData.sponsored_cubes)}</span></div>
+                            <div className="text-xs block ml-7">Already Acquired</div>
+                        </div>
+                        <div>+</div>
+                         */}
                         <div>
                             <div className="flex items-center"><Image src={'/img/greencube-minilogo.svg'} width={18} height={18} className="mr-2"/><span className="text-lg font-bold">{Intl.NumberFormat('en-US').format(greenCubes)}</span></div>
-                            <div className="text-xs block ml-8">Requested</div>
+                            <div className="text-xs block ml-7">Requested</div>
                         </div>
                         <div className="text-xs">
                             <div><b>Sponsorship Offer</b>: {Intl.NumberFormat('en-US').format(greenCubes * 0.10)} USD</div>
                             <div><b>Holding Period</b>: 1 Month</div>
                             <div><b>Holding Expiry Date</b>: {formattedDate}</div>
                         </div>
+                        {userData.sponsored_cubes > 0 &&
+                        <div className="text-xs">
+                            <div><b>Previously Acquired</b>: {Intl.NumberFormat('en-US').format(userData.sponsored_cubes)}</div>
+                            <div><b>Updated Total</b>: {Intl.NumberFormat('en-US').format(Number(userData.sponsored_cubes) + Number(greenCubes))}</div>
+                        </div>
+                        }
                     </div>
                     }
 
