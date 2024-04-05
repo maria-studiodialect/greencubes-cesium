@@ -100,7 +100,7 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
                         <div className="text-[3vh] font-bold">{getTitle()} </div>
                     </div>
                     {step === 1 &&
-                    <div className="flex space-x-8 pt-14 bg-lightGray">
+                    <div className="flex space-x-5 mt-14 bg-lightGrey w-full px-5">
                         {/* 
                         <div>
                             <div className="flex items-center"><Image src={'/img/greencube-minilogo.svg'} width={18} height={18} className="mr-2"/><span className="text-lg font-bold">{Intl.NumberFormat('en-US').format(userData.sponsored_cubes)}</span></div>
@@ -128,8 +128,8 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
                     
                     <input type="hidden" name="form-name" value="contactForm" />
                     {step === 2 &&
-                        <div className="mt-14 bg-lightGrey w-full flex flex-col items-center">
-                            <div className="text-xs px-28 pb-5">On check out, your cubes will now be escrowed for one month, and an agent wil be in contact to manage the purchase order and payment.</div>
+                        <div className="mt-14 bg-lightGrey w-full flex flex-col items-center px-5">
+                            <div className="text-xs px-24 pb-5">On check out, your cubes will now be escrowed for one month, and an agent wil be in contact to manage the purchase order and payment.</div>
                             <div className="flex gap-y-3 mt-2 gap-x-5">
                                 <div className="text-sm font-bold leading-tight mr-10">Preferred means<br/>of contact</div>
                                 <div className="space-y-3">
