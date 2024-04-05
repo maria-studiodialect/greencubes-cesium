@@ -110,7 +110,7 @@ function Location({ selected, onSiteSelect}) {
             <div className="text-[3.2vh] text-center leading-tight mb-2">La Gamba<br/>Tropenstation</div>
             {!selected ?
             <>
-                <div className="text-sm flex items-center"><Image src={'/img/hectares.svg'} width={30} height={30} className="mr-2"/> 500 Hectares</div>
+                <div className="text-sm flex items-center"><Image src={'/img/hectares.svg'} width={20} height={20} className="mr-2"/> 500 Hectares</div>
                 <div className="flex flex-col justify-center items-center space-x-5 w-full pt-5 my-4">
                     <Image src={'/img/map_gamba.png'} width={105} height={99} className="mb-3 drop-shadow-xl h-[13vh] w-auto aspect-auto"/> 
                     <div className="text-xs font-light flex items-center"><Image src={'/img/cr-flag.png'} width={30} height={30} className="mr-4 h-[2vh]"/><div className="text-lg leading-none">Costa Rica</div></div>
