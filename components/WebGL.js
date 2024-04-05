@@ -10,23 +10,25 @@ import PieChart from './PieChart';
 export default function WebGL({calculatorOpen, onCalculatorClose, user, userData}) {
 
         // Initialize the state with the default input value
-        const [inputValue, setInputValue] = useState(userData.sponsored_cubes);
+        const [inputValue, setInputValue] = useState(0);
         const [isCalculatorOpen, setIsCalculatorOpen] = useState(calculatorOpen);
         const [isCartOpen, setIsCartOpen] = useState(false);
         const [total, setTotal] = useState(3200000)
         const [unavailable, setUnavailable] = useState(800000)
-        const [sponsorship, setSponsorship] = useState(inputValue)
+        const [sponsorship, setSponsorship] = useState(userData.sponsored_cubes)
         const [available, setAvailable] = useState((total - unavailable) - sponsorship)
+
     
-        useEffect(() => {
-            // This effect will run whenever inputValue changes
-            setSponsorship(inputValue);
-    
+        useEffect(() => {    
             // Update available state based on the new inputValue
             setAvailable((total - unavailable) - inputValue);
 
 
         }, [inputValue, total, unavailable]);
+
+        useEffect(() => {
+            setSponsorship(userData.sponsored_cubes);
+        }, []);
 
         useEffect(() => {
             console.log(calculatorOpen)
@@ -37,10 +39,12 @@ export default function WebGL({calculatorOpen, onCalculatorClose, user, userData
         // Handle change event to update the state
         const handleChange = (event) => {
             setInputValue(event.target.value);
+            setSponsorship(Number(userData.sponsored_cubes) + Number(event.target.value));
         };
 
         const updateInput = (newInput) => {
-            setInputValue(Number(inputValue) + Number(newInput));
+            setInputValue(newInput);
+            setSponsorship((currentSponsorship) => Number(currentSponsorship) + Number(newInput));
         }
 
     return (
@@ -64,7 +68,7 @@ export default function WebGL({calculatorOpen, onCalculatorClose, user, userData
             rotation={[0, 0, 0]}
             polar={[-0.5, 0.1]} 
             azimuth={[-0.5, 0.7]}>
-            <Model sponsorship={inputValue} unavailable={unavailable} available={available} total={total}/>
+            <Model sponsorship={sponsorship} unavailable={unavailable} available={available} total={total}/>
             </PresentationControls>
             {/*<OrbitControls />*/}
         </Canvas>
@@ -89,7 +93,7 @@ export default function WebGL({calculatorOpen, onCalculatorClose, user, userData
             </div>
         </div>
         <div className='fixed right-[2vw] top-0'>
-        <PieChart unavailable={unavailable} sponsorship={inputValue} available={available} />
+        <PieChart unavailable={unavailable} sponsorship={sponsorship} available={available} />
         </div>
         </>
     )
@@ -154,7 +158,7 @@ function formatNumber(number) {
 }
 
 function Model({sponsorship, available, unavailable, total}) {
-
+    console.log('sponsor' + sponsorship)
 
     const ref = useRef();
     const { nodes, materials } = useGLTF('/webgl/glb/Finca-Split-Materials.glb');

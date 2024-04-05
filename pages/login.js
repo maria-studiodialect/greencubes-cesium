@@ -75,7 +75,7 @@ export default function Login() {
                 </div>
 
                 <div className="text-xs">
-                  <Link href='/resetPassword'><div className="font-medium text-gray-400 hover:text-white">Forgot your password?</div></Link>
+                  <div className="font-medium text-gray-400 hover:text-white">Forgot your password?</div>
                 </div>
               </div>
 
