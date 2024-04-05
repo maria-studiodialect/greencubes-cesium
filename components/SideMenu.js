@@ -16,10 +16,10 @@ export default function SideMenu({user, type, img, title, roundImg, cubes = 3200
         transition={{ ease: 'easeInOut', stiffness: 50, transition: 2}}
         >
         <div className="absolute top-0 left-0 bg-cover z-30 w-[22vw] h-full bg-lightGrey flex flex-col justify-between">
-            <Image src={img} width={374} height={281} className="object-cover h-[36vh] w-full aspect-auto"/>
+            <Image src={img} width={374} height={281} className="object-cover h-[32vh] w-full aspect-auto"/>
             <div className="flex-1">
                 <Image src='/img/bg-img.jpg' width={374} height={281} className="object-cover h-[36vh] w-full aspect-auto"/>
-                <div className="absolute top-[40vh] left-0 right-0 flex flex-col items-center justify-between mb-1 flex-1">
+                <div className="absolute top-[35vh] left-0 right-0 flex flex-col items-center justify-between mb-1 flex-1">
                     {type === 'Location' && 
                         <Location selected={selected} onSiteSelect={onSiteSelect}/>
                     }
