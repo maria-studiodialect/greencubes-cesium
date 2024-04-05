@@ -13,8 +13,9 @@ module.exports = {
         blue: '#32B8DC', 
         greenLime: '#77D721', 
         greenLeaf: '#B9F46E', 
-        greenLemon: '#DCFF06'
-      
+        greenLemon: '#DCFF06',
+        greenOlive: '#B5A303',
+        lightGrey: '#F6F6F6'
       }
     },
   },

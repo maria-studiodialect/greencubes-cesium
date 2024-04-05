@@ -1,5 +1,9 @@
 import "../styles/globals.css"
 import {Roboto} from '@next/font/google'
+import Config from "/amplifyconfiguration.json"
+import { Amplify } from "aws-amplify"
+Amplify.configure(Config)
+
 
 const roboto = Roboto({
   subsets:  ['latin'], 

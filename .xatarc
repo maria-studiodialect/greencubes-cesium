@@ -1,0 +1,7 @@
+{
+  "databaseURL": "https://maria-studiodialect-s-workspace-j3k9ii.eu-west-1.xata.sh/db/greenCubes",
+  "codegen": {
+    "output": "src/xata.js",
+    "moduleType": "esm"
+  }
+}

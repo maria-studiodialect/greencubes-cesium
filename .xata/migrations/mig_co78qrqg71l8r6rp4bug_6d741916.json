@@ -1,0 +1,16 @@
+{
+  "id": "mig_co78qrqg71l8r6rp4bug",
+  "parentID": "mig_co78qo9bqdbdp8saadvg",
+  "checksum": "1:6d741916ec591b4a9adfff76640ac09e5b04dd324e1eb11d4fb1428d9d80e6a7",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "sponsored_cubes",
+          "type": "int"
+        },
+        "table": "Sponsorships"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "mig_co78qo9bqdbdp8saadvg",
+  "parentID": "mig_co78qlvdifft4ad8mps0",
+  "checksum": "1:17f88faa41100f5137b221eeb2ac18ccec542f9bd2094123e9f55ce105fd230a",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "email",
+          "type": "string"
+        },
+        "table": "Sponsorships"
+      }
+    }
+  ]
+}
