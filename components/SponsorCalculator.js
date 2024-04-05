@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { PiMedalFill } from "react-icons/pi";
 
 
-export default function SponsorCalculator({inputValue, handleClose, handleChange }) {
+export default function SponsorCalculator({inputValue, handleClose, handleChange, available }) {
     const [step, setStep] = useState(1);
     const [size, setSize] = useState(0); // Size in sqm
     const [employees, setEmployees] = useState(0); // Number of employees
@@ -14,6 +14,7 @@ export default function SponsorCalculator({inputValue, handleClose, handleChange
     const [sqm, setSqm] = useState(0);
     const [selectedLevel, setSelectedLevel] = useState('Gold'); 
     const [baseGreenCubes, setBaseGreenCubes] = useState(0); // New state to store the base calculation for green cubes
+    const [message, setMessage] = useState(""); 
 
     const calculateGreenCubes = () => {
         const sizeImpact = size * 3;
@@ -21,10 +22,19 @@ export default function SponsorCalculator({inputValue, handleClose, handleChange
         const dataImpact = data * 500;
         
         // Calculate total impact
-        const totalImpact = Number(sizeImpact) + Number(employeesImpact) + Number(dataImpact);
+        let totalImpact = Number(sizeImpact) + Number(employeesImpact) + Number(dataImpact);
         console.log("Calculating total impact:", totalImpact);
     
-        setBaseGreenCubes(totalImpact); // Store this as the base calculation
+        // Check if total impact exceeds the maximum allowed value
+        if (totalImpact > available) {
+            console.log("Total impact exceeds the maximum allowed value. Adjusting to available.");
+            totalImpact = available; // Set to maximum value
+            setMessage("The maximum amount of cubes is available"); // Set message
+        } else {
+            setMessage(""); // Reset message if within limit
+        }
+        
+        setBaseGreenCubes(totalImpact); // Store this as the base calculation, adjusted if necessary
         adjustGreenCubesAndSqmForLevel(selectedLevel); // Adjust according to the current level
     };
     
