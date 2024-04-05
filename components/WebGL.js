@@ -19,16 +19,16 @@ export default function WebGL({calculatorOpen, onCalculatorClose, user, userData
         const [available, setAvailable] = useState((total - unavailable) - sponsorship)
 
     
-        useEffect(() => {    
-            // Update available state based on the new inputValue
-            setAvailable((total - unavailable) - inputValue);
-
-
-        }, [inputValue, total, unavailable]);
 
         useEffect(() => {
             setSponsorship(userData.sponsored_cubes);
         }, []);
+        
+        useEffect(() => {    
+            // Update available state based on the new inputValue
+            setAvailable((total - unavailable) - sponsorship);
+
+        }, [sponsorship, total, unavailable]);
 
         useEffect(() => {
             console.log(calculatorOpen)
@@ -74,7 +74,7 @@ export default function WebGL({calculatorOpen, onCalculatorClose, user, userData
         </Canvas>
         </div>
         {isCalculatorOpen &&
-            <SponsorCalculator inputValue={inputValue} handleChange={updateInput} handleClose={() => {setIsCalculatorOpen(false); onCalculatorClose()}}/>
+            <SponsorCalculator inputValue={inputValue} available={available} handleChange={updateInput} handleClose={() => {setIsCalculatorOpen(false); onCalculatorClose()}}/>
         }
         {isCartOpen &&
             <Cart inputValue={inputValue} handleClose={() => setIsCartOpen(false)} user={user} userData={userData} />
