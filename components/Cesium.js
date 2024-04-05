@@ -27,14 +27,16 @@ import MultiModal from "./MultiModal"
 import Carousel from "./Carousel"
 import { IoMdClose } from "react-icons/io";
 import SuccessMessage from "./SuccessMessage"
+import SideMenu from "./SideMenu"
+import WebGL from "./WebGL"
 
 
 Ion.defaultAccessToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0MmQ1ZWI4YS1mYzgzLTQyMjktOWI3Yi1kNzdjZGJjYzQ2YzEiLCJpZCI6MTM5MDYwLCJpYXQiOjE3MDE2ODE2MzV9.-iuRo4YnxpdDKMqVLqNxPDFcpVDzCZs07ovC3AoOvSo"
 
-export default function Cesium() {
+export default function Cesium({user}) {
   const [box, setBox] = useState(false)
-  const [model, setModel] = useState(false)
+  const [gambaSelected, setGambaSelected] = useState(false)
   const [cubeInfo, setCubeInfo] = useState(false)
   const [cubeBuild, setCubeBuild] = useState(false)
   const [hoveredEntity, setHoveredEntity] = useState(null)
@@ -57,9 +59,21 @@ export default function Cesium() {
   const outlineOrange = Color.fromCssColorString('#F5BD2D').withAlpha(1)
   const [infoModal, setInfoModal] = useState(false)
   const [tilesetUrl, setTilesetUrl] = useState(null);
+  const [calculator, setCalculator] = useState(false)
+  const [userData, setUserData] = useState()
 
-
-
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const res = await fetch(`/api/getUser?email=${user.attributes.email}`)
+            const { data } = await res.json()
+            setUserData(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    fetchData()
+}, [])
 
   const image = "/img/test.jpg"
 
@@ -74,10 +88,11 @@ export default function Cesium() {
   const handleDoubleClick = () => {
     setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
     setCameraFly(true);
-    setModel(true);
+    setGambaSelected(true);
   };
 
   const openInfoModal = () => {
+    setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
     setInfoModal(true)
   };
 
@@ -168,6 +183,73 @@ export default function Cesium() {
     }
   }
 
+  function getType() {
+    if (infoModal) {
+      return <SideMenu type="Location" title = 'La Gamba Tropenstation'  img = '/img/gamba-trop.jpg' selected = {gambaSelected}  btnText = {gambaSelected ? (userData.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator") : "Explore"}
+      onClick={() => {
+        if (gambaSelected) {
+          handlePolygonClick({
+            name: 'costaRicaArea3',
+            coordinates: '-83.1746627910919,8.715954642202648',
+            location: 'La Selva 3', 
+            bio: 'High', 
+            cubes: '467 million',
+            img: '/img/laselva-3.svg'
+          });
+          handleExploreClick();
+          userData?.sponsored_cubes < 1 && toggleCalculator();
+        } else {
+          handleDoubleClick();
+        }
+      }}
+      onSiteSelect={() =>
+        handlePolygonClick({
+          name: 'costaRicaArea3',
+          coordinates: '-83.1746627910919,8.715954642202648',
+          location: 'La Selva 3', 
+          bio: 'High', 
+          cubes: '467 million',
+          img: '/img/laselva-3.svg'
+        })}/>
+    } else if (box) {
+      return <SideMenu onClick={() => {
+        handlePolygonClick({
+            name: 'costaRicaArea3',
+            coordinates: '-83.1746627910919,8.715954642202648',
+            location: 'La Selva 3', 
+            bio: 'High', 
+            cubes: '467 million',
+            img: '/img/laselva-3.svg'
+        });
+        handleExploreClick();
+        userData?.sponsored_cubes < 1 && toggleCalculator();
+      }} type="Site" title = 'Finca Amable'  img = '/img/fincaAmable-lg.jpg' btnText={userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"}  onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)} />
+    } else if (cubeInfo) {
+      return <SideMenu onClick={() => {
+        console.log('clicked');
+        toggleCalculator();
+      }} menuSelected="Sponsor" type="Site" title = 'Finca Amable'  img = '/img/fincaAmable-lg.jpg' btnText="Sponsor Calculator" onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
+    } else {
+      return <SideMenu onClick={() => {
+        handlePolygonClick({
+            name: 'costaRicaArea3',
+            coordinates: '-83.1746627910919,8.715954642202648',
+            location: 'La Selva 3', 
+            bio: 'High', 
+            cubes: '467 million',
+            img: '/img/laselva-3.svg'
+        });
+        handleExploreClick();
+        userData?.sponsored_cubes < 1 && toggleCalculator();
+      }} type = "Welcome" img = '/img/lidar-welcome.jpg' title = 'Finca Amable' btnText = {userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"} onAreaSelect={openInfoModal} user={user}/>
+    }
+  }
+  const toggleCalculator = () => {
+    setCalculator(!calculator);
+  };
+
+  console.log(userData?.sponsored_cubes > 0)
+
   return (
     <>
       {/* <div onClick={getCoords} className="fixed z-40 bottom-0 right-0 bg-white">GET COORDS</div> */}
@@ -218,7 +300,7 @@ export default function Cesium() {
               roll: 0.0                             // No roll
             }}
             maximumHeight={position}
-            onComplete={() => (setCameraFly(false), setInfoModal(false))} // Reset the state after the camera animation completes
+            onComplete={() => (setCameraFly(false))} // Reset the state after the camera animation completes
           />
         )}
       </Entity>
@@ -620,18 +702,17 @@ export default function Cesium() {
 
       </Viewer>
       <AnimatePresence>
+      {getType()}
+      </AnimatePresence>
+      {/* 
+      <AnimatePresence>
       {box && (
           <WiderModal  exploreClick={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
       )}
       </AnimatePresence>
-      <AnimatePresence>
-        {infoModal && 
-          <InfoModal/>
-        }
-      </AnimatePresence>
+      */}
+            
       
-
-
       {/* Unity Build */}
       <AnimatePresence>
         {cubeBuild && (
@@ -641,11 +722,12 @@ export default function Cesium() {
         exit={{ opacity: 0, transition: { delay: 0.2 } }}
         transition={{ type: "spring", stiffness: 100, duration: 2}}
         >
-          <UnityBuild/>
+          {/*<UnityBuild/>*/}
+          <WebGL user={user} userData={userData} calculatorOpen={calculator} onCalculatorClose={() => setCalculator(false)} />
         </motion.div>
         )}
       </AnimatePresence>
-
+      {/*
       <AnimatePresence>
         {cubeInfo && (
           <>
@@ -655,13 +737,13 @@ export default function Cesium() {
             exit={{ y: 0, x: -50, opacity: 0 }}
             transition={{ ease: 'easeInOut', stiffness: 50}}
           >
-          {/* <CubeInfo closeClick={closeInfoCubes} /> */}
+           // <CubeInfo closeClick={closeInfoCubes} />
           <MultiModal closeClick={closeInfoCubes} checkout={handleCheckout}/>
           </motion.div>
           </>
         )}
       </AnimatePresence>
-
+    */}
       <AnimatePresence>
         {success &&
             <motion.div 

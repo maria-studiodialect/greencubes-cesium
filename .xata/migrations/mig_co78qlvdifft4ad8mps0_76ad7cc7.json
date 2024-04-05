@@ -1,0 +1,11 @@
+{
+  "id": "mig_co78qlvdifft4ad8mps0",
+  "checksum": "1:76ad7cc77ab2f5e030ddeec73532b357ed01df468c8a9cf5f67ea6c46e5abb52",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Sponsorships"
+      }
+    }
+  ]
+}
