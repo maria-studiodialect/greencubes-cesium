@@ -4,12 +4,12 @@ const xata = getXataClient()
 
 const handler = async (req, res) => {
     // using update method to update records in the database
-    const { id, ...data } = req.body
+    const {...data} = req.body
     try {
-        await xata.db.Sponsorships.update(id, { ...data })
+        await xata.db.Sponsorships.create({ ...data })
         res.json({ message: 'Success 😁' })
         } catch (error) {
-        const errorMessage = 'Error updating the user.'
+        const errorMessage = 'Error creating user.'
         res.status(500).json({ message: errorMessage })
     }
 }

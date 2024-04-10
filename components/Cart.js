@@ -69,7 +69,7 @@ export default function Cart({inputValue, handleChange, handleClose, user, userD
                 console.log(data)
             })
         } catch (error) {
-            console.error('Error updating the product:', error);
+            console.error('Error updating the user:', error);
           // Additional error handling logic
         }
     }
