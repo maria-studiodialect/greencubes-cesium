@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 import { IoCloseCircle } from "react-icons/io5";
 
 
-export default function SideMenu({user, type, img, title, roundImg, cubes = 3200000, selected = false, btnText, onClick, onAreaSelect, onSiteSelect, onPlotSelect, droneSelection, cameraSelection, personSelection, menuSelected }) {
+export default function SideMenu({user, type, img, title, roundImg, cubes = 3200000, selected = false, btnText, onClick, onAreaSelect, onSiteSelect, onPlotSelect, droneSelection, cameraSelection, personSelection, menuSelected, toggleProject }) {
     const [pdfOpen, setPdfOpen] = useState(false)
 
     function pdfReveal() {
@@ -27,7 +27,7 @@ export default function SideMenu({user, type, img, title, roundImg, cubes = 3200
                 <Image src='/img/bg-img.jpg' width={374} height={281} className="object-cover h-[36vh] w-full aspect-auto"/>
                 <div className="absolute top-[35vh] left-0 right-0 flex flex-col items-center justify-between mb-1 flex-1">
                     {type === 'Location' && 
-                        <Location selected={selected} onSiteSelect={onSiteSelect} pdfReveal={pdfReveal} />
+                        <Location selected={selected} onSiteSelect={onSiteSelect} pdfReveal={pdfReveal} toggleProject={toggleProject} />
                     }
                     {type === 'Site' && 
                         <Site menuSelected={menuSelected} selected={false} pdfReveal={pdfReveal} title={title} cubes={cubes} onPlotSelect={onPlotSelect} droneSelection={droneSelection} cameraSelection={cameraSelection} personSelection={personSelection}/>
@@ -101,7 +101,7 @@ function Site({title, cubes, onPlotSelect, droneSelection, cameraSelection, pers
 
 }
 
-function Location({ selected, onSiteSelect, pdfReveal}) {
+function Location({ selected, onSiteSelect, pdfReveal, toggleProject}) {
     const [openSites, setOpenSites] = useState(false);
     const dropdownRef = useRef(null); // Step 1
 
@@ -156,7 +156,7 @@ function Location({ selected, onSiteSelect, pdfReveal}) {
             </>
             }
             <div className={`${selected ? 'border-t' : 'border-b'} w-full text-gray-500`}>
-                <div className="hover:bg-greenLeaf py-3 px-8 cursor-pointer">About the project</div>
+                <div onClick={toggleProject} className="hover:bg-greenLeaf py-3 px-8 cursor-pointer">About the project</div>
             </div>
         </>
     );
