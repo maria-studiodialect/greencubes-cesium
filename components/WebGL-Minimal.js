@@ -63,7 +63,7 @@ export default function WebGLMinimal({selected}) {
 
 function LaGamba() {
     const ref = useRef();
-    const { nodes, materials } = useGLTF('/webgl/glb/LaGamba.glb');
+    const { nodes, materials } = useGLTF('/webgl/glb/laGamba.glb');
     const fontProps = { fontSize: 7, letterSpacing: -0.05, lineHeight: 1, 'material-toneMapped': false }
 
     return (

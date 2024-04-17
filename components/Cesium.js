@@ -249,7 +249,7 @@ export default function Cesium({user}) {
       return <SideMenu onClick={() => {
         console.log('clicked');
         toggleCalculator();
-      }} menuSelected="Sponsor" type="Site" title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img = '/img/fincaAmable-lg.jpg' btnText="Sponsor Calculator" onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
+      }} menuSelected="Sponsor" type="Site" title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img={getImage(selectedPolygon.name)} btnText="Sponsor Calculator" onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
     } else {
       return <SideMenu onClick={() => {
         handlePolygonClick({
