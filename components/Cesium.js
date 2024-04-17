@@ -29,6 +29,10 @@ import { IoMdClose } from "react-icons/io";
 import SuccessMessage from "./SuccessMessage"
 import SideMenu from "./SideMenu"
 import WebGL from "./WebGL"
+import WebGLMinimal from "./WebGL-Minimal"
+import { IoCloseCircle } from "react-icons/io5";
+import { FaArrowLeft } from "react-icons/fa6";
+
 
 
 Ion.defaultAccessToken =
@@ -75,15 +79,6 @@ export default function Cesium({user}) {
     fetchData()
 }, [])
 
-  const image = "/img/test.jpg"
-
-  const handleHover = (cube) => {
-    console.log("hover on cube", cube)
-  }
-
-  const handleOut = () => {
-    console.log("out")
-  }
 
   const handleDoubleClick = () => {
     setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
@@ -118,6 +113,8 @@ export default function Cesium({user}) {
     setCoordinates({longitude: longitude, latitude: latitude})
   };
 
+  console.log(selectedPolygon)
+
   const handleExploreClick = () => {
     setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
     setCubeInfo(true);
@@ -128,9 +125,11 @@ export default function Cesium({user}) {
 
   const closeInfoCubes = () => {
     setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
-    setCubeInfo(false);
+    setCubeBuild(false)
     setCameraFly(true);
     setBox(true);
+
+    console.log('clicked')
   }
   const handleCheckout = () => {
     setCubeInfo(false);
@@ -183,17 +182,47 @@ export default function Cesium({user}) {
     }
   }
 
+  function onSiteSelect(name) {
+    if (name === 'Finca Eduardo') {
+      handlePolygonClick({
+        name: 'Finca Eduardo',
+              coordinates: '-83.174510, 8.708136',
+              location: 'La Selva 2', 
+              bio: 'Very High', 
+              cubes: 3400000,
+              img: '/img/laselva-2.svg'
+      })
+    } else if (name === 'Estacion Tropical La Gamba' ) {
+    handlePolygonClick({
+    name: 'Estacion Tropical La Gamba',
+              coordinates: '-83.20242972659405,8.700082058155436',
+              location: 'La Gamba', 
+              bio: 'High', 
+              cubes: 900000
+    })
+    } else {
+      handlePolygonClick({
+        name: 'Finca Amable',
+        coordinates: '-83.1746627910919,8.715954642202648',
+        location: 'La Selva 3', 
+        bio: 'High', 
+        cubes: 3200000,
+        img: '/img/laselva-3.svg'
+      })
+    }
+  }
+
   function getType() {
     if (infoModal) {
       return <SideMenu type="Location" title = 'La Gamba Tropenstation'  img = '/img/gamba-trop.jpg' selected = {gambaSelected}  btnText = {gambaSelected ? (userData.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator") : "Explore"}
       onClick={() => {
         if (gambaSelected) {
           handlePolygonClick({
-            name: 'costaRicaArea3',
+            name: 'Finca Amable',
             coordinates: '-83.1746627910919,8.715954642202648',
             location: 'La Selva 3', 
             bio: 'High', 
-            cubes: '467 million',
+            cubes: 3200000,
             img: '/img/laselva-3.svg'
           });
           handleExploreClick();
@@ -202,46 +231,38 @@ export default function Cesium({user}) {
           handleDoubleClick();
         }
       }}
-      onSiteSelect={() =>
-        handlePolygonClick({
-          name: 'costaRicaArea3',
-          coordinates: '-83.1746627910919,8.715954642202648',
-          location: 'La Selva 3', 
-          bio: 'High', 
-          cubes: '467 million',
-          img: '/img/laselva-3.svg'
-        })}/>
+      onSiteSelect={(name) => onSiteSelect(name)}/>
     } else if (box) {
       return <SideMenu onClick={() => {
         handlePolygonClick({
-            name: 'costaRicaArea3',
-            coordinates: '-83.1746627910919,8.715954642202648',
-            location: 'La Selva 3', 
-            bio: 'High', 
-            cubes: '467 million',
-            img: '/img/laselva-3.svg'
+          name: 'Finca Amable',
+          coordinates: '-83.1746627910919,8.715954642202648',
+          location: 'La Selva 3', 
+          bio: 'High', 
+          cubes: 3200000,
+          img: '/img/laselva-3.svg'
         });
         handleExploreClick();
         userData?.sponsored_cubes < 1 && toggleCalculator();
-      }} type="Site" title = 'Finca Amable'  img = '/img/fincaAmable-lg.jpg' btnText={userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"}  onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)} />
+      }} type="Site" title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img = '/img/fincaAmable-lg.jpg' btnText={userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"}  onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)} />
     } else if (cubeInfo) {
       return <SideMenu onClick={() => {
         console.log('clicked');
         toggleCalculator();
-      }} menuSelected="Sponsor" type="Site" title = 'Finca Amable'  img = '/img/fincaAmable-lg.jpg' btnText="Sponsor Calculator" onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
+      }} menuSelected="Sponsor" type="Site" title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img = '/img/fincaAmable-lg.jpg' btnText="Sponsor Calculator" onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
     } else {
       return <SideMenu onClick={() => {
         handlePolygonClick({
-            name: 'costaRicaArea3',
-            coordinates: '-83.1746627910919,8.715954642202648',
-            location: 'La Selva 3', 
-            bio: 'High', 
-            cubes: '467 million',
-            img: '/img/laselva-3.svg'
-        });
+          name: 'Finca Amable',
+          coordinates: '-83.1746627910919,8.715954642202648',
+          location: 'La Selva 3', 
+          bio: 'High', 
+          cubes: 3200000,
+          img: '/img/laselva-3.svg'
+        })
         handleExploreClick();
         userData?.sponsored_cubes < 1 && toggleCalculator();
-      }} type = "Welcome" img = '/img/lidar-welcome.jpg' title = 'Finca Amable' btnText = {userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"} onAreaSelect={openInfoModal} user={user}/>
+      }} type = "Welcome" img = '/img/lidar-welcome.jpg' title = {selectedPolygon.name} cubes={selectedPolygon.cubes} btnText = {userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"} onAreaSelect={openInfoModal} user={user}/>
     }
   }
   const toggleCalculator = () => {
@@ -348,42 +369,42 @@ export default function Cesium({user}) {
           />
         } 
         <Entity
-          name="Costa Rica Area"
+          name="Estacion Tropical La Gamba"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
               -83.20242972659405,8.700082058155436,0 -83.20175800222725,8.699860569079352,0 -83.20155978832922,8.700130078432313,0 -83.20165488750533,8.700412174732799,0 -83.20159200153307,8.700732928924968,0 -83.20185595577597,8.700812275774163,0 -83.20227298918174,8.700952883488037,0 -83.20270660155461,8.700677855947868,0 -83.20242972659405,8.700082058155436
             ]),
             material: (() => {
-              if (hoveredEntity === 'costaRicaArea') {
+              if (hoveredEntity === 'Estacion Tropical La Gamba') {
                 return selectedOrange;
-              } else if (selectedPolygon.name === 'costaRicaArea') {
+              } else if (selectedPolygon.name === 'Estacion Tropical La Gamba') {
                 return hoverOrange;
               } else {
                 return Color.WHITE.withAlpha(0.3);
               }
             })(),
             fill: true,
-            fillColor: hoveredEntity === "costaRicaArea" || selectedPolygon.name === "costaRicaArea" ? Color.ORANGE.withAlpha(0.5) : Color.TRANSPARENT,
+            fillColor: hoveredEntity === "Estacion Tropical La Gamba" || selectedPolygon.name === "Estacion Tropical La Gamba" ? Color.ORANGE.withAlpha(0.5) : Color.TRANSPARENT,
             outline: true,
             zIndex: 2, 
-            outlineColor: selectedPolygon.name === "costaRicaArea" ? Color.ORANGE.withAlpha(1) : Color.ORANGE.withAlpha(0.7),
+            outlineColor: selectedPolygon.name === "Estacion Tropical La Gamba" ? Color.ORANGE.withAlpha(1) : Color.ORANGE.withAlpha(0.7),
             heightReference: HeightReference.CLAMP_TO_GROUND,
           }}
-          onMouseEnter={() => handlePolygonMouseEnter("costaRicaArea")}
+          onMouseEnter={() => handlePolygonMouseEnter("Estacion Tropical La Gamba")}
           onMouseLeave={handlePolygonMouseLeave}
           onDoubleClick={doubleClickQuiet}
           onClick={() =>
             handlePolygonClick({
-              name: 'costaRicaArea',
+              name: 'Estacion Tropical La Gamba',
               coordinates: '-83.20242972659405,8.700082058155436',
               location: 'La Gamba', 
               bio: 'High', 
-              cubes: '580 million'
+              cubes: 900000
             })
           }
         />
         <Entity
-          name="Costa Rica Area 2"
+          name="Finca Eduardo"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
               -83.17605240146077 + 0.00001, 8.712786755328775 + 0.00001,
@@ -394,9 +415,9 @@ export default function Cesium({user}) {
               -83.17605240146077 + 0.00001, 8.712786755328775 + 0.00001
             ]),
             material: (() => {
-              if (hoveredEntity === 'costaRicaArea2') {
+              if (hoveredEntity === 'Finca Eduardo') {
                 return selectedOrange;
-              } else if (selectedPolygon.name === 'costaRicaArea2') {
+              } else if (selectedPolygon.name === 'Finca Eduardo') {
                 return hoverOrange;
               } else {
                 return Color.WHITE.withAlpha(0.3);
@@ -409,30 +430,30 @@ export default function Cesium({user}) {
             outlineColor:  Color.ORANGE.withAlpha(1),
             heightReference: HeightReference.CLAMP_TO_GROUND
           }}
-          onMouseEnter={() => handlePolygonMouseEnter("costaRicaArea2")}
+          onMouseEnter={() => handlePolygonMouseEnter("Finca Eduardo")}
           onMouseLeave={handlePolygonMouseLeave}
           onDoubleClick={doubleClickQuiet}
           onClick={() =>
             handlePolygonClick({
-              name: 'costaRicaArea2',
-              coordinates: '-83.17605240146077,8.712786755328775',
+              name: 'Finca Eduardo',
+              coordinates: '-83.174510, 8.708136',
               location: 'La Selva 2', 
               bio: 'Very High', 
-              cubes: '340 million',
+              cubes: 3400000,
               img: '/img/laselva-2.svg'
             })
           }
         />
         <Entity
-          name="Costa Rica Area 3"
+          name="Finca Amable"
           polygon={{
             hierarchy: Cartesian3.fromDegreesArray([
               -83.1746627910919,8.715954642202648,0 -83.1737570781505,8.713936806606773,0 -83.17225636996424,8.714578212993517,0 -83.17427388150296,8.719114376600476,0 -83.17459705888224,8.719035778065916,0 -83.17493506353392,8.719244663164448,0 -83.17547381808328,8.719350260654883,0 -83.17598596924216,8.719206239997447,0 -83.17648590750156,8.718956333337792,0 -83.17663486209328,8.71875732663138,0 -83.17652764759447,8.71843855349665,0 -83.17623064260972,8.718252040559312,0 -83.17589290352993,8.718265574729413,0 -83.17519012725013,8.718199728650866,0 -83.17504140398765,8.717972596981951,0 -83.17535234815065,8.717799168364181,0 -83.17655527327155,8.717277397041395,0 -83.17670398008781,8.717010225329005,0 -83.17690683882057,8.716662893778647,0 -83.17627182685756,8.715272990225751,0 -83.1746627910919,8.715954642202648  
             ]),
             material: (() => {
-              if (hoveredEntity === 'costaRicaArea3') {
+              if (hoveredEntity === 'Finca Amable') {
                 return selectedOrange;
-              } else if (selectedPolygon.name === 'costaRicaArea3') {
+              } else if (selectedPolygon.name === 'Finca Amable') {
                 return hoverOrange;
               } else {
                 return Color.WHITE.withAlpha(0.3);
@@ -444,16 +465,16 @@ export default function Cesium({user}) {
             zIndex: 3,
             heightReference: HeightReference.CLAMP_TO_GROUND
           }}
-          onMouseEnter={() => handlePolygonMouseEnter("costaRicaArea3")}
+          onMouseEnter={() => handlePolygonMouseEnter("Finca Amable")}
           onMouseLeave={handlePolygonMouseLeave}
           onDoubleClick={handleExploreClick}
           onClick={() =>
             handlePolygonClick({
-              name: 'costaRicaArea3',
+              name: 'Finca Amable',
               coordinates: '-83.1746627910919,8.715954642202648',
               location: 'La Selva 3', 
               bio: 'High', 
-              cubes: '467 million',
+              cubes: 3200000,
               img: '/img/laselva-3.svg'
             })
           }
@@ -716,14 +737,22 @@ export default function Cesium({user}) {
       {/* Unity Build */}
       <AnimatePresence>
         {cubeBuild && (
+          
         <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 1.5 } }}
         exit={{ opacity: 0, transition: { delay: 0.2 } }}
         transition={{ type: "spring", stiffness: 100, duration: 2}}
         >
+          <>
           {/*<UnityBuild/>*/}
+          {selectedPolygon.name === 'Finca Amable' ?
           <WebGL user={user} userData={userData} calculatorOpen={calculator} onCalculatorClose={() => setCalculator(false)} />
+          :
+          <WebGLMinimal selected={selectedPolygon.name}/>
+          }
+           <div onClick={closeInfoCubes} className="fixed flex items-center z-30 top-2 left-[23vw] text-white"><FaArrowLeft className="mr-2" /> Return to Map</div>
+          </>
         </motion.div>
         )}
       </AnimatePresence>
@@ -756,17 +785,28 @@ export default function Cesium({user}) {
         }
       </AnimatePresence>
 
+
       {/* Carousels */}
       <AnimatePresence>
         {carousel === 1 && (
           <div className="fixed top-0 left-0 z-40 bg-black/30 backdrop-blur h-full w-full flex items-center justify-center px-[25%]">
-            <div className="fixed top-10 right-10 text-white text-3xl opacity-60 hover:opacity-100" onClick={() => setCarousel(0)}><IoMdClose /></div>
+            <div className="fixed top-10 right-10 text-white text-3xl opacity-60 hover:opacity-100" onClick={() => setCarousel(0)}><IoCloseCircle /></div>
             <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             >
-                <Carousel slides={[{type: 'video', src: '/img/ocelot_2.mp4', webm: '/img/ocelot_2.webm',thumbnail: '/img/leopard.jpg'}, {type: 'image', src: '/img/1.jpg', thumbnail: '/img/1.jpg' },{type: 'image', src:'/img/2.jpg', thumbnail: '/img/2.jpg'}, {type: 'image', src:'/img/3.jpg', thumbnail: '/img/3.jpg'}, {type: 'image', src:'/img/4.jpg', thumbnail: '/img/4.jpg'}]} />
+                <Carousel slides={[
+                  {type: 'video', src: 'https://upcdn.io/W142iUD/raw/greencubes/cameraTrap_coati.mp4', webm: 'https://upcdn.io/W142iUD/raw/greencubes/cameraTrap_coati.mp4',thumbnail: '/carousel-img/cameraTrap_coati.webp'},
+                  {type: 'video', src: 'https://upcdn.io/W142iUD/raw/greencubes/cameraTrap_agoati-sm.mp4', webm: 'https://upcdn.io/W142iUD/raw/greencubes/cameraTrap_agoati-sm.mp4',thumbnail: '/carousel-img/cameraTrap_agoati.webp'},
+                  {type: 'video', src: 'https://upcdn.io/W142iUD/raw/greencubes/cameraTrap_puma.mp4', webm: 'https://upcdn.io/W142iUD/raw/greencubes/cameraTrap_puma.mp4',thumbnail: '/carousel-img/cameraTrap_puma.webp'},
+                  {type: 'video', src: 'https://upcdn.io/W142iUD/raw/greencubes/cameraTrap_Tayra.mp4', webm: 'https://upcdn.io/W142iUD/raw/greencubes/cameraTrap_Tayra.mp4',thumbnail: '/carousel-img/cameraTrap_tayra.webp'},
+                  {type: 'video', src: 'https://upcdn.io/W142iUD/raw/greencubes/cameraTrap_ocelot.mp4', webm: 'https://upcdn.io/W142iUD/raw/greencubes/cameraTrap_ocelot.mp4',thumbnail: '/carousel-img/cameraTrap_ocelot.webp'},
+                  {type: 'image', src: '/carousel-img/cameraTrap_agoati.webp', thumbnail: '/carousel-img/cameraTrap_agoati.webp' },
+                  {type: 'image', src:'/carousel-img/cameraTrap_coati.webp', thumbnail: '/carousel-img/cameraTrap_coati.webp'},
+                  {type: 'image', src:'/carousel-img/cameraTrap_puma.webp', thumbnail: '/carousel-img/cameraTrap_puma.webp'}, 
+                  {type: 'image', src:'/carousel-img/cameraTrap_tayra.webp', thumbnail: '/carousel-img/cameraTrap_tayra.webp'}, 
+                  {type: 'image', src:'/carousel-img/cameraTrap_rail.webp', thumbnail: '/carousel-img/cameraTrap_rail.webp'}]} />
             </motion.div>
           </div>
         )}
@@ -774,7 +814,7 @@ export default function Cesium({user}) {
       <AnimatePresence>
         {carousel === 2 && (
           <div className="fixed top-0 left-0 z-40 bg-black/30 backdrop-blur h-full w-full flex items-center justify-center px-[25%]">
-            <div className="fixed top-10 right-10 text-white text-3xl opacity-60 hover:opacity-100" onClick={() => setCarousel(0)}><IoMdClose /></div>
+            <div className="fixed top-10 right-10 text-white text-3xl opacity-60 hover:opacity-100" onClick={() => setCarousel(0)}><IoCloseCircle /></div>
             <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -788,7 +828,7 @@ export default function Cesium({user}) {
       <AnimatePresence>
         {carousel === 3 && (
           <div className="fixed top-0 left-0 z-40 bg-black/30 backdrop-blur h-full w-full flex items-center justify-center px-[25%]">
-            <div className="fixed top-10 right-10 text-white text-3xl opacity-60 hover:opacity-100" onClick={() => setCarousel(0)}><IoMdClose /></div>
+            <div className="fixed top-10 right-10 text-white text-3xl opacity-60 hover:opacity-100" onClick={() => setCarousel(0)}><IoCloseCircle /></div>
             <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
