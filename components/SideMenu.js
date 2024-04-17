@@ -4,7 +4,6 @@ import { RiArrowDropRightFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 import Button from "./Button";
 import { useState, useEffect, useRef } from 'react';
-import { pdfjs, Page, Document } from 'react-pdf'
 import { IoCloseCircle } from "react-icons/io5";
 
 
@@ -38,7 +37,7 @@ export default function SideMenu({user, type, img, title, roundImg, cubes = 3200
                     }
                 </div>
             </div>
-            <div onClick={onClick} className="bg-greenLime w-full py-2.5 text-center"><Button text={btnText} /></div>
+            <div onClick={onClick} className="bg-greenLime w-full py-2.5 text-center min-h-[6vh]">{(title !== 'Estacion Tropical La Gamba' && title !== 'Finca Eduardo') && <Button text={btnText} />}</div>
         </div>
         </motion.div>
         {pdfOpen &&
