@@ -32,6 +32,7 @@ import WebGL from "./WebGL"
 import WebGLMinimal from "./WebGL-Minimal"
 import { IoCloseCircle } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa6";
+import { func } from "three/examples/jsm/nodes/Nodes.js"
 
 
 
@@ -192,6 +193,29 @@ export default function Cesium({user}) {
               cubes: 3400000,
               img: '/img/laselva-2.svg'
       })
+    } else if (name === 'Estacion Tropical La Gamba' ) {
+    handlePolygonClick({
+    name: 'Estacion Tropical La Gamba',
+              coordinates: '-83.20242972659405,8.700082058155436',
+              location: 'La Gamba', 
+              bio: 'High', 
+              cubes: 900000
+    })
+    } else {
+      handlePolygonClick({
+        name: 'Finca Amable',
+        coordinates: '-83.1746627910919,8.715954642202648',
+        location: 'La Selva 3', 
+        bio: 'High', 
+        cubes: 3200000,
+        img: '/img/laselva-3.svg'
+      })
+    }
+  }
+
+  function getImage(name) {
+    if (name === 'Finca Eduardo') {
+      return 
     } else if (name === 'Estacion Tropical La Gamba' ) {
     handlePolygonClick({
     name: 'Estacion Tropical La Gamba',
@@ -751,7 +775,7 @@ export default function Cesium({user}) {
           :
           <WebGLMinimal selected={selectedPolygon.name}/>
           }
-           <div onClick={closeInfoCubes} className="fixed flex items-center z-30 top-2 left-[23vw] text-white"><FaArrowLeft className="mr-2" /> Return to Map</div>
+            <div onClick={closeInfoCubes} className="fixed flex items-center z-30 top-2 left-[23vw] text-white"><FaArrowLeft className="mr-2" /> Return to Map</div>
           </>
         </motion.div>
         )}
