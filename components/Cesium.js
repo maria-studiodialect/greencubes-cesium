@@ -15,25 +15,14 @@ import {
 } from "cesium"
 import { useState, useRef, useEffect, useMemo } from "react"
 import { Entity, Viewer, CameraFlyTo, Scene, Globe, Camera } from "resium"
-import InfoBox from "../components/InfoBox"
-import CubeInfo from "../components/CubeInfo"
-import dynamic from "next/dynamic"
 import { motion, AnimatePresence } from "framer-motion"
-import UnityBuild from "../components/UnityBuild"
-import BuildingInfo from "../components/BuildingInfo"
-import InfoModal from "./InfoModal"
-import WiderModal from "./WiderModal"
-import MultiModal from "./MultiModal"
 import Carousel from "./Carousel"
-import { IoMdClose } from "react-icons/io";
 import SuccessMessage from "./SuccessMessage"
 import SideMenu from "./SideMenu"
 import WebGL from "./WebGL"
 import WebGLMinimal from "./WebGL-Minimal"
 import { IoCloseCircle } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa6";
-import { func } from "three/examples/jsm/nodes/Nodes.js"
-
 
 
 Ion.defaultAccessToken =
@@ -215,24 +204,11 @@ export default function Cesium({user}) {
 
   function getImage(name) {
     if (name === 'Finca Eduardo') {
-      return 
+      return '/img/FincaEduardo.jpg'
     } else if (name === 'Estacion Tropical La Gamba' ) {
-    handlePolygonClick({
-    name: 'Estacion Tropical La Gamba',
-              coordinates: '-83.20242972659405,8.700082058155436',
-              location: 'La Gamba', 
-              bio: 'High', 
-              cubes: 900000
-    })
+      return '/img/laGamba.jpeg'
     } else {
-      handlePolygonClick({
-        name: 'Finca Amable',
-        coordinates: '-83.1746627910919,8.715954642202648',
-        location: 'La Selva 3', 
-        bio: 'High', 
-        cubes: 3200000,
-        img: '/img/laselva-3.svg'
-      })
+      return '/img/fincaAmable-lg.jpg'
     }
   }
 
@@ -268,7 +244,7 @@ export default function Cesium({user}) {
         });
         handleExploreClick();
         userData?.sponsored_cubes < 1 && toggleCalculator();
-      }} type="Site" title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img = '/img/fincaAmable-lg.jpg' btnText={userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"}  onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)} />
+      }} type="Site" title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img={getImage(selectedPolygon.name)} btnText={userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"}  onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)} />
     } else if (cubeInfo) {
       return <SideMenu onClick={() => {
         console.log('clicked');
