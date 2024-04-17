@@ -4,7 +4,6 @@ import { RiArrowDropRightFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 import Button from "./Button";
 import { useState, useEffect, useRef } from 'react';
-import { pdfjs, Page, Document } from 'react-pdf'
 import { IoCloseCircle } from "react-icons/io5";
 
 
