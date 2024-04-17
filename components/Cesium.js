@@ -23,6 +23,7 @@ import WebGL from "./WebGL"
 import WebGLMinimal from "./WebGL-Minimal"
 import { IoCloseCircle } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa6";
+import Project from "./Project"
 
 
 Ion.defaultAccessToken =
@@ -55,6 +56,7 @@ export default function Cesium({user}) {
   const [tilesetUrl, setTilesetUrl] = useState(null);
   const [calculator, setCalculator] = useState(false)
   const [userData, setUserData] = useState()
+  const [projectOpen, setProjectOpen] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -214,7 +216,7 @@ export default function Cesium({user}) {
 
   function getType() {
     if (infoModal) {
-      return <SideMenu type="Location" title = 'La Gamba Tropenstation'  img = '/img/gamba-trop.jpg' selected = {gambaSelected}  btnText = {gambaSelected ? (userData.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator") : "Explore"}
+      return <SideMenu type="Location" title = 'La Gamba Tropenstation' toggleProject={() => setProjectOpen(!projectOpen)}  img = '/img/gamba-trop.jpg' selected = {gambaSelected}  btnText = {gambaSelected ? (userData.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator") : "Explore"}
       onClick={() => {
         if (gambaSelected) {
           handlePolygonClick({
@@ -244,7 +246,7 @@ export default function Cesium({user}) {
         });
         handleExploreClick();
         userData?.sponsored_cubes < 1 && toggleCalculator();
-      }} type="Site" title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img={getImage(selectedPolygon.name)} btnText={userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"}  onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)} />
+      }} type="Site" title = {selectedPolygon.name}  cubes={selectedPolygon.cubes}  img={getImage(selectedPolygon.name)} btnText={userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"}  onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)} />
     } else if (cubeInfo) {
       return <SideMenu onClick={() => {
         console.log('clicked');
@@ -785,7 +787,6 @@ export default function Cesium({user}) {
         }
       </AnimatePresence>
 
-
       {/* Carousels */}
       <AnimatePresence>
         {carousel === 1 && (
@@ -838,6 +839,13 @@ export default function Cesium({user}) {
             </motion.div>
           </div>
         )}
+      </AnimatePresence>
+
+      {/* About the Project */}
+      <AnimatePresence>
+      {projectOpen &&
+        <Project toggleProject={() => setProjectOpen(!projectOpen)}/>
+      }
       </AnimatePresence>
     </>
   )
