@@ -14,7 +14,7 @@
 .embla {
   --slide-spacing: 1rem;
   --slide-size: 100%;
-  --slide-height: 60vh;
+  --slide-height: 50vh;
   padding: 1.6rem;
 }
 .embla__viewport {
@@ -36,7 +36,7 @@
   display: block;
   height: var(--slide-height);
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .embla__slide__number {
   width: 4.6rem;

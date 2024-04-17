@@ -5,6 +5,8 @@ import {
     PrevButton,
     NextButton
 } from './EmblaCarouselArrowsDotsButtons'
+import { IoCloseCircle } from "react-icons/io5";
+
 
 export default function Carousel(props) {
     const { slides, options } = props
@@ -68,12 +70,14 @@ export default function Carousel(props) {
                     </div>
                     {slide.type === 'image' ? (
                     <img
-                        className="embla__slide__img"
+                        className="embla__slide__img aspect-video object-contain"
                         src={slide.src}
                         alt="Your alt text"
+
+                    
                     />
                     ) : (
-                    <video controls autoPlay muted className="embla__slide__video h-[60vh] object-cover">
+                    <video controls autoPlay muted className="embla__slide__video h-[50vh] object-contain">
                         <source src={slide.src} type="video/mp4"  />
                         <source src={slide.webm} type="video/webm"  />
                         Your browser does not support the video tag.
