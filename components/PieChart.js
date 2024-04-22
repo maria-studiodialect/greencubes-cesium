@@ -39,7 +39,7 @@ export default function PieChart({ unavailable, sponsorship, available }) {
                       pointStyle: 'circle', // Explicitly setting the point style to circle
                       padding: 20 // Optional: Adds padding between the legend items
                     }
-                  },
+                },
             title: {
                 display: false,
                 text: 'Resource Distribution'

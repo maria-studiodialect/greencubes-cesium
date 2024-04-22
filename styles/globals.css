@@ -14,7 +14,7 @@
 .embla {
   --slide-spacing: 1rem;
   --slide-size: 100%;
-  --slide-height: 50vh;
+  --slide-height: 70vh;
   padding: 1.6rem;
 }
 .embla__viewport {
@@ -31,11 +31,13 @@
   min-width: 0;
   padding-left: var(--slide-spacing);
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 .embla__slide__img {
   display: block;
   height: var(--slide-height);
-  width: 100%;
+  width: auto;
   object-fit: contain;
 }
 .embla__slide__number {
