@@ -157,16 +157,31 @@ export default function Cesium({user}) {
   console.log('gamba', gambaSelected)
   console.log('infoModal', infoModal)
   const backButton = () => {
-
-    setInfoModal(false)
+    if (!gambaSelected && infoModal) {
+      setInfoModal(false)
+    }
+    
     if (gambaSelected && infoModal) {
       const viewer = viewerRef.current.cesiumElement;
       viewer.camera.setView(initialCameraView);      
+      setBox(false);
       setGambaSelected(false);
+      setCubeInfo(false);
+      setCubeBuild(false);
+      setHoveredEntity(null);
+      setSelectedPolygon({ name: null });
       setCameraFly(false);
       setSecondCameraFly(false);
+      setCameraCubes(false);
       setPosition(null);
       setCoordinates(null);
+      setCarousel(0);
+      setSuccess(false);
+      setInfoModal(false);
+      setCalculator(false);
+      setProjectOpen(false);
+      console.log('Back to initial globe view');
+      console.log('clicked back!')
     } 
 
     if (box) {
