@@ -11,6 +11,7 @@ import {
   IonResource,
   Cesium3DTileset,
   Math,
+  Billboard,
   Cartographic
 } from "cesium"
 import { useState, useRef, useEffect, useMemo } from "react"
@@ -53,7 +54,6 @@ export default function Cesium({user}) {
   const outlineBlue = Color.fromCssColorString('#299F93').withAlpha(1)
   const outlineOrange = Color.fromCssColorString('#F5BD2D').withAlpha(1)
   const [infoModal, setInfoModal] = useState(false)
-  const [tilesetUrl, setTilesetUrl] = useState(null);
   const [calculator, setCalculator] = useState(false)
   const [userData, setUserData] = useState()
   const [projectOpen, setProjectOpen] = useState(false)
@@ -76,6 +76,7 @@ export default function Cesium({user}) {
     setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
     setCameraFly(true);
     setGambaSelected(true);
+    setProjectOpen(false)
   };
 
   const openInfoModal = () => {
@@ -103,9 +104,8 @@ export default function Cesium({user}) {
     setBox(true);
     const [longitude, latitude] = polygonData.coordinates.split(',').map(coord => parseFloat(coord.trim()));
     setCoordinates({longitude: longitude, latitude: latitude})
+    setProjectOpen(false) 
   };
-
-  console.log(selectedPolygon)
 
   const handleExploreClick = () => {
     setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
@@ -113,6 +113,7 @@ export default function Cesium({user}) {
     setCameraCubes(true);
     setBox(false)
     setCubeBuild(true);
+    setProjectOpen(false)
   }
 
   const closeInfoCubes = () => {
@@ -120,13 +121,69 @@ export default function Cesium({user}) {
     setCubeBuild(false)
     setCameraFly(true);
     setBox(true);
-
+    setCubeInfo(false);
     console.log('clicked')
   }
   const handleCheckout = () => {
     setCubeInfo(false);
     setSuccess(true);
   }
+
+  const backToGlobe = () => {
+      // Reset camera to the initial view
+      const viewer = viewerRef.current.cesiumElement;
+      viewer.camera.setView(initialCameraView);
+
+      // Reset state variables to their initial values
+      setBox(false);
+      setGambaSelected(false);
+      setCubeInfo(false);
+      setCubeBuild(false);
+      setHoveredEntity(null);
+      setSelectedPolygon({ name: null });
+      setCameraFly(false);
+      setSecondCameraFly(false);
+      setCameraCubes(false);
+      setPosition(null);
+      setCoordinates(null);
+      setCarousel(0);
+      setSuccess(false);
+      setInfoModal(false);
+      setCalculator(false);
+      setProjectOpen(false);
+      console.log('Back to initial globe view');
+  };
+
+  console.log('gamba', gambaSelected)
+  console.log('infoModal', infoModal)
+  const backButton = () => {
+
+    setInfoModal(false)
+    if (gambaSelected && infoModal) {
+      const viewer = viewerRef.current.cesiumElement;
+      viewer.camera.setView(initialCameraView);      
+      setGambaSelected(false);
+      setCameraFly(false);
+      setSecondCameraFly(false);
+      setPosition(null);
+      setCoordinates(null);
+    } 
+
+    if (box) {
+      setBox(false);
+      setInfoModal(true);
+      setGambaSelected(true);
+      setCoordinates(null);
+      setPosition(null);
+      setSelectedPolygon({ name: null });
+    }
+
+    if (cubeInfo) {
+      closeInfoCubes()
+    }
+  }
+
+  console.log('cube info', cubeInfo)
 
   const terrainProvider = useMemo(() => new CesiumTerrainProvider({
     url: IonResource.fromAssetId(1)
@@ -139,6 +196,8 @@ export default function Cesium({user}) {
   const initialCameraView = {
     destination: Cartesian3.fromDegrees(-78.35623066008425, 2.9224258786165658, 22260578.86946213), // Example coordinates and altitude
   };
+
+
   useEffect(() => {
     // Ensure the viewer is fully loaded and defined
     if (viewerRef.current && viewerRef.current.cesiumElement) {
@@ -150,29 +209,7 @@ export default function Cesium({user}) {
     }
   }, [viewerRef]); // Add viewerRef as a dependency to the useEffect hook
   
-  const getCoords = () => {
-    if (viewerRef.current && viewerRef.current.cesiumElement) {
-      const viewer = viewerRef.current.cesiumElement;
 
-      const position = viewer.camera.positionWC;
-    
-      // Convert the position to longitude, latitude, and height
-      const cartographic = Cartographic.fromCartesian(position);
-      const longitude = Math.toDegrees(cartographic.longitude);
-      const latitude = Math.toDegrees(cartographic.latitude);
-      const height = cartographic.height;
-    
-      // Get the heading, pitch, and roll
-      const heading = Math.toDegrees(viewer.camera.heading);
-      const pitch = Math.toDegrees(viewer.camera.pitch);
-      const roll = Math.toDegrees(viewer.camera.roll);
-    
-      // Log the values
-      console.log(`Longitude: ${longitude}, Latitude: ${latitude}, Height: ${height}`);
-      console.log(`Heading: ${heading}, Pitch: ${pitch}, Roll: ${roll}`);
-      // Now it's safe to use screenSpaceEventHandler
-    }
-  }
 
   function onSiteSelect(name) {
     if (name === 'Finca Eduardo') {
@@ -216,7 +253,7 @@ export default function Cesium({user}) {
 
   function getType() {
     if (infoModal) {
-      return <SideMenu type="Location" title = 'La Gamba Tropenstation' toggleProject={() => setProjectOpen(!projectOpen)}  img = '/img/gamba-trop.jpg' selected = {gambaSelected}  btnText = {gambaSelected ? (userData.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator") : "Explore"}
+      return <SideMenu  closeAbout={() => setProjectOpen(false)} type="Location" title = 'La Gamba Tropenstation' toggleProject={() => setProjectOpen(!projectOpen)}  img = '/img/gamba-trop.jpg' selected = {gambaSelected}  btnText = {gambaSelected ? (userData.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator") : "Explore"}
       onClick={() => {
         if (gambaSelected) {
           handlePolygonClick({
@@ -233,9 +270,9 @@ export default function Cesium({user}) {
           handleDoubleClick();
         }
       }}
-      onSiteSelect={(name) => onSiteSelect(name)}/>
+      onSiteSelect={(name) => onSiteSelect(name)} backToGlobe={backToGlobe} backButton={backButton}/>
     } else if (box) {
-      return <SideMenu onClick={() => {
+      return <SideMenu  closeAbout={() => setProjectOpen(false)} onClick={() => {
         handlePolygonClick({
           name: 'Finca Amable',
           coordinates: '-83.1746627910919,8.715954642202648',
@@ -246,14 +283,14 @@ export default function Cesium({user}) {
         });
         handleExploreClick();
         userData?.sponsored_cubes < 1 && toggleCalculator();
-      }} type="Site" title = {selectedPolygon.name}  cubes={selectedPolygon.cubes}  img={getImage(selectedPolygon.name)} btnText={userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"}  onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)} />
+      }} type="Site" backToGlobe={backToGlobe} backButton={backButton} title = {selectedPolygon.name}  cubes={selectedPolygon.cubes}  img={getImage(selectedPolygon.name)} btnText={userData?.sponsored_cubes > 0 ? "View Dashboard" : "Sponsor Calculator"}  onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)} />
     } else if (cubeInfo) {
-      return <SideMenu onClick={() => {
+      return <SideMenu  closeAbout={() => setProjectOpen(false)} onClick={() => {
         console.log('clicked');
         toggleCalculator();
-      }} menuSelected="Sponsor" type="Site" title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img={getImage(selectedPolygon.name)} btnText="Sponsor Calculator" onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
+      }} menuSelected="Sponsor" type="Site" backButton={backButton} title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img={getImage(selectedPolygon.name)} btnText="Sponsor Calculator" onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
     } else {
-      return <SideMenu onClick={() => {
+      return <SideMenu  closeAbout={() => setProjectOpen(false)} onClick={() => {
         handlePolygonClick({
           name: 'Finca Amable',
           coordinates: '-83.1746627910919,8.715954642202648',
@@ -271,7 +308,6 @@ export default function Cesium({user}) {
     setCalculator(!calculator);
   };
 
-  console.log(userData?.sponsored_cubes > 0)
 
   return (
     <>
@@ -297,6 +333,7 @@ export default function Cesium({user}) {
         <Scene />
         <Globe />
         <Camera ref={cesium}/>
+        
         <Entity
           name="Costa Rica"
           position={Cartesian3.fromDegrees(-83.18837090285736, 8.728579229757717, 100)}
@@ -385,6 +422,7 @@ export default function Cesium({user}) {
                 return Color.WHITE.withAlpha(0.3);
               }
             })(),
+            
             fill: true,
             fillColor: hoveredEntity === "Estacion Tropical La Gamba" || selectedPolygon.name === "Estacion Tropical La Gamba" ? Color.ORANGE.withAlpha(0.5) : Color.TRANSPARENT,
             outline: true,
@@ -394,7 +432,7 @@ export default function Cesium({user}) {
           }}
           onMouseEnter={() => handlePolygonMouseEnter("Estacion Tropical La Gamba")}
           onMouseLeave={handlePolygonMouseLeave}
-          onDoubleClick={doubleClickQuiet}
+          onDoubleClick={handleExploreClick}
           onClick={() =>
             handlePolygonClick({
               name: 'Estacion Tropical La Gamba',
@@ -405,6 +443,21 @@ export default function Cesium({user}) {
             })
           }
         />
+        {/* 
+        <Entity
+          name="La Gamba Billboard"
+          position={Cartesian3.fromDegrees(-83.20242972659405,8.700082058155436, 100)}
+          billboard={{
+            image:
+              "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/brazil.png?v=1701444967776",
+            heightReference: HeightReference.CLAMP_TO_GROUND,
+            horizontalOrigin: HorizontalOrigin.LEFT,
+          }}
+          description="descriptor"
+          onMouseEnter={() => document.body.style.cursor = 'pointer'}
+          onMouseLeave={() => document.body.style.cursor = 'default'}
+        />
+        */}
         <Entity
           name="Finca Eduardo"
           polygon={{
@@ -434,7 +487,7 @@ export default function Cesium({user}) {
           }}
           onMouseEnter={() => handlePolygonMouseEnter("Finca Eduardo")}
           onMouseLeave={handlePolygonMouseLeave}
-          onDoubleClick={doubleClickQuiet}
+          onDoubleClick={handleExploreClick}
           onClick={() =>
             handlePolygonClick({
               name: 'Finca Eduardo',
@@ -753,7 +806,6 @@ export default function Cesium({user}) {
           :
           <WebGLMinimal selected={selectedPolygon.name}/>
           }
-            <div onClick={closeInfoCubes} className="fixed flex items-center z-30 top-2 left-[23vw] text-white"><FaArrowLeft className="mr-2" /> Return to Map</div>
           </>
         </motion.div>
         )}
@@ -790,7 +842,7 @@ export default function Cesium({user}) {
       {/* Carousels */}
       <AnimatePresence>
         {carousel === 1 && (
-          <div className="fixed top-0 left-0 z-40 bg-black/30 backdrop-blur h-full w-full flex items-center justify-center px-[25%]">
+          <div className="fixed top-0 left-0 z-40 bg-black/30 backdrop-blur h-full w-full flex items-center justify-center px-[10%]">
             <div className="fixed top-10 right-10 text-white text-3xl opacity-60 hover:opacity-100" onClick={() => setCarousel(0)}><IoCloseCircle /></div>
             <motion.div 
             initial={{ opacity: 0 }}
@@ -814,28 +866,28 @@ export default function Cesium({user}) {
       </AnimatePresence>
       <AnimatePresence>
         {carousel === 2 && (
-          <div className="fixed top-0 left-0 z-40 bg-black/30 backdrop-blur h-full w-full flex items-center justify-center px-[25%]">
+          <div className="fixed top-0 left-0 z-40 bg-black/30 backdrop-blur h-full w-full flex items-center justify-center px-[10%]">
             <div className="fixed top-10 right-10 text-white text-3xl opacity-60 hover:opacity-100" onClick={() => setCarousel(0)}><IoCloseCircle /></div>
             <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             >
-                <Carousel slides={[{type: 'video', src: '/img/flyOver_720.mp4',webm: '/img/flyOver_720.webm', thumbnail: '/img/video.jpg'}, {type: 'image', src: '/img/2-1.jpg', thumbnail: '/img/2-1.jpg' },{type: 'image', src:'/img/2-2.jpg', thumbnail: '/img/2-2.jpg'}, {type: 'image', src:'/img/2-3.jpg', thumbnail: '/img/2-3.jpg'}, {type: 'image', src:'/img/2-4.jpg', thumbnail: '/img/2-4.jpg'}]} />
+                <Carousel slides={[{type: 'video', src: 'https://upcdn.io/W142iUD/raw/greencubes/amable_eduardo_cube_flyover.mp4',webm: 'https://upcdn.io/W142iUD/raw/greencubes/amable_eduardo_cube_flyover.mp4', thumbnail: '/img/video.jpg'}, {type: 'image', src: '/img/2-1.jpg', thumbnail: '/img/2-1.jpg' },{type: 'image', src:'/img/2-2.jpg', thumbnail: '/img/2-2.jpg'}, {type: 'image', src:'/img/2-3.jpg', thumbnail: '/img/2-3.jpg'}, {type: 'image', src:'/img/2-4.jpg', thumbnail: '/img/2-4.jpg'}]} />
             </motion.div>
           </div>
         )}
       </AnimatePresence>
       <AnimatePresence>
         {carousel === 3 && (
-          <div className="fixed top-0 left-0 z-40 bg-black/30 backdrop-blur h-full w-full flex items-center justify-center px-[25%]">
+          <div className="fixed top-0 left-0 z-40 bg-black/30 backdrop-blur h-full w-full flex items-center justify-center px-[10%]">
             <div className="fixed top-10 right-10 text-white text-3xl opacity-60 hover:opacity-100" onClick={() => setCarousel(0)}><IoCloseCircle /></div>
             <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             >
-                <Carousel slides={[{type: 'video', src: '/img/blendVideo_720_1.mp4', webm: '/img/blendVideo_720_1.webm', thumbnail: '/img/lidar.jpg'}, {type: 'image', src: '/img/3-1.jpg', thumbnail: '/img/3-1.jpg' },{type: 'image', src:'/img/3-2.jpg', thumbnail: '/img/3-2.jpg'}, {type: 'image', src:'/img/3-3.jpg', thumbnail: '/img/3-3.jpg'}, {type: 'image', src:'/img/3-4.jpg', thumbnail: '/img/3-4.jpg'}]} />
+                <Carousel slides={[{type: 'video', src: 'https://upcdn.io/W142iUD/raw/greencubes/log_front.mp4', webm: 'https://upcdn.io/W142iUD/raw/greencubes/log_front.mp4', thumbnail: '/img/gamba-trop.jpg'}]} />
             </motion.div>
           </div>
         )}
@@ -848,5 +900,5 @@ export default function Cesium({user}) {
       }
       </AnimatePresence>
     </>
-  )
+  ) 
 }

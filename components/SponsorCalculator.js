@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { PiMedalFill } from "react-icons/pi";
+import { IoClose } from "react-icons/io5";
+
 
 
 export default function SponsorCalculator({inputValue, handleClose, handleChange, available }) {
@@ -97,14 +99,16 @@ export default function SponsorCalculator({inputValue, handleClose, handleChange
         className="fixed h-[80vh] inset-0 z-[9999999] flex items-center justify-center"
         >
         <div className="bg-cover relative">
+                <div onClick={handleClose} className="absolute top-2 right-2 text-md bg-white rounded-full p-1 cursor-pointer shadow hover:bg-greenLemon z-10"><IoClose /></div>
+
                 <div><Image src='/img/bg-img-wider.jpg' width={870} height={240} className="rounded-lg w-auto h-[21vh] aspect-auto relative z-0"/></div>
                 <div className="absolute top-0 left-0 right-0 flex flex-col items-center justify-center">
                     <div className="text-center flex-1 mt-4 ml-3 pt-5">
                         <div className="text-[3vh] font-bold">Sponsor Calculator</div>
                     </div>
                     {step === 1 &&
-                    <div className="mt-14 bg-lightGrey w-full flex flex-col items-center">
-                        <div className="grid grid-cols-3 items-center gap-y-3 mt-2 gap-x-5">
+                    <div className="mt-14 bg-lightGrey w-full flex flex-col items-center pl-5 pr-2">
+                        <div className="grid grid-cols-2 items-center gap-y-3 mt-2 gap-x-5">
                             <div>Size in sqm</div>
                             <div className="flex items-center border border-solid border-black rounded-full py-0.5"><input
                                 type="number"
@@ -113,7 +117,7 @@ export default function SponsorCalculator({inputValue, handleClose, handleChange
                                 onChange={(e) => setSize(e.target.value)}
                                 className="bg-transparent text-center rounded-full"
                             /></div>
-                            <div></div>
+                            
                             <div className="w-full">Data Consumption</div>
                             <div className="flex items-center border border-solid border-black rounded-full py-0.5"><input
                                 type="number"
@@ -123,7 +127,7 @@ export default function SponsorCalculator({inputValue, handleClose, handleChange
                                 onChange={(e) => setData(e.target.value)}// Update the value when the input changes
                                 className="bg-transparent text-center rounded-full"
                             /></div>
-                            <div className="text-xs text-gray-500">How do I calculate this?</div>
+                            {/*<div className="text-[0.6em] text-gray-500">How do I calculate this?</div>*/}
                             <div>No of employees</div>
                             <div className="flex items-center border border-solid border-black rounded-full py-0.5"><input
                                 type="number"
@@ -133,7 +137,7 @@ export default function SponsorCalculator({inputValue, handleClose, handleChange
                                 onChange={(e) => setEmployees(e.target.value)}// Update the value when the input changes
                                 className="bg-transparent text-center rounded-full"
                             /></div>
-                            <div></div>
+                            
                             
                         </div>
                     </div>
