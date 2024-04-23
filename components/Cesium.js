@@ -12,7 +12,7 @@ import {
   Cesium3DTileset,
   Math,
   Billboard,
-  Cartographic
+  Cartographic,
 } from "cesium"
 import { useState, useRef, useEffect, useMemo } from "react"
 import { Entity, Viewer, CameraFlyTo, Scene, Globe, Camera } from "resium"
@@ -76,7 +76,7 @@ export default function Cesium({user}) {
     setPosition(cesium.current?.cesiumElement?._positionCartographic?.height)
     setCameraFly(true);
     setGambaSelected(true);
-    setProjectOpen(false)
+    setProjectOpen(false);
   };
 
   const openInfoModal = () => {
@@ -457,22 +457,49 @@ export default function Cesium({user}) {
               cubes: 900000
             })
           }
-        />
-        {/* 
-        <Entity
+          
+        >
+
+          <Entity
           name="La Gamba Billboard"
-          position={Cartesian3.fromDegrees(-83.20242972659405,8.700082058155436, 100)}
+          position={Cartesian3.fromDegrees(-83.20222972659405,8.708082058155436, 800)}
           billboard={{
             image:
-              "https://cdn.glitch.global/20e0005a-1645-4f59-add0-0c8829cfab10/brazil.png?v=1701444967776",
-            heightReference: HeightReference.CLAMP_TO_GROUND,
+              "https://upcdn.io/W142iUD/raw/greencubes/lagamba-b.png",
+            heightReference: HeightReference.RELATIVE_TO_GROUND_TO_GROUND,
             horizontalOrigin: HorizontalOrigin.LEFT,
+            sizeInMeters: true,
+            width: 1560,
+            height: 510
           }}
           description="descriptor"
           onMouseEnter={() => document.body.style.cursor = 'pointer'}
           onMouseLeave={() => document.body.style.cursor = 'default'}
+          onClick={() =>
+            handlePolygonClick({
+              name: 'Estacion Tropical La Gamba',
+              coordinates: '-83.20242972659405,8.700082058155436',
+              location: 'La Gamba', 
+              bio: 'High', 
+              cubes: 900000
+            })
+          }
+          
         />
-        */}
+        <Entity
+                name="Connection Line"
+                polyline={{
+                    positions: Cartesian3.fromDegreesArrayHeights([
+                      -83.202088, 8.700426, 50, // From the center of the polygon at ground level
+                      -83.20222972659405,8.708082058155436, 800 // To the billboard location at height 510
+                    ]),
+                    width: 1,
+                    material: Color.WHITE
+                }}
+            />
+        </Entity>
+  
+        
         <Entity
           name="Finca Eduardo"
           polygon={{
@@ -513,7 +540,45 @@ export default function Cesium({user}) {
               img: '/img/laselva-2.svg'
             })
           }
-        />
+        >
+          <Entity
+          name="Eduardo Billboard"
+          position={Cartesian3.fromDegrees(-83.17005240146077, 8.712786755328775, 510)}
+          billboard={{
+            image:
+              "https://upcdn.io/W142iUD/raw/greencubes/finca-eduardo-b.png",
+            heightReference: HeightReference.RELATIVE_TO_GROUND,
+            horizontalOrigin: HorizontalOrigin.LEFT,
+            sizeInMeters: true,
+            width: 1560,
+            height: 510
+          }}
+          description="descriptor"
+          onMouseEnter={() => document.body.style.cursor = 'pointer'}
+          onMouseLeave={() => document.body.style.cursor = 'default'}
+          onClick={() =>
+            handlePolygonClick({
+              name: 'Finca Eduardo',
+              coordinates: '-83.174510, 8.708136',
+              location: 'La Selva 2', 
+              bio: 'Very High', 
+              cubes: 3400000,
+              img: '/img/laselva-2.svg'
+            })
+          }
+            />
+            <Entity
+                name="Connection Line"
+                polyline={{
+                    positions: Cartesian3.fromDegreesArrayHeights([
+                        -83.172902, 8.711586, 0, // From the center of the polygon at ground level
+                        -83.17005240146077, 8.712786755328775, 510 // To the billboard location at height 510
+                    ]),
+                    width: 1,
+                    material: Color.WHITE
+                }}
+            />
+        </Entity>
         <Entity
           name="Finca Amable"
           polygon={{
@@ -548,7 +613,45 @@ export default function Cesium({user}) {
               img: '/img/laselva-3.svg'
             })
           }
-        />
+        >
+          <Entity
+          name="Amable Billboard"
+          position={Cartesian3.fromDegrees(-83.1786627910919,8.705954642202648, 100)}
+          billboard={{
+            image:
+              "https://upcdn.io/W142iUD/raw/greencubes/finca-amable-b.png",
+            heightReference: HeightReference.CLAMP_TO_GROUND,
+            horizontalOrigin: HorizontalOrigin.RIGHT,
+            sizeInMeters: true,
+            width: 1560,
+            height: 510 
+          }}
+          description="descriptor"
+          onMouseEnter={() => document.body.style.cursor = 'pointer'}
+          onMouseLeave={() => document.body.style.cursor = 'default'}
+          onClick={() =>
+            handlePolygonClick({
+              name: 'Finca Amable',
+              coordinates: '-83.1746627910919,8.715954642202648',
+              location: 'La Selva 3', 
+              bio: 'High', 
+              cubes: 3200000,
+              img: '/img/laselva-3.svg'
+            })
+          }
+            />
+            <Entity
+                name="Connection Line"
+                polyline={{
+                    positions: Cartesian3.fromDegreesArrayHeights([
+                        -83.174654, 8.716732, 0, // From the center of the polygon at ground level
+                        -83.1786627910919,8.705954642202648, 100 // To the billboard location at height 510
+                    ]),
+                    width: 1,
+                    material: Color.WHITE
+                }}
+            />
+        </Entity>
         <Entity
           name="La Gamba Outline"
           corridor={{
