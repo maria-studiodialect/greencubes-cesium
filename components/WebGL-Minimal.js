@@ -107,7 +107,7 @@ function formatNumber(number) {
 
 function LaGamba() {
     const ref = useRef();
-    const { nodes, materials } = useGLTF('/webgl/glb/gamba-split.glb');
+    const { nodes, materials } = useGLTF('/webgl/glb/lagambav2.glb');
     const fontProps = { fontSize: 7, letterSpacing: -0.05, lineHeight: 1, 'material-toneMapped': false }
 
     console.log(nodes)
@@ -115,9 +115,9 @@ function LaGamba() {
     return (
         <>
         <group ref={ref}>
-        <mesh receiveShadow castShadow geometry={nodes["1001"].geometry} material={new THREE.MeshStandardMaterial({color: '#00FFDD'})} scale={350} rotation={[0,0,0]} position={[-50, -250, 0]}/>    
-        <mesh receiveShadow castShadow geometry={nodes["1002"].geometry} material={materials["Material.002"]} scale={350} rotation={[0,0,0]} position={[-50, -250, 0]}/>        
-        <Billboard position={[-100, -10, -70]}>
+        <mesh receiveShadow castShadow geometry={nodes["Mesh_0001"].geometry} material={materials["Material_0"]} scale={350} rotation={[0,0,0]} position={[-50, -340, 0]}/>    
+        <mesh receiveShadow castShadow geometry={nodes["Mesh_0002"].geometry} material={materials["Material.002"]} scale={350} rotation={[0,0,0]} position={[-50, -340, 0]}/>        
+        <Billboard position={[-90, -15, -70]}>
                 <Marker>
                 <div className={`content flex`}>
                     <svg width="4521" height="1148" viewBox="0 0 4521 1148" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -134,7 +134,7 @@ function LaGamba() {
                 </div>
                 </Marker>
             </Billboard>
-            <Billboard position={[-130, 0, 10]}>
+            <Billboard position={[-130, 0, 20]}>
                 <Marker>
                 <div className={`content flex`}>
                     <svg width="4521" height="1148" viewBox="0 0 4521 1148" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -160,9 +160,6 @@ function FincaEduardo() {
     const ref = useRef();
     const { nodes, materials } = useGLTF('/webgl/glb/eduardov2.glb');
     const fontProps = { fontSize: 7, letterSpacing: -0.05, lineHeight: 1, 'material-toneMapped': false }
-
-    console.log(nodes)
-    console.log(materials)
     return (
         <>
         <group ref={ref}>
