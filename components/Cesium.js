@@ -484,7 +484,7 @@ export default function Cesium({user}) {
               cubes: 900000
             })
           }
-          
+          onDoubleClick={handleExploreClick}
         />
         <Entity
                 name="Connection Line"
@@ -556,6 +556,7 @@ export default function Cesium({user}) {
           description="descriptor"
           onMouseEnter={() => document.body.style.cursor = 'pointer'}
           onMouseLeave={() => document.body.style.cursor = 'default'}
+          onDoubleClick={handleExploreClick}
           onClick={() =>
             handlePolygonClick({
               name: 'Finca Eduardo',
@@ -639,6 +640,7 @@ export default function Cesium({user}) {
               img: '/img/laselva-3.svg'
             })
           }
+          onDoubleClick={handleExploreClick}
             />
             <Entity
                 name="Connection Line"
