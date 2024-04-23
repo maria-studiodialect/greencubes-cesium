@@ -14,7 +14,7 @@ export default function PieChart({ unavailable, sponsorship, available }) {
             labels: ['Unavailable Units', 'Available Units', 'Sponsored Units',],
             datasets: [{
             label: 'Dataset 1',
-            data: [unavailable, sponsorship, available],
+            data: [unavailable, available, sponsorship],
             backgroundColor: [
                 '#679D83',
                 '#84EAD3',
