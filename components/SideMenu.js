@@ -54,7 +54,7 @@ export default function SideMenu({user, type, img, title, roundImg, cubes = 3200
         </div>
         </motion.div>
         {pdfOpen &&
-        <div className="absolute top-6 right-[4vw] z-[6999999] w-[70vw] h-[87vh]">
+        <div className="absolute top-6 right-[4vw] z-[9999999] w-[70vw] h-[87vh]">
             <div onClick={() => setPdfOpen(false)} className="flex justify-end mb-2 text-white text-2xl"><IoCloseCircle /></div>
             {/*
         <object data="/baseline_assessment.pdf" type="application/pdf" width="100%" height="100%">
