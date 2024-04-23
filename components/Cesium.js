@@ -303,7 +303,7 @@ export default function Cesium({user}) {
       return <SideMenu  closeAbout={() => setProjectOpen(false)} onClick={() => {
         console.log('clicked');
         toggleCalculator();
-      }} menuSelected="Sponsor" type="Site" backButton={backButton} title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img={getImage(selectedPolygon.name)} btnText="Sponsor Calculator" onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
+      }} menuSelected="Sponsor" type="Site"  backToGlobe={backToGlobe}  backButton={backButton} title = {selectedPolygon.name} cubes={selectedPolygon.cubes}  img={getImage(selectedPolygon.name)} btnText="Sponsor Calculator" onPlotSelect={handleExploreClick} personSelection={() => setCarousel(3)} cameraSelection={() => setCarousel(1)} droneSelection={() => setCarousel(2)}/>
     } else {
       return <SideMenu  closeAbout={() => setProjectOpen(false)} onClick={() => {
         handlePolygonClick({
