@@ -161,25 +161,27 @@ function Model({sponsorship, available, unavailable, total}) {
     console.log('sponsor' + sponsorship)
 
     const ref = useRef();
-    const { nodes, materials } = useGLTF('/webgl/glb/Finca-Split-Materials.glb');
+    const { nodes, materials } = useGLTF('/webgl/glb/fincaAmablev3.glb');
     const fontProps = { fontSize: 7, letterSpacing: -0.05, lineHeight: 1, 'material-toneMapped': false }
 
+    console.log(nodes)
+    console.log(materials)
     return (
         <>
         <group ref={ref}>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0.geometry} material={materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0002.geometry} material={materials["Material.002"]} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0003.geometry} material={materials["Material.002"]} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0004.geometry} material={sponsorship >= 240000 ? materials["Material.001"] : materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0005.geometry} material={sponsorship >= 480000 ? materials["Material.001"] : materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0006.geometry} material={sponsorship >= 720000 ? materials["Material.001"] : materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0007.geometry} material={sponsorship >= 960000 ? materials["Material.001"] : materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0008.geometry} material={sponsorship >= 1200000 ? materials["Material.001"] : materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0009.geometry} material={sponsorship >= 1440000 ? materials["Material.001"] : materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0010.geometry} material={sponsorship >= 1680000 ? materials["Material.001"] : materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0011.geometry} material={sponsorship >= 1920000 ? materials["Material.001"] : materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0012.geometry} material={sponsorship >= 2160000 ? materials["Material.001"] : materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
-        <mesh receiveShadow castShadow geometry={nodes.Mesh_0013.geometry} material={sponsorship >= 2400000 ? materials["Material.001"] : materials.Material_0} scale={0.5} position={[0, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Unavailable.geometry} material={materials["Material.002"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_01.geometry} material={sponsorship >= 240000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_02.geometry} material={sponsorship >= 480000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_03.geometry} material={sponsorship >= 720000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_04.geometry} material={sponsorship >= 960000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_05.geometry} material={sponsorship >= 1200000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_06.geometry} material={sponsorship >= 1440000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_07.geometry} material={sponsorship >= 1680000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_08.geometry} material={sponsorship >= 1920000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_09.geometry} material={sponsorship >= 2160000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_10.geometry} material={sponsorship >= 2400000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes.Available_11.geometry} material={sponsorship >= 2400000 ? materials["Material.001"] : materials["Material_0.001"]} scale={250} rotation={[-0.1, 2.8, 0]} position={[-20, 10, 0]}/>
+
             <Billboard position={[-40, 40, 150]}>
                 <Marker2>
                 <div className={`content flex`}>
@@ -217,7 +219,7 @@ function Model({sponsorship, available, unavailable, total}) {
             </Billboard>
             }
         {available > 0 &&
-        <Billboard position={sponsorship >= 1200000 ? [-10, 10, -195] : [-50, 10, -105]}>
+        <Billboard position={sponsorship >= 1200000 ? [-30, 10, -195] : [-50, 10, -105]}>
             <Marker2 >
             <div className={`content flex`}>
                 <svg width="4521" height="1148" viewBox="0 0 4521 1148" fill="none" xmlns="http://www.w3.org/2000/svg">
