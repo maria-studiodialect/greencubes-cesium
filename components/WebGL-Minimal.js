@@ -115,7 +115,7 @@ function LaGamba() {
     return (
         <>
         <group ref={ref}>
-        <mesh receiveShadow castShadow geometry={nodes["1001"].geometry} material={new THREE.MeshStandardMaterial({color: '#6FFF00'})} scale={350} rotation={[0,0,0]} position={[-50, -250, 0]}/>    
+        <mesh receiveShadow castShadow geometry={nodes["1001"].geometry} material={new THREE.MeshStandardMaterial({color: '#00FFDD'})} scale={350} rotation={[0,0,0]} position={[-50, -250, 0]}/>    
         <mesh receiveShadow castShadow geometry={nodes["1002"].geometry} material={materials["Material.002"]} scale={350} rotation={[0,0,0]} position={[-50, -250, 0]}/>        
         <Billboard position={[-100, -10, -70]}>
                 <Marker>
@@ -164,7 +164,7 @@ function FincaEduardo() {
     return (
         <>
         <group ref={ref}>
-        <mesh receiveShadow castShadow geometry={nodes["1"].geometry} material={new THREE.MeshStandardMaterial({color: '#6FFF00'})} scale={150} rotation={[-0.05,0,0]} position={[-190, -30, 0]}/>
+        <mesh receiveShadow castShadow geometry={nodes["1"].geometry} material={new THREE.MeshStandardMaterial({color: '#00FFDD'})} scale={150} rotation={[-0.05,0,0]} position={[-190, -30, 0]}/>
         <mesh receiveShadow castShadow geometry={nodes["1001"].geometry} material={materials["Material.002"]} scale={150} rotation={[-0.05,0,0]} position={[-190, -30, 0]}/>                
         <Billboard position={[-100, -25, -100]}>
                 <Marker>
