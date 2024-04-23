@@ -11,7 +11,7 @@ export default function PieChart({ unavailable, sponsorship, available }) {
         const pieChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ['Unavailable Units', 'Sponsored Units', 'Available Units'],
+            labels: ['Unavailable Units', 'Available Units', 'Sponsored Units',],
             datasets: [{
             label: 'Dataset 1',
             data: [unavailable, sponsorship, available],
