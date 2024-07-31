@@ -32,7 +32,7 @@ const awsConfig = {
   aws_cognito_verification_mechanisms: [
     "EMAIL"
   ],
-  aws_user_files_s3_bucket: "greencubesimagesrepo72930-dev",
+  aws_user_files_s3_bucket: "greencubesimagesrepo180200-devjuly",
   aws_user_files_s3_bucket_region: "eu-north-1"
 };
 
